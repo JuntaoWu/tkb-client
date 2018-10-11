@@ -1,0 +1,208 @@
+{
+	"groups": [
+		{
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png",
+			"name": "preload"
+		},
+		{
+			"keys": "progress-bg,progress",
+			"name": "loading"
+		},
+		{
+			"keys": "",
+			"name": "lazyload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"type": "image",
+			"name": "checkbox_select_disabled_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_down.png",
+			"type": "image",
+			"name": "checkbox_select_down_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_up.png",
+			"type": "image",
+			"name": "checkbox_select_up_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_unselect.png",
+			"type": "image",
+			"name": "checkbox_unselect_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_disabled.png",
+			"type": "image",
+			"name": "radiobutton_select_disabled_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"type": "image",
+			"name": "radiobutton_select_down_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_up.png",
+			"type": "image",
+			"name": "radiobutton_select_up_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"type": "image",
+			"name": "radiobutton_unselect_png"
+		},
+		{
+			"url": "assets/ScrollBar/roundthumb.png",
+			"type": "image",
+			"name": "roundthumb_png"
+		},
+		{
+			"url": "assets/Slider/thumb.png",
+			"type": "image",
+			"name": "thumb_png"
+		},
+		{
+			"url": "assets/Slider/track.png",
+			"type": "image",
+			"name": "track_png"
+		},
+		{
+			"url": "assets/Slider/tracklight.png",
+			"type": "image",
+			"name": "tracklight_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/handle.png",
+			"type": "image",
+			"name": "handle_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/off.png",
+			"type": "image",
+			"name": "off_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/on.png",
+			"type": "image",
+			"name": "on_png"
+		},
+		{
+			"url": "assets/ProgressBar/thumb_pb.png",
+			"type": "image",
+			"name": "thumb_pb_png"
+		},
+		{
+			"url": "assets/ProgressBar/track_pb.png",
+			"type": "image",
+			"name": "track_pb_png"
+		},
+		{
+			"url": "assets/ScrollBar/track_sb.png",
+			"type": "image",
+			"name": "track_sb_png"
+		},
+		{
+			"url": "assets/loading/progress.png",
+			"type": "image",
+			"name": "progress"
+		},
+		{
+			"url": "assets/loading/progress-bg.png",
+			"type": "image",
+			"name": "progress-bg"
+		},
+		{
+			"url": "assets/start/btn-view.png",
+			"type": "image",
+			"name": "btn-view"
+		},
+		{
+			"url": "assets/background/game-background.png",
+			"type": "image",
+			"name": "game-background"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/caocao.png",
+			"type": "image",
+			"name": "caocao"
+		},
+		{
+			"url": "assets/xiaobin.png",
+			"type": "image",
+			"name": "xiaobin"
+		},
+		{
+			"url": "assets/zhangfei.png",
+			"type": "image",
+			"name": "zhangfei"
+		},
+		{
+			"url": "assets/zhangfei_range.png",
+			"type": "image",
+			"name": "zhangfei_range"
+		},
+		{
+			"url": "assets/trap.png",
+			"type": "image",
+			"name": "trap"
+		},
+		{
+			"url": "assets/loading/loading-background.png",
+			"type": "image",
+			"name": "loading-background"
+		},
+		{
+			"url": "assets/icons/btn-back.png",
+			"type": "image",
+			"name": "btn-back"
+		},
+		{
+			"url": "assets/icons/btn-restart.png",
+			"type": "image",
+			"name": "btn-restart"
+		},
+		{
+			"url": "assets/icons/btn-tip.png",
+			"type": "image",
+			"name": "btn-tip"
+		},
+		{
+			"url": "assets/icons/icon-power.png",
+			"type": "image",
+			"name": "icon-power"
+		},
+		{
+			"url": "assets/icons/icon-star-black.png",
+			"type": "image",
+			"name": "icon-star-black"
+		},
+		{
+			"url": "assets/icons/icon-star.png",
+			"type": "image",
+			"name": "icon-star"
+		},
+		{
+			"url": "assets/fonts/level-number.fnt",
+			"type": "font",
+			"name": "level-number_fnt"
+		},
+		{
+			"url": "assets/fonts/level-number.png",
+			"type": "image",
+			"name": "level-number_png"
+		}
+	]
+}

@@ -1,0 +1,62 @@
+{
+    "鼠": {
+        "name": "鼠",
+        "originIndex": 0,
+        "source": "t1"
+    },
+    "牛": {
+        "name": "牛",
+        "originIndex": 1,
+        "source": "t2"
+    },
+    "虎": {
+        "name": "虎",
+        "originIndex": 2,
+        "source": "t3"
+    },
+    "兔": {
+        "name": "兔",
+        "originIndex": 3,
+        "source": "t4"
+    },
+    "龙": {
+        "name": "龙",
+        "originIndex": 4,
+        "source": "t5"
+    },
+    "蛇": {
+        "name": "蛇",
+        "originIndex": 5,
+        "source": "t6"
+    },
+    "马": {
+        "name": "马",
+        "originIndex": 6,
+        "source": "t7"
+    },
+    "羊": {
+        "name": "羊",
+        "originIndex": 7,
+        "source": "t8"
+    },
+    "猴": {
+        "name": "猴",
+        "originIndex": 8,
+        "source": "t9"
+    },
+    "鸡": {
+        "name": "鸡",
+        "originIndex": 9,
+        "source": "t10"
+    },
+    "狗": {
+        "name": "狗",
+        "originIndex": 10,
+        "source": "t11"
+    },
+    "猪": {
+        "name": "猪",
+        "originIndex": 11,
+        "source": "t12"
+    }
+}

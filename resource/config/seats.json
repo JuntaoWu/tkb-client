@@ -1,0 +1,34 @@
+{
+    "1": {
+        "color": "红色",
+        "source": "red"
+    },
+    "2": {
+        "color": "橙色",
+        "source": "orange"
+    },
+    "3": {
+        "color": "黄色",
+        "source": "yellow"
+    },
+    "4": {
+        "color": "绿色",
+        "source": "green"
+    },
+    "5": {
+        "color": "蓝色",
+        "source": "blue"
+    },
+    "6": {
+        "color": "紫色",
+        "source": "purple"
+    },
+    "7": {
+        "color": "白色",
+        "source": "white"
+    },
+    "8": {
+        "color": "黑色",
+        "source": "black"
+    }
+}

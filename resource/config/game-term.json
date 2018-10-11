@@ -1,0 +1,158 @@
+[
+   {
+    "name": "盖宝",
+    "description": "郑国渠把某个宝物封印，之后玩家无法鉴定"
+  },
+  {
+    "name": "封人",
+    "description": "药不然偷袭某名玩家"
+  },
+  {
+    "name": "被坑",
+    "description": "本轮被随机不能鉴定"
+  },
+  {
+    "name": "首封",
+    "description": "药不然第一次发动技能"
+  },
+  {
+    "name": "连封",
+    "description": "药不然前一轮封了某位玩家，这一轮又封了该玩家"
+  },
+  {
+    "name": "验宝",
+    "description": "玩家验宝回合检验宝物的真假"
+  },
+  {
+    "name": "验人",
+    "description": "方震选择一人知道其好坏身份"
+  },
+  {
+    "name": "金水",
+    "description": "方震验的好人"
+  },
+  {
+    "name": "指封",
+    "description": "坏人指挥药不然封一个人"
+  },
+  {
+    "name": "认同伙",
+    "description": "叫郑国渠跳出来"
+  },
+  {
+    "name": "指身份",
+    "description": "最后一轮告诉队友其需要指出的身份是哪位玩家"
+  },
+  {
+    "name": "证身份",
+    "description": "通过说明宝物二号票位的真假来证自己的身份做好"
+  },
+  {
+    "name": "抿身份",
+    "description": "试探并猜测出某个身份"
+  },
+  {
+    "name": "挡身份",
+    "description": "做出一些许愿和方震的行为来迷惑老朝奉方"
+  },
+  {
+    "name": "跳身份",
+    "description": "声称自己是某个身份"
+  },
+  {
+    "name": "对跳",
+    "description": "两个玩家都声称自己是某一身份"
+  },
+  {
+    "name": "踩",
+    "description": "指出某个玩家发言不好的地方，做低其身份"
+  },
+  {
+    "name": "污/脏",
+    "description": "诬陷某个玩家，做低该玩家身份"
+  },
+  {
+    "name": "裸打",
+    "description": "亮明自己身份来玩"
+  },
+  {
+    "name": "颜杀",
+    "description": "发言或者发言没有信息点的情况下，通过表情反应直接判断玩家身份"
+  },
+  {
+    "name": "好人坑",
+    "description": "好人的位置、号码"
+  },
+  {
+    "name": "坏人坑",
+    "description": "坏人的位置、号码"
+  },
+  {
+    "name": "聊爆",
+    "description": "发言出现破绽，身份暴露"
+  },
+  {
+    "name": "鉴宝爆",
+    "description": "首置位明说某宝的真假，结果公布出来不对"
+  },
+  {
+    "name": "身份做好/做差",
+    "description": "指一名玩家的身份是偏好人或者偏坏人"
+  },
+  {
+    "name": "倒钩",
+    "description": "老朝奉不发动技能，隐藏在好人当中"
+  },
+  {
+    "name": "首置位验宝/发言",
+    "description": "第一个行动的玩家"
+  },
+  {
+    "name": "末置位验宝/发言",
+    "description": "最后一个行动的玩家"
+  },
+  {
+    "name": "首验",
+    "description": "第一位验宝的人（更好证实身份）"
+  },
+  {
+    "name": "尾三号",
+    "description": "倒数第三个验宝的玩家"
+  },
+  {
+    "name": "传位",
+    "description": "验宝时选择下一名行动玩家"
+  },
+  {
+    "name": "归票位",
+    "description": "最后一轮最后一名发言的玩家"
+  },
+  {
+    "name": "公布位",
+    "description": "票数第二的宝物，可以得知此宝物真假"
+  },
+  {
+    "name": "铁真宝",
+    "description": "系统给出的真宝"
+  },
+  {
+    "name": "铁假宝",
+    "description": "系统给出的假宝"
+  },
+  {
+    "name": "冲票",
+    "description": "坏人都投一个假宝，强行投出一个假宝"
+  },
+  {
+    "name": "票型",
+    "description": "投票的情况"
+  },
+  {
+    "name": "绑票",
+    "description": "投票情况总是相同的几位玩家"
+  },
+  {
+    "name": "绑轮",
+    "description": "总是互相传票的几位玩家"
+  }
+]

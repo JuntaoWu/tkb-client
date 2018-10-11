@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.Shade" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+    <e:Group>
+        <e:Rect id="rect" top="0" bottom="0" left="0" right="0" alpha="0.4" width="100%" height="100%" />
+    </e:Group>
+</e:Skin>
