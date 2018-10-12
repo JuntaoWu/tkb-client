@@ -13,8 +13,7 @@ module game {
         public y: any;
         public bodyType: BodyType;
         public angle?: any;
-        public endX?: any;
-        public endY?: any;
+        public offset?: number;
     }
 
     export enum BodyType {
@@ -25,5 +24,9 @@ module game {
         TYPE_ENEMY = 5,
         TYPE_HERO = 6,
         TYPE_MASS = 7,
+        TYPE_MOVING_WALL_V = 8,
+        TYPE_ATTACK_MOVING_WALL = 9,
+        TYPE_ATTACK_MOVING_WALL_V = 10,
+        TYPE_STAR = 11,
     }
 }

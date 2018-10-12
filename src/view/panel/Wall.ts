@@ -124,31 +124,26 @@ module game {
                 this.airWallBodys.push(airBody);
                 this.airWallTypes.push(airWall.bodyType);
 
-                if (airWall.bodyType == BodyType.TYPE_MOVING_WALL) {
-                    let doSth = () => {
-                        if (!airBody) {
-                            return;
-                        }
-                        // var a = new Array();
-                        // p2.vec2.subtract(a, airBody.position, [airWall.endX, airWall.endY]);
-                        // airBody.applyImpulse(a, airBody.position);
 
-                        let originalPositionX = airBody.position[0];
-                        let originalPositionY = airBody.position[1];
 
-                        this.world.on("postStep", () => {
-                            // Kinematic bodies are controlled via velocity.
-                            airBody.position[0] = originalPositionX + (-100) * Math.sin(2 / 10 * this.world.time);
-                            // airBody.position[1] = originalPositionY + (airWall.endY - airWall.y) * Math.sin(2 / 10 * this.world.time);
-                        });
-
-                        // egret.Tween.get(airBody).to({ position: [airWall.endX, airWall.endY] }, 1000, egret.Ease.backInOut).to({
-                        //     position: [airWall.x, airWall.y]
-                        // }, 1000).call(() => {
-                        //     doSth();
-                        // });
+                if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL
+                    || airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
+                    if (!airBody) {
+                        return;
                     }
-                    doSth();
+
+                    let originalPositionX = airBody.position[0];
+                    let originalPositionY = airBody.position[1];
+
+                    this.world.on("postStep", () => {
+                        // Kinematic bodies are controlled via velocity.
+                        if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL) {
+                            airBody.position[0] = originalPositionX + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
+                        }
+                        else if (airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
+                            airBody.position[1] = originalPositionY + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
+                        }
+                    });
                 }
             });
         }

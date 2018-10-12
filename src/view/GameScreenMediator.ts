@@ -116,7 +116,7 @@ module game {
 
         public async changeLevel() {
             const level = +this.gameScreen.txtLevel.text;
-            if(!level) {
+            if (!level) {
                 return;
             }
             this.updateLevel(level - 1);
@@ -158,7 +158,9 @@ module game {
                 });
 
                 this._wall.airWallBodys.forEach((i, wallIndex) => {
-                    if (this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_WALL) {
+                    if (this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_WALL
+                        || this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_MOVING_WALL
+                        || this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_MOVING_WALL_V) {
                         if (t.bodyA === i || t.bodyB === i) {
 
                             this._ball.ballBody.forEach((m, index) => {
