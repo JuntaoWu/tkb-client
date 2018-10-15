@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star",
 			"name": "preload"
 		},
 		{
@@ -203,6 +203,11 @@
 			"url": "assets/fonts/level-number.png",
 			"type": "image",
 			"name": "level-number_png"
+		},
+		{
+			"url": "assets/star.png",
+			"type": "image",
+			"name": "star"
 		}
 	]
 }

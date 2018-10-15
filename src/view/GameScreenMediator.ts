@@ -13,6 +13,7 @@ module game {
         private _wall: Wall;
         private _holes: Holes;
         private _ball: game.Balls;
+        private _star: game.Stars;
         private _cue: game.Cue;
 
         private cueState: CueState;
@@ -132,10 +133,15 @@ module game {
             this._wall.updateConfig(levelsArray[this.currentLevel].walls);
             this._holes.updateConfig(levelsArray[this.currentLevel].holes);
             this._ball.updateConfig(levelsArray[this.currentLevel].balls);
+            this._star.updateConfig(levelsArray[this.currentLevel].stars);
         }
 
         private hitListener() {
             this.world.on("endContact", (t) => {
+
+                this._star.starBodies.forEach(star => {
+                    
+                });
 
                 this._holes.holes.forEach(hole => {
                     if (t.bodyA === hole || t.bodyB === hole) {

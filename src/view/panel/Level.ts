@@ -4,6 +4,7 @@ module game {
         public balls: Array<GameObjectInfo>;
         public walls: Array<GameObjectInfo>;
         public holes: Array<GameObjectInfo>;
+        public stars: Array<GameObjectInfo>;
     }
 
     export class GameObjectInfo {

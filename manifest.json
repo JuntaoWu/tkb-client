@@ -15,7 +15,7 @@
 		"libs/modules/physics/physics.js"
 	],
 	"game": [
-		"bin-debug/model/common/MyStats.js",
+		"bin-debug/model/common/PlayerInfo.js",
 		"bin-debug/AccountAdapter.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/LoadingUI.js",
@@ -37,8 +37,8 @@
 		"bin-debug/model/common/CommonData.js",
 		"bin-debug/model/common/Constants.js",
 		"bin-debug/model/common/CustomPhotonEvents.js",
+		"bin-debug/model/common/MyStats.js",
 		"bin-debug/ApplicationFacade.js",
-		"bin-debug/model/common/PlayerInfo.js",
 		"bin-debug/model/common/Receiver.js",
 		"bin-debug/model/common/Role.js",
 		"bin-debug/model/common/Scene.js",
@@ -58,6 +58,7 @@
 		"bin-debug/view/panel/Holes.js",
 		"bin-debug/view/panel/Level.js",
 		"bin-debug/view/panel/Shade.js",
+		"bin-debug/view/panel/Star.js",
 		"bin-debug/view/panel/StartScreen.js",
 		"bin-debug/view/panel/Wall.js"
 	]
