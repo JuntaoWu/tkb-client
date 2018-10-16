@@ -11,22 +11,7 @@ module game {
             super(StartScreenMediator.NAME, viewComponent);
             super.initializeNotifier("ApplicationFacade");
 
-            this.startScreen.txtOpenId.addEventListener(egret.TouchEvent.TOUCH_TAP, (event: egret.TouchEvent) => {
-                event.stopImmediatePropagation();
-            }, this);
-            this.startScreen.btnChangeOpenId.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeOpenIdClick, this);
-
-            this.startScreen.btnCreateRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.createRoomClick, this);
-            this.startScreen.btnJoinRoom.addEventListener(egret.TouchEvent.TOUCH_TAP, this.joinRoomClick, this);
-            this.startScreen.btnViewMore.addEventListener(egret.TouchEvent.TOUCH_TAP, this.viewMoreClick, this);
-
-            this.startScreen.headGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showMyInfo, this);
-            this.startScreen.btnNotice.addEventListener(egret.TouchEvent.TOUCH_TAP, this.noticeClick, this);
-            this.startScreen.btnRank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.rankClick, this);
-            this.startScreen.btnGuide.addEventListener(egret.TouchEvent.TOUCH_TAP, this.guideClick, this);
-            this.startScreen.btnSetting.addEventListener(egret.TouchEvent.TOUCH_TAP, this.settingClick, this);
-
-            this.initData();
+            //this.initData();
         }
 
         public async initData() {

@@ -1,25 +1,20 @@
 
 module game {
 
-    export class GameScreen extends eui.Component {
+    export class LevelScreen extends eui.Component {
 
-        public name: string = "GameScreen";
+        public name: string = "LevelScreen";
 
         // controls:
-        public gameBackground: eui.Image;
-        private poweredLabel: eui.Label;
-        public groupPhysics: eui.Group;
-        public btnRestart: eui.Button;
-        public btnGo: eui.Button;
+        public listLevel: eui.List;
         public btnBack: eui.Button;
-        public txtLevel: eui.TextInput;
 
         //bindings:
         public currentLevel: string = "第 1 关";
 
         public constructor() {
             super();
-            this.skinName = "skins.GameScreen";
+            this.skinName = "skins.LevelScreen";
             this.addEventListener(eui.UIEvent.ADDED, this.createCompleteEvent, this);
         }
 
@@ -27,7 +22,7 @@ module game {
             // this.poweredLabel.y = this.stage.stageHeight - this.poweredLabel.height - 30;
 
             this.removeEventListener(eui.UIEvent.ADDED, this.createCompleteEvent, this);
-            ApplicationFacade.instance.registerMediator(new GameScreenMediator(this));
+            ApplicationFacade.instance.registerMediator(new LevelScreenMediator(this));
 
         }
 

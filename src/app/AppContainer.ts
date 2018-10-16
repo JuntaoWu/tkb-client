@@ -5,6 +5,7 @@ module game {
 
         public startScreen: StartScreen = new StartScreen();
         public gameScreen: GameScreen = new GameScreen();
+        public levelScreen: LevelScreen = new LevelScreen();
 
         public constructor() {
             super();
@@ -24,6 +25,13 @@ module game {
             this.removeChildren();
 
             this.addChild(this.startScreen);
+            egret.Tween.get(this).to({ alpha: 1 }, 1500);
+        }
+
+        public enterLevelScreen(): void {
+            this.removeChildren();
+
+            this.addChild(this.levelScreen);
             egret.Tween.get(this).to({ alpha: 1 }, 1500);
         }
 

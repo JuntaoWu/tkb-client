@@ -87,6 +87,9 @@ module game {
                     if (data == Scene.Start) {
                         appMediator.main.enterStartScreen();
                     }
+                    else if(data == Scene.Level) {
+                        appMediator.main.enterLevelScreen();
+                    }
                     else if (data == Scene.Game) {
                         appMediator.main.enterGameScreen();
                     }

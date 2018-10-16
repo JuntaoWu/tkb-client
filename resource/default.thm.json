@@ -16,8 +16,10 @@
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
+		"resource/components/LevelItemRenderer.exml",
 		"resource/components/Shade.exml",
 		"resource/containers/GameScreen.exml",
+		"resource/containers/LevelScreen.exml",
 		"resource/containers/LoadingUI.exml",
 		"resource/containers/StartScreen.exml",
 		"resource/eui_skins/ButtonSkin.exml",

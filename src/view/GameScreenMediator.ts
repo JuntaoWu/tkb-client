@@ -46,6 +46,7 @@ module game {
             this.gameScreen.stage.addChild(this._wall = new game.Wall(this.world, this.proxy.levelsArray[this.currentLevel].walls));
             this.gameScreen.stage.addChild(this._holes = new game.Holes(this.world, this.proxy.levelsArray[this.currentLevel].holes));
             this.gameScreen.stage.addChild(this._ball = new game.Balls(this.world, this.proxy.levelsArray[this.currentLevel].balls));
+            this.gameScreen.stage.addChild(this._star = new game.Stars(this.world, this.proxy.levelsArray[this.currentLevel].stars));
             this.createMaterial();
             this.hitListener();
             this.gameScreen.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
@@ -55,6 +56,12 @@ module game {
 
             this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
             this.gameScreen.btnGo.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeLevel, this);
+            this.gameScreen.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevel, this);
+        }
+
+        public navigateToLevel() {
+            this.gameScreen.removeChildren();
+            this.sendNotification(SceneCommand.CHANGE, Scene.Level);
         }
 
         private createWorld(): void {
@@ -140,7 +147,7 @@ module game {
             this.world.on("endContact", (t) => {
 
                 this._star.starBodies.forEach(star => {
-                    
+
                 });
 
                 this._holes.holes.forEach(hole => {

@@ -37,6 +37,7 @@ module game {
             const data = notification.getBody();
             switch (notification.getName()) {
                 case GameCommand.START_GAME: {
+                    this.sendNotification(SceneCommand.CHANGE, Scene.Game);
                     gameProxy.startGame();
                     break;
                 }

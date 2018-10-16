@@ -3,7 +3,8 @@ module game {
 
     export enum Scene {
         Start = 1,
-        Game = 2,
+        Level = 2,
+        Game = 3,
     }
 
 }

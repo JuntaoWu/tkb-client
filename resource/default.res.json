@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png",
 			"name": "preload"
 		},
 		{
@@ -208,6 +208,161 @@
 			"url": "assets/star.png",
 			"type": "image",
 			"name": "star"
+		},
+		{
+			"url": "assets/start/icon-star.png",
+			"type": "image",
+			"name": "icon-star-start"
+		},
+		{
+			"url": "assets/start/bg-power.png",
+			"type": "image",
+			"name": "bg-power"
+		},
+		{
+			"url": "assets/start/bg-star.png",
+			"type": "image",
+			"name": "bg-star"
+		},
+		{
+			"url": "assets/start/btn-arrow-left.png",
+			"type": "image",
+			"name": "btn-arrow-left"
+		},
+		{
+			"url": "assets/start/btn-arrow-right.png",
+			"type": "image",
+			"name": "btn-arrow-right"
+		},
+		{
+			"url": "assets/start/btn-rank.png",
+			"type": "image",
+			"name": "btn-rank"
+		},
+		{
+			"url": "assets/start/btn-settings.png",
+			"type": "image",
+			"name": "btn-settings"
+		},
+		{
+			"url": "assets/start/btn-share.png",
+			"type": "image",
+			"name": "btn-share"
+		},
+		{
+			"url": "assets/start/chapter-1.png",
+			"type": "image",
+			"name": "chapter-1"
+		},
+		{
+			"url": "assets/start/dock.png",
+			"type": "image",
+			"name": "dock"
+		},
+		{
+			"url": "assets/start/icon-power.png",
+			"type": "image",
+			"name": "icon-power-start"
+		},
+		{
+			"url": "assets/start/logo.png",
+			"type": "image",
+			"name": "logo"
+		},
+		{
+			"url": "assets/start/middle.png",
+			"type": "image",
+			"name": "middle"
+		},
+		{
+			"url": "assets/start/status-bar.png",
+			"type": "image",
+			"name": "status-bar"
+		},
+		{
+			"url": "assets/fonts/level-number-start.png",
+			"type": "image",
+			"name": "level-number-start_png"
+		},
+		{
+			"url": "assets/fonts/level-number-start.fnt",
+			"type": "font",
+			"name": "level-number-start_fnt"
+		},
+		{
+			"url": "assets/background/start-background.png",
+			"type": "image",
+			"name": "start-background"
+		},
+		{
+			"url": "assets/level/icon-check.png",
+			"type": "image",
+			"name": "icon-check"
+		},
+		{
+			"url": "assets/level/icon-lock.png",
+			"type": "image",
+			"name": "icon-lock"
+		},
+		{
+			"url": "assets/level/icon-star-black.png",
+			"type": "image",
+			"name": "icon-star-black-level"
+		},
+		{
+			"url": "assets/level/icon-star-color.png",
+			"type": "image",
+			"name": "icon-star-color"
+		},
+		{
+			"url": "assets/level/level-background.png",
+			"type": "image",
+			"name": "level-background"
+		},
+		{
+			"url": "assets/level/star/star.png",
+			"type": "image",
+			"name": "star_png"
+		},
+		{
+			"url": "assets/level/star/star1.png",
+			"type": "image",
+			"name": "star1_png"
+		},
+		{
+			"url": "assets/level/light/图层 11.png",
+			"type": "image",
+			"name": "图层 11_png"
+		},
+		{
+			"url": "assets/level/light/圆角矩形 2 拷贝.png",
+			"type": "image",
+			"name": "圆角矩形 2 拷贝_png"
+		},
+		{
+			"url": "assets/level/btn-back-level.png",
+			"type": "image",
+			"name": "btn-back-level"
+		},
+		{
+			"url": "assets/level/level-1.png",
+			"type": "image",
+			"name": "level-1"
+		},
+		{
+			"url": "assets/level/word-bg.png",
+			"type": "image",
+			"name": "word-bg"
+		},
+		{
+			"name": "level-number-level_fnt",
+			"type": "font",
+			"url": "assets/fonts/level-number-level.fnt"
+		},
+		{
+			"name": "level-number-level_png",
+			"type": "image",
+			"url": "assets/fonts/level-number-level.png"
 		}
 	]
 }

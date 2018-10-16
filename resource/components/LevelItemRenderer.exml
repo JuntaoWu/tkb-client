@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="skins.LevelItemRenderer" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="up,down,disabled" height="265">
+    <e:Button>
+        <e:Skin states="up,down,disabled">
+            <e:Group height="250" x="0" y="16"  scaleX.down="0.9" scaleY.down="0.9">
+                <e:Image source="level-1" horizontalCenter="0"></e:Image>
+                <e:Group>
+                    <e:Image source="word-bg"></e:Image>
+                    <e:BitmapLabel text="80" font="level-number-level_fnt" horizontalCenter="0" y="1"></e:BitmapLabel>
+                </e:Group>
+                <e:Group horizontalCenter="0" y="172">
+                    <e:Image source="icon-star-color" x="0"></e:Image>
+                    <e:Image source="icon-star-color" x="64"></e:Image>
+                    <e:Image source="icon-star-black" x="128"></e:Image>
+                </e:Group>
+            </e:Group>
+            <e:Image source="icon-check" right="0" />
+        </e:Skin>
+    </e:Button>
+</e:Skin>
