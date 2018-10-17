@@ -13,6 +13,11 @@ module game {
             this.createCue(x, y);
         }
 
+        public clear() {
+            this.world.removeBody(this.cueBody);
+            this.removeChild(this.cueGroup);
+        }
+
         createCue(x, y) {
             this.cueGroup = new eui.Group();
             this.cueGroup.x = x;

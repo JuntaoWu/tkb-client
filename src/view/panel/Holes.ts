@@ -3,6 +3,7 @@ module game {
     export class Holes extends egret.Sprite {
 
         public holes: p2.Body[] = [];
+        public holeBmps: any[] = [];
 
         public constructor(private world: p2.World, private config: Array<GameObjectInfo> = []) {
             super();
@@ -13,12 +14,21 @@ module game {
             this.updateConfig(this.config);
         }
 
+        public clear() {
+            this.holeBmps.forEach(holeBmp => {
+                holeBmp && this.removeChild(holeBmp);
+            });
+            this.holeBmps.length = 0;
+        }
+
         public updateConfig(config: Array<GameObjectInfo> = []) {
             this.config = config;
             this.holes.forEach(body => {
                 this.world.removeBody(body);
             });
             this.holes.length = 0;
+
+            this.clear();
 
             this.config.forEach(hole => {
 
@@ -38,6 +48,8 @@ module game {
                 });
                 body.addShape(circle6);
 
+                circle6.collisionResponse = false;
+
                 var o;
                 o = new egret.Bitmap(RES.getRes("trap"));
                 o.width = o.height = clone.width;
@@ -45,6 +57,8 @@ module game {
                 o.anchorOffsetY = clone.height / 2;
                 this.addChild(o);
                 body.displays = [o];
+
+                this.holeBmps.push(o);
 
                 this.world.addBody(body);
                 this.holes.push(body);

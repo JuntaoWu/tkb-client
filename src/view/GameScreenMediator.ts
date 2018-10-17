@@ -47,6 +47,11 @@ module game {
             this.gameScreen.stage.addChild(this._holes = new game.Holes(this.world, this.proxy.levelsArray[this.currentLevel].holes));
             this.gameScreen.stage.addChild(this._ball = new game.Balls(this.world, this.proxy.levelsArray[this.currentLevel].balls));
             this.gameScreen.stage.addChild(this._star = new game.Stars(this.world, this.proxy.levelsArray[this.currentLevel].stars));
+
+            this.gameScreen.stage.addChild(this._cue = new game.Cue(360, 1100, this.world));
+            this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
+            this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
+
             this.createMaterial();
             this.hitListener();
             this.gameScreen.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
@@ -60,7 +65,10 @@ module game {
         }
 
         public navigateToLevel() {
-            this.gameScreen.removeChildren();
+            this._ball.clear();
+            this._holes.clear();
+            this._cue.clear();
+            this.world.clear();
             this.sendNotification(SceneCommand.CHANGE, Scene.Level);
         }
 
@@ -98,7 +106,11 @@ module game {
             var wallMaterial = new p2.Material(0)
                 , ballMaterial = new p2.Material(0)
                 , wallBallContactMaterial = new p2.ContactMaterial(wallMaterial, ballMaterial);
+            var ballBallContactMaterial = new p2.ContactMaterial(ballMaterial, ballMaterial);
 
+            ballBallContactMaterial.friction = 0;
+            ballBallContactMaterial.restitution = 1;
+            wallBallContactMaterial.friction = 0;
             wallBallContactMaterial.restitution = 1;
 
             this._wall.upWall.material = wallMaterial;
@@ -115,7 +127,13 @@ module game {
                 var ball = this._ball.ballShapes[ballIndex];
                 ball.material = ballMaterial;
             }
+
+            if(this._cue) {
+                this._cue.cueBody.shapes[0].material = ballMaterial;
+            }
+
             this.world.addContactMaterial(wallBallContactMaterial);
+            this.world.addContactMaterial(ballBallContactMaterial);
         }
 
         public async reloadCurrentLevel() {
@@ -131,6 +149,18 @@ module game {
         }
 
         public async updateLevel(level: number) {
+
+            this.gameScreen.starCount = 0;
+
+            if (this._cue) {
+                this._cue.clear();
+                this._cue = undefined;
+            }
+
+            this.gameScreen.stage.addChild(this._cue = new game.Cue(360, 1100, this.world));
+            this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
+            this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
+
             if (this._cue) {
                 this._cue.cueBody.shapes[1].collisionMask = 0;
             }
@@ -146,8 +176,13 @@ module game {
         private hitListener() {
             this.world.on("endContact", (t) => {
 
-                this._star.starBodies.forEach(star => {
+                this._star.starBodies.forEach((star, index) => {
+                    if (t.bodyA === star || t.bodyB === star) {
 
+                        this.world.removeBody(star);
+                        this._star.removeStarBmp(index);
+                        ++this.gameScreen.starCount;
+                    }
                 });
 
                 this._holes.holes.forEach(hole => {
@@ -234,9 +269,8 @@ module game {
                     //this.stage.addChild(this._cue = new game.Cue(600, 200, this.world));
                     // }
 
-                    this._cue.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
-                    this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
-                    this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
+                    // this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
+                    // this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
                     this.createMaterial();
                     //                }
 
@@ -311,14 +345,12 @@ module game {
 
             if (this.cueState != game.CueState.CUEON) {
                 if (!this._cue) {
-                    this._cue = new game.Cue(200, 600, this.world);
-                    this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
-                    this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
+
                     // this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
                     // this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
                     // this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
                 }
-                this.gameScreen.stage.addChild(this._cue);
+                this._cue && this.gameScreen.stage.addChild(this._cue);
                 this.cueState = game.CueState.CUEON;
             }
         }

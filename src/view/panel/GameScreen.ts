@@ -14,8 +14,25 @@ module game {
         public btnBack: eui.Button;
         public txtLevel: eui.TextInput;
 
+        public star0: eui.Image;
+        public star1: eui.Image;
+        public star2: eui.Image;
+
         //bindings:
         public currentLevel: string = "第 1 关";
+
+        private _starCount: number = 0;
+        public get starCount(): number {
+            return this._starCount;
+        }
+        public set starCount(v: number) {
+            this._starCount = v;
+            for (let i = 0; i < 3; ++i) {
+                let star = this[`star${i}`] as eui.Image;
+                star.source = i < v ? "icon-star" : "icon-star-black";
+            }
+        }
+
 
         public constructor() {
             super();

@@ -47,11 +47,13 @@ module game {
                     radius: clone.width / 2
                 })
                     , i = new p2.Body({
-                        mass: 1,
+                        mass: 0,
                         position: [clone.x, clone.y]
                     });
                 i.addShape(t),
                     this.world.addBody(i);
+
+                t.collisionResponse = false;
 
                 var o = new egret.Bitmap(RES.getRes("star"));
                 o.width = o.height = clone.width;

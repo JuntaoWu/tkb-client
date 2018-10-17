@@ -31,9 +31,9 @@
         </e:Group>
         <e:Group id="groupLevel" y="80" horizontalCenter="0">
             <e:BitmapLabel text="{currentLevel}" font="level-number_fnt" horizontalCenter="0" y="0"></e:BitmapLabel>
-            <e:Image source="icon-star" y="40"></e:Image>
-            <e:Image source="icon-star" y="40" x="66"></e:Image>
-            <e:Image source="icon-star-black" y="40" x="137"></e:Image>
+            <e:Image id="star0" source="icon-star-black" y="40"></e:Image>
+            <e:Image id="star1" source="icon-star-black" y="40" x="66"></e:Image>
+            <e:Image id="star2" source="icon-star-black" y="40" x="137"></e:Image>
         </e:Group>
     </e:Group>
     <e:Group id="groupPhysic" width="100%" height="1100" x="0" y="180"></e:Group>
