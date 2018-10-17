@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone",
 			"name": "preload"
 		},
 		{
@@ -355,14 +355,29 @@
 			"name": "word-bg"
 		},
 		{
-			"name": "level-number-level_fnt",
+			"url": "assets/fonts/level-number-level.fnt",
 			"type": "font",
-			"url": "assets/fonts/level-number-level.fnt"
+			"name": "level-number-level_fnt"
 		},
 		{
-			"name": "level-number-level_png",
+			"url": "assets/fonts/level-number-level.png",
 			"type": "image",
-			"url": "assets/fonts/level-number-level.png"
+			"name": "level-number-level_png"
+		},
+		{
+			"url": "assets/zhangai/stone-left.png",
+			"type": "image",
+			"name": "stone-left"
+		},
+		{
+			"url": "assets/zhangai/stone-right.png",
+			"type": "image",
+			"name": "stone-right"
+		},
+		{
+			"url": "assets/zhangai/stone.png",
+			"type": "image",
+			"name": "stone"
 		}
 	]
 }

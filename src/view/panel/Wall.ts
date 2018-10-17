@@ -119,12 +119,36 @@ module game {
                 });
                 airBody.angle = -airWall.angle;
                 airBody.addShape(airBox);
-                airBody.displays = [];
+
+                let wallGroup = new eui.Group();
+
+
+                var left = new egret.Bitmap(RES.getRes("stone-left"));
+                left.x = 0;
+                wallGroup.addChild(left);
+
+                let count = (clone.width - 92) / 40;
+                for(let i = 0; i < count; ++i) {
+                    let stone = new egret.Bitmap(RES.getRes("stone"));
+                    stone.x = left.width + 40 * i;
+                    wallGroup.addChild(stone);
+                }
+
+                var right = new egret.Bitmap(RES.getRes("stone-right"));
+                right.x = clone.width - 46;
+
+                wallGroup.addChild(right);
+
+                wallGroup.anchorOffsetX = clone.width / 2;
+                wallGroup.anchorOffsetY = clone.height / 2;
+                wallGroup.rotation = -airWall.angle * 180 / Math.PI;
+
+                this.addChild(wallGroup);
+
+                airBody.displays = [wallGroup];
                 this.world.addBody(airBody);
                 this.airWallBodys.push(airBody);
                 this.airWallTypes.push(airWall.bodyType);
-
-
 
                 if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL
                     || airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
