@@ -128,7 +128,7 @@ module game {
                 ball.material = ballMaterial;
             }
 
-            if(this._cue) {
+            if (this._cue) {
                 this._cue.cueBody.shapes[0].material = ballMaterial;
             }
 
@@ -174,8 +174,8 @@ module game {
         }
 
         private hitListener() {
-            this.world.on("endContact", (t) => {
 
+            this.world.on("beginContact", (t) => {
                 this._star.starBodies.forEach((star, index) => {
                     if (t.bodyA === star || t.bodyB === star) {
 
@@ -204,6 +204,9 @@ module game {
                         });
                     }
                 });
+            });
+
+            this.world.on("endContact", (t) => {
 
                 this._wall.airWallBodys.forEach((i, wallIndex) => {
                     if (this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_WALL
