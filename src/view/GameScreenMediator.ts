@@ -49,14 +49,15 @@ module game {
             this.gameScreen.stage.addChild(this._star = new game.Stars(this.world, this.proxy.levelsArray[this.currentLevel].stars));
 
             this.gameScreen.stage.addChild(this._cue = new game.Cue(360, 1100, this.world));
+            this._cue.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
 
             this.createMaterial();
             this.hitListener();
-            this.gameScreen.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
-            this.gameScreen.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
-            this.gameScreen.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
+            this.gameScreen.groupPhysics.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
+            this.gameScreen.groupPhysics.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
+            this.gameScreen.groupPhysics.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
             this.gameScreen.addEventListener(egret.Event.ENTER_FRAME, this.loop, this);
 
             this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
@@ -65,6 +66,7 @@ module game {
         }
 
         public navigateToLevel() {
+            this._wall.clear();
             this._ball.clear();
             this._holes.clear();
             this._cue.clear();
@@ -158,6 +160,7 @@ module game {
             }
 
             this.gameScreen.stage.addChild(this._cue = new game.Cue(360, 1100, this.world));
+            this._cue.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
 
@@ -171,6 +174,8 @@ module game {
             this._holes.updateConfig(levelsArray[this.currentLevel].holes);
             this._ball.updateConfig(levelsArray[this.currentLevel].balls);
             this._star.updateConfig(levelsArray[this.currentLevel].stars);
+
+            this.createMaterial();
         }
 
         private hitListener() {
@@ -254,14 +259,23 @@ module game {
         private touchEvent(e: egret.TouchEvent) {
             switch (e.type) {
                 case egret.TouchEvent.TOUCH_BEGIN: {
+
+                    if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
+                        return;
+                    }
+
                     this._cue.cueBody.shapes[1].collisionMask = 0;
 
                     if (!this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
                         console.log("TOUCH_BEGIN: outside cueArea, contains point false");
-                        return;
                     }
 
                     console.log("TOUCH_BEGIN");
+
+                    this._cue.dragonBone.visible = true;
+
+                    this._cue.dragonBone.animation.play("hover", 0);
+
                     //                if (this.cueBallState == game.CueBallState.CUEBALLVISIBLE) {
 
                     // if (this._cueBall.cueBallBody) {
@@ -285,44 +299,64 @@ module game {
                 }
                 case egret.TouchEvent.TOUCH_END: {
 
+                    if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
+                        return;
+                    }
+
                     if (!this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
                         console.log("TOUCH_END: outside cueArea, contains point false");
-                        return;
                     }
 
                     console.log("TOUCH_END");
 
-                    egret.Tween.get(this._cue.cueBmp).to({
-                        scaleX: 1.5,
-                        scaleY: 1.5
-                    }, 500).call(() => {
-                        //this.world.removeBody(this._cue.cueBody);
-                        //this.stage.removeChild(this._cue);
+                    this._cue.dragonBone.animation.play("expoler", 1);
+
+                    egret.setTimeout(() => {
                         this._cue.cueBody.shapes[1].collisionMask = -1;
-                        this._cue.cueBmp.scaleX = 1;
-                        this._cue.cueBmp.scaleY = 1;
                         this.cueState = game.CueState.CUEOFF;
-                    });
-                    this.mouseEnd = new Array(e.stageX, e.stageY);
 
-                    this._ball.ballBody.forEach(ballBody => {
-                        let aRedBall = new Array();
-                        p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+                        this.mouseEnd = new Array(e.stageX, e.stageY);
 
-                        if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
-                            if (aRedBall && aRedBall.length > 1) {
-                                p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
-                                ballBody.applyImpulse(aRedBall, this.mouseEnd);
+                        this._ball.ballBody.forEach(ballBody => {
+                            let aRedBall = new Array();
+                            p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+
+                            if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
+                                if (aRedBall && aRedBall.length > 1) {
+                                    p2.vec2.scale(aRedBall, aRedBall, 100 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+                                    ballBody.applyImpulse(aRedBall, this.mouseEnd);
+                                }
                             }
-                        }
-                    });
-                    this.mouseStart = null;
-                    this.mouseEnd = null;
+                        });
+                        this.mouseStart = null;
+                        this.mouseEnd = null;
+                    }, this, 200);
+
+                    let onExplorerCompleted = () => {
+
+                        this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                    }
+
+                    this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                    // egret.Tween.get(this._cue.cueBmp).to({
+                    //     scaleX: 1.5,
+                    //     scaleY: 1.5
+                    // }, 500).call(() => {
+                    //     //this.world.removeBody(this._cue.cueBody);
+                    //     //this.stage.removeChild(this._cue);
+                    //     this._cue.cueBody.shapes[1].collisionMask = -1;
+                    //     this._cue.cueBmp.scaleX = 1;
+                    //     this._cue.cueBmp.scaleY = 1;
+                    //     this.cueState = game.CueState.CUEOFF;
+                    // });
+
                     break;
                 }
                 case egret.TouchEvent.TOUCH_MOVE: {
-                    if (!this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
-                        console.log("TOUCH_MOVE: outside cueArea, contains point false");
+
+                    if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
                         return;
                     }
 

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right",
 			"name": "preload"
 		},
 		{
@@ -378,6 +378,86 @@
 			"url": "assets/zhangai/stone.png",
 			"type": "image",
 			"name": "stone"
+		},
+		{
+			"url": "assets/dragonBones/zhangfei_tex.json",
+			"type": "json",
+			"name": "zhangfei_tex_json"
+		},
+		{
+			"url": "assets/dragonBones/zhangfei_tex.png",
+			"type": "image",
+			"name": "zhangfei_tex_png"
+		},
+		{
+			"url": "assets/dragonBones/zhangfei_ske.json",
+			"type": "json",
+			"name": "zhangfei_ske_json"
+		},
+		{
+			"url": "assets/zhangai/Stabs.png",
+			"type": "image",
+			"name": "Stabs"
+		},
+		{
+			"url": "assets/zhangai/QPG22I_1)_M`7({CC2A(E3R.jpg",
+			"type": "image",
+			"name": "QPG22I_1)_M`7({CC2A(E3R_jpg"
+		},
+		{
+			"url": "assets/zhangai/attack-moving-left.png",
+			"type": "image",
+			"name": "attack-moving-left"
+		},
+		{
+			"url": "assets/zhangai/attack-moving-right.png",
+			"type": "image",
+			"name": "attack-moving-right"
+		},
+		{
+			"url": "assets/zhangai/attack-moving-v-left.png",
+			"type": "image",
+			"name": "attack-moving-v-left"
+		},
+		{
+			"url": "assets/zhangai/attack-moving-v-right.png",
+			"type": "image",
+			"name": "attack-moving-v-right"
+		},
+		{
+			"url": "assets/zhangai/attack-moving-v.png",
+			"type": "image",
+			"name": "attack-moving-v"
+		},
+		{
+			"url": "assets/zhangai/attack-moving.png",
+			"type": "image",
+			"name": "attack-moving"
+		},
+		{
+			"url": "assets/zhangai/游戏内容.png",
+			"type": "image",
+			"name": "游戏内容_png"
+		},
+		{
+			"url": "assets/liubei.png",
+			"type": "image",
+			"name": "liubei"
+		},
+		{
+			"url": "assets/zhangai/moving-left.png",
+			"type": "image",
+			"name": "moving-left"
+		},
+		{
+			"url": "assets/zhangai/moving.png",
+			"type": "image",
+			"name": "moving"
+		},
+		{
+			"url": "assets/zhangai/moving-right.png",
+			"type": "image",
+			"name": "moving-right"
 		}
 	]
 }

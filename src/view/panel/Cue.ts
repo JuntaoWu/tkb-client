@@ -6,6 +6,7 @@ module game {
         public cueGroup: eui.Group;
         public cueBmp: egret.Bitmap;
         public radarBmp: egret.Bitmap;
+        public dragonBone: dragonBones.EgretArmatureDisplay;
         public cueBody: p2.Body;
 
         public constructor(x, y, private world: p2.World) {
@@ -25,19 +26,27 @@ module game {
             this.cueGroup.width = 110;
             this.cueGroup.height = 110;
 
-            this.radarBmp = new egret.Bitmap(RES.getRes("zhangfei_range")),
-                this.radarBmp.anchorOffsetX = 125,
-                this.radarBmp.anchorOffsetY = 125,
-                this.radarBmp.width = 250,
-                this.radarBmp.height = 250,
-                this.cueGroup.addChild(this.radarBmp);
+            let dragonBone = DragonBones.createDragonBone("zhangfei", "Armature");
+            // dragonBone.anchorOffsetX = dragonBone.width / 2;
+            // dragonBone.anchorOffsetY = dragonBone.height / 2;
+            this.cueGroup.addChild(dragonBone);
+            dragonBone.visible = false;
+            this.dragonBone = dragonBone;
+            
 
-            this.cueBmp = new egret.Bitmap(RES.getRes("zhangfei")),
-                this.cueBmp.anchorOffsetX = 55,
-                this.cueBmp.anchorOffsetY = 55,
-                this.cueBmp.width = 110,
-                this.cueBmp.height = 110;
-            this.cueGroup.addChild(this.cueBmp);
+            // this.radarBmp = new egret.Bitmap(RES.getRes("zhangfei_range")),
+            //     this.radarBmp.anchorOffsetX = 125,
+            //     this.radarBmp.anchorOffsetY = 125,
+            //     this.radarBmp.width = 250,
+            //     this.radarBmp.height = 250,
+            //     this.cueGroup.addChild(this.radarBmp);
+
+            // this.cueBmp = new egret.Bitmap(RES.getRes("zhangfei")),
+            //     this.cueBmp.anchorOffsetX = 55,
+            //     this.cueBmp.anchorOffsetY = 55,
+            //     this.cueBmp.width = 110,
+            //     this.cueBmp.height = 110;
+            // this.cueGroup.addChild(this.cueBmp);
 
             this.addChild(this.cueGroup);
 

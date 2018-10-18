@@ -45,6 +45,9 @@ module game {
             this.sprite = sprite;
         }
         public drawDebug(): void {
+            // if(1 == 1) {
+            //     return;
+            // }
             this.sprite.graphics.clear();
 
             var l: number = this.world.bodies.length;

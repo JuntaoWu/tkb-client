@@ -43,10 +43,7 @@ module game {
             });
             this.ballBody.length = 0;
             this.ballShapes.length = 0;
-            this.ballBmps.forEach((ballBmp, index) => {
-                this.removeBallBmp(index);
-            });
-            this.ballBmps.length = 0;
+            this.clear();
 
             this.config.forEach(ball => {
                 let clone = {
@@ -72,7 +69,7 @@ module game {
                         o = new egret.Bitmap(RES.getRes("caocao"));
                         break;
                     case BodyType.TYPE_HERO:
-                        o = new egret.Bitmap(RES.getRes("zhangfei"));
+                        o = new egret.Bitmap(RES.getRes("liubei"));
                         break;
                     case BodyType.TYPE_MASS:
                         o = new egret.Bitmap(RES.getRes("xiaobin"));
