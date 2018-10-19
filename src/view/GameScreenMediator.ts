@@ -222,7 +222,7 @@ module game {
                             this._ball.ballBody.forEach((m, index) => {
                                 if (t.bodyA === m || t.bodyB === m) {
                                     console.log(index, "HP -1");
-                                    --this._ball.hps[index];
+                                    this._ball.updateHP(index, -1);
                                 }
                             });
 
@@ -323,7 +323,7 @@ module game {
 
                             if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
                                 if (aRedBall && aRedBall.length > 1) {
-                                    p2.vec2.scale(aRedBall, aRedBall, 100 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+                                    p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
                                     ballBody.applyImpulse(aRedBall, this.mouseEnd);
                                 }
                             }

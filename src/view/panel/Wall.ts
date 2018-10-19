@@ -225,12 +225,32 @@ module game {
                     wallGroup.addChild(right);
                 }
                 else {
-                    let top = airWall.bodyType == BodyType.TYPE_ATTACK_WALL ? new egret.Bitmap(RES.getRes("Stabs")) : new egret.Bitmap(RES.getRes("stone-left"));
+                    let top: egret.Bitmap;
+                    switch (+airWall.bodyType) {
+                        case BodyType.TYPE_STATIC_WALL:
+                            top = new egret.Bitmap(RES.getRes("stone-left"));
+                            break;
+                        case BodyType.TYPE_ATTACK_WALL:
+                            top = new egret.Bitmap(RES.getRes("Stabs"));
+                            break;
+                        case BodyType.TYPE_ATTACK_MOVING_WALL:
+                        case BodyType.TYPE_ATTACK_MOVING_WALL_V:
+                            top = new egret.Bitmap(RES.getRes("attack-moving-v-left"));
+                            break;
+                        case BodyType.TYPE_MOVING_WALL:
+                        case BodyType.TYPE_MOVING_WALL_V:
+                            top = new egret.Bitmap(RES.getRes("moving-v-left"));
+                            break;
+                    }
+
+                    //let top = airWall.bodyType == BodyType.TYPE_ATTACK_WALL ? new egret.Bitmap(RES.getRes("Stabs")) : new egret.Bitmap(RES.getRes("stone-left"));
                     top.y = 0;
                     wallGroup.addChild(top);
-                    top.anchorOffsetY = top.height;
-                    top.rotation = 90;
 
+                    if (airWall.bodyType == BodyType.TYPE_STATIC_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
+                        top.anchorOffsetY = top.height;
+                        top.rotation = 90;
+                    }
                     //TYPE_ATTACK_WALL
                     if (airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
                         top.rotation += airWall.angle * 180 / Math.PI;
@@ -238,28 +258,68 @@ module game {
 
                     let count = (clone.height - 60) / 30;
                     for (let i = 0; i < count; ++i) {
-                        let stone = airWall.bodyType == BodyType.TYPE_ATTACK_WALL ? new egret.Bitmap(RES.getRes("Stabs")) : new egret.Bitmap(RES.getRes("stone"));
-                        stone.anchorOffsetY = stone.height;
+                        let stone: egret.Bitmap;
+                        switch (+airWall.bodyType) {
+                            case BodyType.TYPE_STATIC_WALL:
+                                stone = new egret.Bitmap(RES.getRes("stone"));
+                                break;
+                            case BodyType.TYPE_ATTACK_WALL:
+                                stone = new egret.Bitmap(RES.getRes("Stabs"));
+                                break;
+                            case BodyType.TYPE_ATTACK_MOVING_WALL:
+                            case BodyType.TYPE_ATTACK_MOVING_WALL_V:
+                                stone = new egret.Bitmap(RES.getRes("attack-moving-v"));
+                                break;
+                            case BodyType.TYPE_MOVING_WALL:
+                            case BodyType.TYPE_MOVING_WALL_V:
+                                stone = new egret.Bitmap(RES.getRes("moving-v"));
+                                break;
+                        }
+
+                        //let stone = airWall.bodyType == BodyType.TYPE_ATTACK_WALL ? new egret.Bitmap(RES.getRes("Stabs")) : new egret.Bitmap(RES.getRes("stone"));
                         stone.y = 30 + 30 * i;
                         wallGroup.addChild(stone);
-                        stone.rotation = 90;
 
+                        if (airWall.bodyType == BodyType.TYPE_STATIC_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
+                            stone.anchorOffsetY = stone.height;
+                            stone.rotation = 90;
+                        }
                         //TYPE_ATTACK_WALL
                         if (airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
                             stone.rotation += airWall.angle * 180 / Math.PI;
                         }
                     }
 
-                    let bottom = airWall.bodyType == BodyType.TYPE_ATTACK_WALL ? new egret.Bitmap(RES.getRes("Stabs")) : new egret.Bitmap(RES.getRes("stone-right"));
-                    bottom.anchorOffsetY = bottom.height;
+                    let bottom: egret.Bitmap;
+                    switch (+airWall.bodyType) {
+                        case BodyType.TYPE_STATIC_WALL:
+                            bottom = new egret.Bitmap(RES.getRes("stone-right"));
+                            break;
+                        case BodyType.TYPE_ATTACK_WALL:
+                            bottom = new egret.Bitmap(RES.getRes("Stabs"));
+                            break;
+                        case BodyType.TYPE_ATTACK_MOVING_WALL:
+                        case BodyType.TYPE_ATTACK_MOVING_WALL_V:
+                            bottom = new egret.Bitmap(RES.getRes("attack-moving-v-right"));
+                            break;
+                        case BodyType.TYPE_MOVING_WALL:
+                        case BodyType.TYPE_MOVING_WALL_V:
+                            bottom = new egret.Bitmap(RES.getRes("moving-v-right"));
+                            break;
+                    }
+                    //let bottom = airWall.bodyType == BodyType.TYPE_ATTACK_WALL ? new egret.Bitmap(RES.getRes("Stabs")) : new egret.Bitmap(RES.getRes("stone-right"));
+
                     bottom.y = clone.height - 30;
-                    bottom.rotation = 90;
+                    wallGroup.addChild(bottom);
+
+                    if (airWall.bodyType == BodyType.TYPE_STATIC_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
+                        bottom.anchorOffsetY = bottom.height;
+                        bottom.rotation = 90;
+                    }
                     //TYPE_ATTACK_WALL
                     if (airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
                         bottom.rotation += airWall.angle * 180 / Math.PI;
                     }
-
-                    wallGroup.addChild(bottom);
                 }
 
                 wallGroup.anchorOffsetX = clone.width / 2;

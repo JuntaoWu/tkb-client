@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right,moving-v-right,moving-v,moving-v-left",
 			"name": "preload"
 		},
 		{
@@ -458,6 +458,52 @@
 			"url": "assets/zhangai/moving-right.png",
 			"type": "image",
 			"name": "moving-right"
+		},
+		{
+			"url": "assets/zhangai/moving-v-right.png",
+			"type": "image",
+			"name": "moving-v-right"
+		},
+		{
+			"url": "assets/zhangai/moving-v.png",
+			"type": "image",
+			"name": "moving-v"
+		},
+		{
+			"url": "assets/zhangai/moving-v-left.png",
+			"type": "image",
+			"name": "moving-v-left"
+		},
+		{
+			"url": "assets/zhangfei-label.png",
+			"type": "image",
+			"name": "zhangfei-label"
+		},
+		{
+			"url": "assets/caocao-label.png",
+			"type": "image",
+			"name": "caocao-label"
+		},
+		{
+			"url": "assets/liubei-label.png",
+			"type": "image",
+			"name": "liubei-label"
+		},
+		{
+			"url": "assets/xiaobin-label.png",
+			"type": "image",
+			"name": "xiaobin-label"
+		},
+		{
+			"url": "assets/bar-bg.png",
+			"type": "image",
+			"name": "bar-bg"
+		},
+		{
+			"url": "assets/bar.png",
+			"type": "image",
+			"name": "bar",
+			"scale9grid": "11,5,62,15"
 		}
 	]
 }

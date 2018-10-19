@@ -53,6 +53,7 @@
 		"bin-debug/view/p2DebugDraw.js",
 		"bin-debug/view/StartScreenMediator.js",
 		"bin-debug/view/panel/Balls.js",
+		"bin-debug/view/panel/BallUI.js",
 		"bin-debug/view/panel/BasePanel.js",
 		"bin-debug/view/panel/Cue.js",
 		"bin-debug/view/panel/GameScreen.js",

@@ -16,6 +16,7 @@
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
+		"resource/components/BallUI.exml",
 		"resource/components/LevelItemRenderer.exml",
 		"resource/components/Shade.exml",
 		"resource/containers/GameScreen.exml",

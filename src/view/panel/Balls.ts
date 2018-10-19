@@ -63,32 +63,36 @@ module game {
                 i.addShape(t),
                     this.world.addBody(i);
 
-                var o;
+                const o = new game.BallUI();
                 switch (+ball.bodyType) {
                     case BodyType.TYPE_ENEMY:
-                        o = new egret.Bitmap(RES.getRes("caocao"));
+                        o.updateUI("caocao", clone.width, +ball.hp);
                         break;
                     case BodyType.TYPE_HERO:
-                        o = new egret.Bitmap(RES.getRes("liubei"));
+                        o.updateUI("liubei", clone.width, +ball.hp);
                         break;
                     case BodyType.TYPE_MASS:
-                        o = new egret.Bitmap(RES.getRes("xiaobin"));
+                        o.updateUI("xiaobin", clone.width, +ball.hp);
                         break;
                     default:
-                        o = new egret.Bitmap(RES.getRes("caocao"));
+                        o.updateUI("caocao", clone.width, +ball.hp);
                         break;
                 }
-                o.width = o.height = clone.width;
                 o.anchorOffsetX = clone.width / 2;
-                o.anchorOffsetY = clone.height / 2;
+                o.anchorOffsetY = clone.height / 2 + 25;
                 this.addChild(o);
                 i.displays = [o];
                 this.ballBmps.push(o);
                 this.ballShapes.push(t);
                 this.ballBody.push(i);
                 this.types.push(ball.bodyType);
-                this.hps.push(3);
+                this.hps.push(+ball.hp || 3);
             });
+        }
+
+        public updateHP(index, hp) {
+            this.hps[index] += (+hp);
+            (this.ballBmps[index] as BallUI).updateHP(this.hps[index]);
         }
 
     }
