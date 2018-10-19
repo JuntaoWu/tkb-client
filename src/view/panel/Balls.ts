@@ -92,7 +92,7 @@ module game {
 
         public updateHP(index, hp) {
             this.hps[index] += (+hp);
-            (this.ballBmps[index] as BallUI).updateHP(this.hps[index]);
+            this.ballBmps[index] && (this.ballBmps[index] as BallUI).updateHP(this.hps[index]);
         }
 
     }

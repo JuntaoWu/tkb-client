@@ -223,17 +223,36 @@ module game {
                                 if (t.bodyA === m || t.bodyB === m) {
                                     console.log(index, "HP -1");
                                     this._ball.updateHP(index, -1);
+
+                                    if (this._ball.hps[index] <= 0) {
+                                        if (this._ball.types[index] == game.BodyType.TYPE_HERO) {
+                                            console.log("hero dead.");
+                                            this.updateLevel(this.currentLevel);
+                                        }
+                                        else if (this._ball.types[index] == game.BodyType.TYPE_ENEMY) {
+                                            console.log("enemy dead.");
+                                            this.updateLevel(this.currentLevel + 1);
+                                        }
+                                        else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
+                                            console.log("mass dead.");
+                                            this.world.removeBody(m);
+                                            this._ball.removeBallBmp(index);
+                                        }
+                                    }
                                 }
                             });
 
-                            if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_HERO))) {
-                                console.log("hero dead.");
-                                this.updateLevel(this.currentLevel);
-                            }
-                            else if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_ENEMY))) {
-                                console.log("enemy dead.");
-                                this.updateLevel(this.currentLevel + 1);
-                            }
+                            // if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_HERO))) {
+                            //     console.log("hero dead.");
+                            //     this.updateLevel(this.currentLevel);
+                            // }
+                            // else if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_ENEMY))) {
+                            //     console.log("enemy dead.");
+                            //     this.updateLevel(this.currentLevel + 1);
+                            // }
+                            // else if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_MASS))) {
+                            //     console.log("mass dead.");
+                            // }
                         }
                     }
 
