@@ -10,9 +10,12 @@ module game {
         private poweredLabel: eui.Label;
         public groupPhysics: eui.Group;
         public btnRestart: eui.Button;
+        public btnTip: eui.Button;
         public btnGo: eui.Button;
         public btnBack: eui.Button;
         public txtLevel: eui.TextInput;
+        public btnCurrentTip: eui.Button;
+        public btnConfirmTip: eui.Button;
 
         public star0: eui.Image;
         public star1: eui.Image;

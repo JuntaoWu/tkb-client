@@ -1,10 +1,18 @@
 
 module game {
     export class Level {
+        public _id: string;
         public balls: Array<GameObjectInfo>;
         public walls: Array<GameObjectInfo>;
         public holes: Array<GameObjectInfo>;
         public stars: Array<GameObjectInfo>;
+        public answer: Answer;
+    }
+
+    export class Answer {
+        public time: number;
+        public x: number;
+        public y: number;
     }
 
     export class GameObjectInfo {

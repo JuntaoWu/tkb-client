@@ -27,6 +27,11 @@ module game {
             this.gameScreen.currentLevel = `第 ${v + 1} 关`;
         }
 
+        public currentLevelId: string;
+
+        public predefinedAnswer: Answer;
+        public currentAnswer: Answer;
+
         public constructor(viewComponent: any) {
             super(GameScreenMediator.NAME, viewComponent);
             super.initializeNotifier("ApplicationFacade");
@@ -63,6 +68,11 @@ module game {
             this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
             this.gameScreen.btnGo.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeLevel, this);
             this.gameScreen.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevel, this);
+            this.gameScreen.btnTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playPredefinedTips, this);
+            this.gameScreen.btnCurrentTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playCurrentTips, this);
+            this.gameScreen.btnConfirmTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.confirmTips, this);
+
+            this.reloadCurrentLevel();
         }
 
         public navigateToLevel() {
@@ -170,12 +180,95 @@ module game {
             this.currentLevel = level;
             let levelsArray = this.proxy.levelsArray;
             this.currentLevel %= levelsArray.length;
+            this.currentLevelId = levelsArray[this.currentLevel]._id;
             this._wall.updateConfig(levelsArray[this.currentLevel].walls);
             this._holes.updateConfig(levelsArray[this.currentLevel].holes);
             this._ball.updateConfig(levelsArray[this.currentLevel].balls);
             this._star.updateConfig(levelsArray[this.currentLevel].stars);
 
             this.createMaterial();
+            this.world.time = 0;
+            this.predefinedAnswer = levelsArray[this.currentLevel].answer;
+        }
+
+        public playPredefinedTips() {
+            this.playTips(this.predefinedAnswer);
+        }
+
+        public playCurrentTips() {
+            this.playTips(this.currentAnswer);
+        }
+
+        public playTips(answer: Answer) {
+            if (!answer) {
+                console.log("No answer recorded");
+                return;
+            }
+            const { time, x, y } = answer;
+            this.reloadCurrentLevel();
+
+            this._cue.dragonBone.visible = true;
+            this._cue.dragonBone.animation.play("hover", 0);
+
+            egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 1000);
+
+            let postStepAnswer = () => {
+                if (this.world.time >= time) {
+                    this.world.off("postStep", postStepAnswer);
+                    this._cue.cueBody.position = [x, y];
+                    this.mouseStart = [x, y];
+
+                    this._cue.dragonBone.animation.play("expoler", 1);
+
+                    egret.setTimeout(() => {
+                        this._cue.cueBody.shapes[1].collisionMask = -1;
+                        this.cueState = game.CueState.CUEOFF;
+
+                        this.mouseEnd = new Array(x, y);
+
+                        this._ball.ballBody.forEach(ballBody => {
+                            let aRedBall = new Array();
+                            p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+
+                            if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
+                                if (aRedBall && aRedBall.length > 1) {
+                                    p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+                                    ballBody.applyImpulse(aRedBall, this.mouseEnd);
+                                }
+                            }
+                        });
+                        this.mouseStart = null;
+                        this.mouseEnd = null;
+                    }, this, 200);
+                }
+            }
+
+            this.world.on("postStep", postStepAnswer);
+        }
+
+        public confirmTips() {
+            let token = localStorage.getItem("token");
+            var request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open(`${game.Constants.Endpoints.service}level/updateAnswer?token=${token}&id=${this.currentLevelId || ""}`, egret.HttpMethod.POST);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.send(JSON.stringify({
+                answer: this.currentAnswer
+            }));
+            request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+                console.log(`confirmTips via app server end.`);
+
+                let req = <egret.HttpRequest>(event.currentTarget);
+                let res = JSON.parse(req.response);
+                if (res.error) {
+                    console.error(res.message);
+                }
+                //todo: Invalid code
+
+                this.predefinedAnswer = this.currentAnswer;
+                this.proxy.levelsArray[this.currentLevel].answer = this.predefinedAnswer;
+                
+            }, this);
         }
 
         private hitListener() {
@@ -203,7 +296,7 @@ module game {
                                 }
                                 else if (this._ball.types[i] == game.BodyType.TYPE_ENEMY) {
                                     console.log("enemy falls in a hole.");
-                                    this.updateLevel(this.currentLevel + 1);
+                                    //this.updateLevel(this.currentLevel + 1);
                                 }
                             }
                         });
@@ -227,11 +320,15 @@ module game {
                                     if (this._ball.hps[index] <= 0) {
                                         if (this._ball.types[index] == game.BodyType.TYPE_HERO) {
                                             console.log("hero dead.");
+                                            this.world.removeBody(m);
+                                            this._ball.removeBallBmp(index);
                                             this.updateLevel(this.currentLevel);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_ENEMY) {
                                             console.log("enemy dead.");
-                                            this.updateLevel(this.currentLevel + 1);
+                                            this.world.removeBody(m);
+                                            this._ball.removeBallBmp(index);
+                                            //this.updateLevel(this.currentLevel + 1);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
                                             console.log("mass dead.");
@@ -326,7 +423,13 @@ module game {
                         console.log("TOUCH_END: outside cueArea, contains point false");
                     }
 
-                    console.log("TOUCH_END");
+                    this.currentAnswer = {
+                        time: this.world.time,
+                        x: e.stageX,
+                        y: e.stageY,
+                    };
+
+                    console.log("TOUCH_END: world time:", this.world.time);
 
                     this._cue.dragonBone.animation.play("expoler", 1);
 

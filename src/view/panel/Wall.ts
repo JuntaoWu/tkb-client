@@ -160,7 +160,9 @@ module game {
                     // left.anchorOffsetY = left.height / 2;
                     //TYPE_ATTACK_WALL
                     if (airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
-                        left.rotation = airWall.angle * 180 / Math.PI;
+                        // left.anchorOffsetX = left.width / 2;
+                        // left.anchorOffsetY = left.height / 2;
+                        left.rotation = airWall.angle * 180 / Math.PI % 180;
                     }
 
                     let count = (clone.width - 60) / 30;
@@ -192,7 +194,9 @@ module game {
                         // stone.anchorOffsetY = stone.height / 2;
                         //TYPE_ATTACK_WALL
                         if (airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
-                            stone.rotation = airWall.angle * 180 / Math.PI;
+                            // stone.anchorOffsetX = stone.width / 2;
+                            // stone.anchorOffsetY = stone.height / 2;
+                            stone.rotation = airWall.angle * 180 / Math.PI % 180;
                         }
                     }
 
@@ -219,7 +223,9 @@ module game {
                     // right.anchorOffsetY = right.height / 2;
                     //TYPE_ATTACK_WALL
                     if (airWall.bodyType == BodyType.TYPE_ATTACK_WALL) {
-                        right.rotation = airWall.angle * 180 / Math.PI;
+                        // right.anchorOffsetX = right.width / 2;
+                        // right.anchorOffsetY = right.height / 2;
+                        right.rotation = airWall.angle * 180 / Math.PI % 180;
                     }
 
                     wallGroup.addChild(right);

@@ -30,16 +30,16 @@ module game {
         public static get Endpoints() {
             if (platform.env == "dev") {
                 return {
-                    service: "http://gdjzj.hzsdgames.com:8090/",
+                    service: "http://gdjzj.hzsdgames.com:8092/",
                     localResource: "",
-                    remoteResource: "http://gdjzj.hzsdgames.com:8090/miniGame/"
+                    remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/"
                 };
             }
             if (platform.env == "prod") {
                 return {
-                    service: "https://gdjzj.hzsdgames.com:8084/",
+                    service: "http://gdjzj.hzsdgames.com:8092/",
                     localResource: "",
-                    remoteResource: "https://gdjzj.hzsdgames.com:8084/miniGame/"
+                    remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/"
                 };
             }
         }
