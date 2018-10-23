@@ -32,6 +32,8 @@ module game {
         public predefinedAnswer: Answer;
         public currentAnswer: Answer;
 
+        private collectedStar: boolean[] = [false, false, false];
+
         public constructor(viewComponent: any) {
             super(GameScreenMediator.NAME, viewComponent);
             super.initializeNotifier("ApplicationFacade");
@@ -163,6 +165,7 @@ module game {
         public async updateLevel(level: number) {
 
             this.gameScreen.starCount = 0;
+            this.collectedStar = [false, false, false];
 
             if (this._cue) {
                 this._cue.clear();
@@ -210,36 +213,91 @@ module game {
             this._cue.dragonBone.visible = true;
             this._cue.dragonBone.animation.play("hover", 0);
 
-            egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 1000);
+            egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 200);
 
+            let started = false;
             let postStepAnswer = () => {
-                if (this.world.time >= time) {
-                    this.world.off("postStep", postStepAnswer);
+                if (!started && this.world.time >= time) {
+                    started = true;
+                    console.log("postStepAnswer:", this.world.time);
                     this._cue.cueBody.position = [x, y];
                     this.mouseStart = [x, y];
 
                     this._cue.dragonBone.animation.play("expoler", 1);
 
-                    egret.setTimeout(() => {
-                        this._cue.cueBody.shapes[1].collisionMask = -1;
-                        this.cueState = game.CueState.CUEOFF;
+                    // egret.setTimeout(() => {
+                    //     this.world.off("postStep", postStepAnswer);
 
-                        this.mouseEnd = new Array(x, y);
+                    //     this._cue.cueBody.shapes[1].collisionMask = -1;
+                    //     this.cueState = game.CueState.CUEOFF;
 
-                        this._ball.ballBody.forEach(ballBody => {
-                            let aRedBall = new Array();
-                            p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+                    //     this.mouseEnd = new Array(x, y);
 
-                            if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
-                                if (aRedBall && aRedBall.length > 1) {
-                                    p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
-                                    ballBody.applyImpulse(aRedBall, this.mouseEnd);
-                                }
+                    //     this._ball.ballBody.forEach(ballBody => {
+                    //         let aRedBall = new Array();
+                    //         p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+
+                    //         if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
+                    //             if (aRedBall && aRedBall.length > 1) {
+                    //                 p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+                    //                 console.log("applyImpulse: ", this.world.time, aRedBall);
+                    //                 ballBody.applyImpulse(aRedBall, this.mouseEnd);
+                    //             }
+                    //         }
+                    //     });
+                    //     this.mouseStart = null;
+                    //     this.mouseEnd = null;
+
+                    //     let onExplorerCompleted = () => {
+
+                    //         this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                    //         if (this.cueArea.getAABB().containsPoint([x, y])) {
+                    //             console.log("TOUCH_END: inside cueArea, contains point true");
+
+                    //             this.collectScore(x, y, 0);
+                    //         }
+                    //     }
+
+                    //     this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+                    // }, this, 200);
+                }
+                if (this.world.time >= time + 2.1) {
+
+                    this.world.off("postStep", postStepAnswer);
+
+                    this._cue.cueBody.shapes[1].collisionMask = -1;
+                    this.cueState = game.CueState.CUEOFF;
+
+                    this.mouseEnd = new Array(x, y);
+
+                    this._ball.ballBody.forEach(ballBody => {
+                        let aRedBall = new Array();
+                        p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+
+                        if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
+                            if (aRedBall && aRedBall.length > 1) {
+                                p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+                                console.log("applyImpulse: ", this.world.time, aRedBall);
+                                ballBody.applyImpulse(aRedBall, this.mouseEnd);
                             }
-                        });
-                        this.mouseStart = null;
-                        this.mouseEnd = null;
-                    }, this, 200);
+                        }
+                    });
+                    this.mouseStart = null;
+                    this.mouseEnd = null;
+
+                    let onExplorerCompleted = () => {
+
+                        this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                        if (this.cueArea.getAABB().containsPoint([x, y])) {
+                            console.log("TOUCH_END: inside cueArea, contains point true");
+
+                            this.collectScore(x, y, 0);
+                        }
+                    }
+
+                    this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
                 }
             }
 
@@ -267,7 +325,7 @@ module game {
 
                 this.predefinedAnswer = this.currentAnswer;
                 this.proxy.levelsArray[this.currentLevel].answer = this.predefinedAnswer;
-                
+
             }, this);
         }
 
@@ -279,7 +337,7 @@ module game {
 
                         this.world.removeBody(star);
                         this._star.removeStarBmp(index);
-                        ++this.gameScreen.starCount;
+                        this.collectScore(star.position[0], star.position[1], 1);
                     }
                 });
 
@@ -287,16 +345,28 @@ module game {
                     if (t.bodyA === hole || t.bodyB === hole) {
                         this._ball.ballBody.forEach((ballBody, i) => {
                             if (t.bodyA === ballBody || t.bodyB === ballBody) {
+                                let position = ballBody.position;
                                 this.world.removeBody(ballBody);
-                                this._ball.removeBallBmp(i);
 
                                 if (this._ball.types[i] == game.BodyType.TYPE_HERO) {
                                     console.log("hero falls in a hole.");
+                                    this._ball.removeBallBmp(i);
                                     this.updateLevel(this.currentLevel);
                                 }
                                 else if (this._ball.types[i] == game.BodyType.TYPE_ENEMY) {
+
+                                    let ballUI = this._ball.ballBmps[i] as BallUI;
+                                    ballUI.dead();
+                                    this.collectScore(position[0], position[1], 2);
                                     console.log("enemy falls in a hole.");
                                     //this.updateLevel(this.currentLevel + 1);
+                                    egret.setTimeout(() => {
+                                        this._ball.removeBallBmp(i);
+                                        this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW);
+                                    }, this, 1000);
+                                }
+                                else {
+                                    this._ball.removeBallBmp(i);
                                 }
                             }
                         });
@@ -326,9 +396,16 @@ module game {
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_ENEMY) {
                                             console.log("enemy dead.");
+                                            this.collectScore(m.position[0], m.position[1], 2);
                                             this.world.removeBody(m);
-                                            this._ball.removeBallBmp(index);
                                             //this.updateLevel(this.currentLevel + 1);
+                                            let ballUI = this._ball.ballBmps[index] as BallUI;
+                                            ballUI.dead();
+                                            //this.updateLevel(this.currentLevel + 1);
+                                            egret.setTimeout(() => {
+                                                this._ball.removeBallBmp(index);
+                                                this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW);
+                                            }, this, 1000);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
                                             console.log("mass dead.");
@@ -371,6 +448,43 @@ module game {
         private mouseStart: Array<number>;
         private mouseMove: Array<number>;
         private mouseEnd: Array<number>;
+
+
+        private collectScore(x: number, y: number, starIndex: number) {
+
+            if (this.collectedStar[starIndex]) {
+                return;
+            }
+
+            let collectedCount = this.collectedStar.filter(m => m).length;
+
+            this.collectedStar[starIndex] = true;
+
+            let scoreStarUI: ScoreStarUI = this.gameScreen[`scoreStarUI${starIndex}`];
+
+            this.gameScreen.stage.addChild(scoreStarUI);
+
+            scoreStarUI.groupStar.visible = true;
+            scoreStarUI.x = x;
+            scoreStarUI.y = y;
+
+            scoreStarUI.dragonBone.animation.play("starmove", 1);
+
+            let starmoveComplete = () => {
+                scoreStarUI.dragonBone.removeEvent(dragonBones.EventObject.COMPLETE, starmoveComplete, this);
+                let star = this.gameScreen[`star${collectedCount}`];
+                egret.Tween.get(scoreStarUI).to({ x: star.x + 261 + star.width / 2, y: star.y + 80 + star.height / 2 }, 500).call(() => {
+                    scoreStarUI.dragonBone.animation.play("starin", 1);
+                    let starinComplete = () => {
+                        scoreStarUI.dragonBone.removeEvent(dragonBones.EventObject.COMPLETE, starinComplete, this);
+                        scoreStarUI.groupStar.visible = false;
+                        ++this.gameScreen.starCount;
+                    };
+                    scoreStarUI.dragonBone.once(dragonBones.EventObject.COMPLETE, starinComplete, this);
+                });
+            };
+            scoreStarUI.dragonBone.once(dragonBones.EventObject.COMPLETE, starmoveComplete, this);
+        }
 
         private touchEvent(e: egret.TouchEvent) {
             switch (e.type) {
@@ -419,10 +533,6 @@ module game {
                         return;
                     }
 
-                    if (!this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
-                        console.log("TOUCH_END: outside cueArea, contains point false");
-                    }
-
                     this.currentAnswer = {
                         time: this.world.time,
                         x: e.stageX,
@@ -457,6 +567,12 @@ module game {
                     let onExplorerCompleted = () => {
 
                         this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                        if (this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
+                            console.log("TOUCH_END: inside cueArea, contains point true");
+
+                            this.collectScore(e.stageX, e.stageY, 0);
+                        }
 
                     }
 

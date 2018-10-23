@@ -7,4 +7,5 @@
         <e:Image id="imageHpBar" source="bar" fillMode="scale" anchorOffsetX="0" bottom="0" width="110%" left="0" scale9Grid="15,6,43,13"></e:Image>
         <e:Label id="hpLabel" text="{hpLabelBinding}" size="20" horizontalCenter="0" verticalCenter="0"></e:Label>
     </e:Group>
+    <e:Group id="groupDragonBone" verticalCenter="0" horizontalCenter="0"></e:Group>
 </e:Skin>

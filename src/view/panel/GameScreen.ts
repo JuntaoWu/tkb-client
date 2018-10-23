@@ -21,6 +21,10 @@ module game {
         public star1: eui.Image;
         public star2: eui.Image;
 
+        public scoreStarUI0: ScoreStarUI;
+        public scoreStarUI1: ScoreStarUI;
+        public scoreStarUI2: ScoreStarUI;
+
         //bindings:
         public currentLevel: string = "第 1 关";
 
@@ -36,7 +40,6 @@ module game {
             }
         }
 
-
         public constructor() {
             super();
             this.skinName = "skins.GameScreen";
@@ -49,6 +52,12 @@ module game {
             this.removeEventListener(eui.UIEvent.ADDED, this.createCompleteEvent, this);
             ApplicationFacade.instance.registerMediator(new GameScreenMediator(this));
 
+            this.scoreStarUI0 = new ScoreStarUI();
+            this.scoreStarUI1 = new ScoreStarUI();
+            this.scoreStarUI2 = new ScoreStarUI();
+            this.stage.addChild(this.scoreStarUI0);
+            this.stage.addChild(this.scoreStarUI1);
+            this.stage.addChild(this.scoreStarUI2);
         }
 
         public partAdded(partName: string, instance: any): void {

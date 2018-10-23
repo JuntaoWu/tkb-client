@@ -18,11 +18,13 @@
 	"exmls": [
 		"resource/components/BallUI.exml",
 		"resource/components/LevelItemRenderer.exml",
+		"resource/components/ScoreStarUI.exml",
 		"resource/components/Shade.exml",
 		"resource/containers/GameScreen.exml",
 		"resource/containers/LevelScreen.exml",
 		"resource/containers/LoadingUI.exml",
 		"resource/containers/StartScreen.exml",
+		"resource/containers/VictoryWindow.exml",
 		"resource/eui_skins/ButtonSkin.exml",
 		"resource/eui_skins/CheckBoxSkin.exml",
 		"resource/eui_skins/HScrollBarSkin.exml",

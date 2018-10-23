@@ -109,7 +109,6 @@ module game {
 
             this.clear();
 
-
             this.config.forEach(airWall => {
 
                 let clone = {
@@ -339,25 +338,36 @@ module game {
                 this.world.addBody(airBody);
                 this.airWallBodys.push(airBody);
                 this.airWallTypes.push(airWall.bodyType);
+            });
 
-                if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL
-                    || airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
-                    if (!airBody) {
-                        return;
-                    }
+            if (this.world.has("postStep", this.postStepMove)) {
+                this.world.off("postStep", this.postStepMove);
+            }
 
-                    let originalPositionX = airBody.position[0];
-                    let originalPositionY = airBody.position[1];
+            if (this.config.some(airWall => {
+                return airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL
+                    || airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V
+            })) {
+                //todo:
+                console.log("on postStep");
+                this.world.on("postStep", this.postStepMove, this);
+            }
+        }
 
-                    this.world.on("postStep", () => {
-                        // Kinematic bodies are controlled via velocity.
-                        if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL) {
-                            airBody.position[0] = originalPositionX + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
-                        }
-                        else if (airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
-                            airBody.position[1] = originalPositionY + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
-                        }
-                    });
+        public postStepMove() {
+            // Kinematic bodies are controlled via velocity.
+            this.config && this.config.forEach((airWall, index) => {
+                let clone = {
+                    x: parseFloat(airWall.x as string) * 100,
+                    y: 1280 - parseFloat(airWall.y as string) * 100,
+                };
+                let originalPositionX = clone.x;
+                let originalPositionY = clone.y;
+                if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL) {
+                    this.airWallBodys[index].position[0] = originalPositionX + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
+                }
+                else if (airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
+                    this.airWallBodys[index].position[1] = originalPositionY + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
                 }
             });
         }

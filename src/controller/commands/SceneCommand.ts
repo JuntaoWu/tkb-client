@@ -13,6 +13,8 @@ module game {
          */
         public static CHANGE: string = "scene_change";
 
+        public static SHOW_VICTORY_WINDOW: string = "show_victory_window";
+
         public static SHOW_JOIN_WINDOW: string = "show_join_window";
 
         public static SHOW_USERINFO_WINDOW: string = "show_user_window";
@@ -50,6 +52,7 @@ module game {
         initializeNotifier(key: string) {
             super.initializeNotifier(key);
             this.facade().registerCommand(SceneCommand.CHANGE, SceneCommand);
+            this.facade().registerCommand(SceneCommand.SHOW_VICTORY_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.SHOW_JOIN_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.SHOW_USERINFO_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.SHOW_NOTICE_WINDOW, SceneCommand);
@@ -93,6 +96,10 @@ module game {
                     else if (data == Scene.Game) {
                         appMediator.main.enterGameScreen();
                     }
+                    break;
+                }
+                case SceneCommand.SHOW_VICTORY_WINDOW: {
+                    appMediator.main.showVictoryWindow();
                     break;
                 }
             }

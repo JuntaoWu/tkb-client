@@ -16,7 +16,7 @@ module game {
                 egretFactory.parseTextureAtlasData(textureData, texture);
             }
 
-            let armatureDisplay: dragonBones.EgretArmatureDisplay = egretFactory.buildArmatureDisplay(armatureName);
+            let armatureDisplay: dragonBones.EgretArmatureDisplay = egretFactory.buildArmatureDisplay(armatureName, dragonBoneName);
 
             // armatureDisplay.x = 200;
             // armatureDisplay.y = 300;

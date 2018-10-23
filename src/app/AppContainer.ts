@@ -42,5 +42,19 @@ module game {
             egret.Tween.get(this).to({ alpha: 1 }, 1500);
         }
 
+
+        private _victoryWindow: VictoryWindow;
+        public get victoryWindow(): VictoryWindow {
+            if (!this._victoryWindow) {
+                this._victoryWindow = new VictoryWindow();
+            }
+            return this._victoryWindow;
+        }
+
+        public showVictoryWindow() {
+            this.addChild(this.victoryWindow);
+            this.victoryWindow.show();
+        }
+
     }
 }

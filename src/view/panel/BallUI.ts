@@ -11,6 +11,9 @@ module game {
         public hpBar: eui.Group;
         public imageHpBar: eui.Image;
 
+        public dragonBone: dragonBones.EgretArmatureDisplay;
+        public groupDragonBone: eui.Group;
+
         //bindings:
         public labelBallBinding: string = "caocao-label";
         public imageBallBinding: string = "caocao";
@@ -48,10 +51,23 @@ module game {
             this.widthBinding = width || 120;
             this.maxHP = +maxHP || 3;
             this.hpLabelBinding = `${this.maxHP}/${this.maxHP}`;
+
+            if (source == "caocao") {
+                this.dragonBone = DragonBones.createDragonBone("caodead", "caodead");
+                // this.dragonBone.anchorOffsetX = this.width / 2;
+                // this.dragonBone.anchorOffsetY = this.height / 2;
+                this.dragonBone.visible = false;
+                this.groupDragonBone.addChild(this.dragonBone);
+            }
         }
 
         public updateHP(hp: number) {
             this.hpLabelBinding = `${hp}/${this.maxHP}`;
+        }
+
+        public dead() {
+            this.dragonBone.visible = true;
+            this.dragonBone.animation.play("caocao", 1);
         }
     }
 

@@ -3,7 +3,7 @@ module game {
 
     export class Balls extends egret.Sprite {
         public ballShapes = [];
-        public ballBody = [];
+        public ballBody: p2.Body[] = [];
         public ballBmps = [];
 
         public types: BodyType[] = [];

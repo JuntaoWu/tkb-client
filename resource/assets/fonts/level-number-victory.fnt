@@ -1,0 +1,13 @@
+{"file":"level-number-victory.png","frames":{
+"第":{"x":1,"y":1,"w":64,"h":72,"offX":0,"offY":0,"sourceW":64,"sourceH":72},
+"0":{"x":43,"y":194,"w":37,"h":50,"offX":0,"offY":0,"sourceW":37,"sourceH":50},
+"1":{"x":125,"y":1,"w":25,"h":47,"offX":0,"offY":0,"sourceW":25,"sourceH":47},
+"2":{"x":82,"y":194,"w":39,"h":47,"offX":0,"offY":0,"sourceW":39,"sourceH":47},
+"3":{"x":58,"y":75,"w":38,"h":52,"offX":0,"offY":0,"sourceW":38,"sourceH":52},
+"4":{"x":86,"y":1,"w":37,"h":53,"offX":0,"offY":0,"sourceW":37,"sourceH":53},
+"5":{"x":43,"y":141,"w":41,"h":51,"offX":0,"offY":0,"sourceW":41,"sourceH":51},
+"6":{"x":1,"y":198,"w":40,"h":53,"offX":0,"offY":0,"sourceW":40,"sourceH":53},
+"7":{"x":123,"y":56,"w":37,"h":48,"offX":0,"offY":0,"sourceW":37,"sourceH":48},
+"8":{"x":1,"y":141,"w":40,"h":55,"offX":0,"offY":0,"sourceW":40,"sourceH":55},
+"9":{"x":86,"y":129,"w":37,"h":49,"offX":0,"offY":0,"sourceW":37,"sourceH":49},
+"关":{"x":1,"y":75,"w":55,"h":64,"offX":0,"offY":0,"sourceW":55,"sourceH":64}}}

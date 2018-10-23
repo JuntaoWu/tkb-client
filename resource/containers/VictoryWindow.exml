@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.VictoryWindow" width="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+        xmlns:game="game.*">
+    <game:Shade id="overlay" />
+    <e:Group id="container" horizontalCenter="0" height="900">
+        <e:Image id="victoryBackground" left="0" right="0" source="victory-background" y="240" />
+        <e:Group id="groupBanner">
+            <e:Image id="imgBanner" source="banner-victory"></e:Image>
+        </e:Group>
+        <e:BitmapLabel text="第 1 关" y="365" horizontalCenter="0" font="level-number-victory_fnt"></e:BitmapLabel>
+        <e:Group id="groupLevel" y="392" horizontalCenter="0">
+            <e:Image id="star0" source="icon-star-victory"></e:Image>
+            <e:Image id="star1" source="icon-star-victory" y="40" horizontalCenter="0"></e:Image>
+            <e:Image id="star2" source="icon-star-victory" x="288"></e:Image>
+        </e:Group>
+        <e:Group x="160" y="630">
+            <e:Image source="icon-power-bg" verticalCenter="0"></e:Image>
+            <e:Image source="icon-power-start"></e:Image>
+            <e:Label text="10/15" verticalCenter="0" x="62" size="40"></e:Label>
+        </e:Group>
+        <e:Group x="399" y="635">
+            <e:Image source="icon-plus" verticalCenter="0"></e:Image>
+            <e:Image source="icon-power-value" y="0" x="65"></e:Image>
+        </e:Group>
+        <e:Button x="87" bottom="0">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-next" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+        <e:Button x="415" bottom="0">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-share-victory" scaleX.down="0.9" scaleY.down="0.9"></e:Image>
+            </e:Skin>
+        </e:Button>
+        <e:Button id="closeButton" right="17" y="178">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-close" scaleX.down="0.9" scaleY.down="0.9"></e:Image>
+            </e:Skin>
+        </e:Button>
+    </e:Group>
+</e:Skin>

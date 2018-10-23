@@ -3,7 +3,7 @@ module game {
 
     export class Stars extends egret.Sprite {
         public starShapes = [];
-        public starBodies = [];
+        public starBodies: p2.Body[] = [];
         public starBmps = [];
 
         public constructor(private world: p2.World, private config: Array<GameObjectInfo> = []) {
