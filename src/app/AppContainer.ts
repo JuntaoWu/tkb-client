@@ -53,7 +53,7 @@ module game {
 
         public showVictoryWindow() {
             this.addChild(this.victoryWindow);
-            this.victoryWindow.show();
+            this.victoryWindow.show(true);
         }
 
     }

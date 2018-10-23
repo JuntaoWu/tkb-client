@@ -19,6 +19,8 @@ module game {
             ApplicationFacade.instance.registerMediator(new VictoryWindowMediator(this));
 
             this.dragonBone = DragonBones.createDragonBone("jiesuan", "victory");
+            // this.dragonBone.anchorOffsetX = this.width / 2;
+            // this.dragonBone.anchorOffsetY = this.height / 2;
             this.groupBanner.addChild(this.dragonBone);
         }
 

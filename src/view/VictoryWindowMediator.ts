@@ -19,10 +19,12 @@ module game {
             this.proxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
             await this.proxy.initialize();
 
-            this.victoryWindow.dragonBone.animation.play("vector", 1);
-            this.victoryWindow.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, () => {
-                this.victoryWindow.dragonBone.visible = false;
-            }, this);
+            egret.setTimeout(() => {
+                this.victoryWindow.dragonBone.animation.play("vector", 1);
+                this.victoryWindow.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, () => {
+                    this.victoryWindow.dragonBone.visible = false;
+                }, this);
+            }, this, 1000);
         }
 
         public navigateToStart() {
