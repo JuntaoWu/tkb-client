@@ -37,6 +37,9 @@ module game {
 			// this.userInfo = await accountProxy.loadUserInfo();
 			if (!this.levelsArray) {
 				let token = localStorage.getItem("token");
+				if (platform.name == "wxgame" || platform.env == "prod") {
+					token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBpcGl4aWEiLCJpYXQiOjE1Mzk5MjMyODd9.B5gkXqSrRBZhfLjiDYPghqZ4VXFK-N6TXN8voUAoDy0";
+				}
 				this.levelsArray = await RES.getResByUrl(`http://gdjzj.hzsdgames.com:8092/level.json/?token=${token}&timestamp=${new Date().getTime()}`, null, this, RES.ResourceItem.TYPE_JSON);
 			}
 		}
@@ -82,6 +85,8 @@ module game {
 				this.currentPower += 3;
 				this.sendNotification(GameProxy.POWER_CHANGED);
 				this.sendNotification(GameProxy.STAR_CHANGED);
+
+				//todo: save current power & passInfo
 			}
 		}
 

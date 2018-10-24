@@ -1,11 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,zhangfei_range,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right,moving-v-right,moving-v,moving-v-left,stars_tex_png,stars_ske_json,stars_tex_json,caodead_tex_json,caodead_tex_png,caodead_ske_json,level-number-victory_fnt,level-number-victory_png,victory-background,banner-victory,btn-close,btn-next,btn-share-victory,icon-plus,icon-power-bg,icon-power-value,icon-star-victory,jiesuan_tex_png,jiesuan_tex_json,jiesuan_ske_json,icon-star-victory-black,power-number-victory_fnt,power-number-victory_png",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right,moving-v-right,moving-v,moving-v-left,stars_tex_png,stars_ske_json,stars_tex_json,caodead_tex_json,caodead_tex_png,caodead_ske_json,level-number-victory_fnt,level-number-victory_png,victory-background,banner-victory,btn-close,btn-next,btn-share-victory,icon-plus,icon-power-bg,icon-power-value,icon-star-victory,jiesuan_tex_png,jiesuan_tex_json,jiesuan_ske_json,icon-star-victory-black,power-number-victory_fnt,power-number-victory_png",
 			"name": "preload"
 		},
 		{
-			"keys": "progress-bg,progress",
+			"keys": "progress-bg,progress,start-background",
 			"name": "loading"
 		},
 		{
@@ -150,19 +150,9 @@
 			"name": "zhangfei"
 		},
 		{
-			"url": "assets/zhangfei_range.png",
-			"type": "image",
-			"name": "zhangfei_range"
-		},
-		{
 			"url": "assets/trap.png",
 			"type": "image",
 			"name": "trap"
-		},
-		{
-			"url": "assets/loading/loading-background.png",
-			"type": "image",
-			"name": "loading-background"
 		},
 		{
 			"url": "assets/icons/btn-back.png",
@@ -400,11 +390,6 @@
 			"name": "Stabs"
 		},
 		{
-			"url": "assets/zhangai/QPG22I_1)_M`7({CC2A(E3R.jpg",
-			"type": "image",
-			"name": "QPG22I_1)_M`7({CC2A(E3R_jpg"
-		},
-		{
 			"url": "assets/zhangai/attack-moving-left.png",
 			"type": "image",
 			"name": "attack-moving-left"
@@ -433,11 +418,6 @@
 			"url": "assets/zhangai/attack-moving.png",
 			"type": "image",
 			"name": "attack-moving"
-		},
-		{
-			"url": "assets/zhangai/游戏内容.png",
-			"type": "image",
-			"name": "游戏内容_png"
 		},
 		{
 			"url": "assets/liubei.png",
@@ -611,14 +591,14 @@
 			"name": "icon-star-victory-black"
 		},
 		{
-			"name": "power-number-victory_fnt",
+			"url": "assets/fonts/power-number-victory.fnt",
 			"type": "font",
-			"url": "assets/fonts/power-number-victory.fnt"
+			"name": "power-number-victory_fnt"
 		},
 		{
-			"name": "power-number-victory_png",
+			"url": "assets/fonts/power-number-victory.png",
 			"type": "image",
-			"url": "assets/fonts/power-number-victory.png"
+			"name": "power-number-victory_png"
 		}
 	]
 }

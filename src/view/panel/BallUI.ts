@@ -6,6 +6,7 @@ module game {
         public name: string = "BallUI";
 
         // controls:
+        public groupNormal: eui.Group;
         public labelBall: eui.Image;
         public imageBall: eui.Image;
         public hpBar: eui.Group;
@@ -66,6 +67,7 @@ module game {
         }
 
         public dead() {
+            this.groupNormal.visible = false;
             this.dragonBone.visible = true;
             this.dragonBone.animation.play("caocao", 1);
         }

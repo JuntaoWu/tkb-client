@@ -58,7 +58,7 @@ export class WxgamePlugin implements plugins.Command {
                     content = content.replace(/var n=function\(i,n\){/g, `var n=function(i,n){i.puremvc=n;`);
                     content = content.replace(/\).call\(this\)/g, `).call(window)`);
                     content = content.replace(/n\(global,i\(/g, `n(window,i.call(this,`);
-                    
+
                     content += ";window.puremvc = puremvc";
                 }
 
@@ -72,6 +72,12 @@ export class WxgamePlugin implements plugins.Command {
                     content = content.replace(`Xe=Ye||Qe||Function("return this")()`,
                         `Xe=Qe||window`);
                     content = content.replace(`gu=_u();`, `gu=_u();Xe._=gu;`);
+                }
+
+                if (filename == 'libs/modules/physics/physics.js' || filename == 'libs/modules/physics/physics.min.js') {
+                    content = content.replace(`module.exports = a();`, `{module.exports = a();window.p2 = a();}`);
+                    content = content.replace(`module.exports=t();`, `{module.exports=t();window.p2=t();}`);
+                    content += ";window.p2 = p2";
                 }
 
                 file.contents = new Buffer(content);

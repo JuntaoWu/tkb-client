@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="skins.BallUI" width="120" height="170" xmlns:e="http://ns.egret.com/eui">
-    <e:Image id="labelBall" source="{labelBallBinding}" horizontalCenter="0"></e:Image>
-    <e:Image id="imageBall" source="{imageBallBinding}" horizontalCenter="0" verticalCenter="0" fillMode="scale"></e:Image>
-    <e:Group id="hpBar" width="104" horizontalCenter="0" bottom="0">
-        <e:Image source="bar-bg" bottom="0" horizontalCenter="0"></e:Image>
-        <e:Image id="imageHpBar" source="bar" fillMode="scale" anchorOffsetX="0" bottom="0" width="110%" left="0" scale9Grid="15,6,43,13"></e:Image>
-        <e:Label id="hpLabel" text="{hpLabelBinding}" size="20" horizontalCenter="0" verticalCenter="0"></e:Label>
+    <e:Group id="groupNormal" width="100%" height="100%">
+        <e:Image id="labelBall" source="{labelBallBinding}" horizontalCenter="0"></e:Image>
+        <e:Image id="imageBall" source="{imageBallBinding}" horizontalCenter="0" verticalCenter="0" fillMode="scale"></e:Image>
+        <e:Group id="hpBar" width="104" horizontalCenter="0" bottom="0">
+            <e:Image source="bar-bg" bottom="0" horizontalCenter="0"></e:Image>
+            <e:Image id="imageHpBar" source="bar" fillMode="scale" anchorOffsetX="0" bottom="0" width="110%" left="0"
+                     scale9Grid="15,6,43,13"></e:Image>
+            <e:Label id="hpLabel" text="{hpLabelBinding}" size="20" horizontalCenter="0" verticalCenter="0"></e:Label>
+        </e:Group>
     </e:Group>
     <e:Group id="groupDragonBone" verticalCenter="0" horizontalCenter="0"></e:Group>
 </e:Skin>

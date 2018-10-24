@@ -56,7 +56,7 @@ class DebugPlatform implements Platform {
     }
 
     public get appVersion(): string {
-        return "0.2.24";
+        return "0.1.0";
     }
 
     public async getUserInfo() {

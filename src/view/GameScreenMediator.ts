@@ -78,7 +78,13 @@ module game {
             this.gameScreen.btnCurrentTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playCurrentTips, this);
             this.gameScreen.btnConfirmTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.confirmTips, this);
 
+            this.gameScreen.toggleSwitch.addEventListener(egret.Event.CHANGE, this.toggleTestMode, this);
+
             this.reloadCurrentLevel();
+        }
+
+        public toggleTestMode(event: egret.Event) {
+            this.gameScreen.testMode = this.gameScreen.toggleSwitch.selected;
         }
 
         public navigateToLevelScreen() {
@@ -311,6 +317,9 @@ module game {
 
         public confirmTips() {
             let token = localStorage.getItem("token");
+            if (platform.env == "prod") {
+                token = "";
+            }
             var request = new egret.HttpRequest();
             request.responseType = egret.HttpResponseType.TEXT;
             request.open(`${game.Constants.Endpoints.service}level/updateAnswer?token=${token}&id=${this.currentLevelId || ""}`, egret.HttpMethod.POST);
@@ -359,14 +368,15 @@ module game {
                                     this.loadLevel(this.currentLevel);
                                 }
                                 else if (this._ball.types[i] == game.BodyType.TYPE_ENEMY) {
-
                                     let ballUI = this._ball.ballBmps[i] as BallUI;
                                     ballUI.dead();
                                     this.collectScore(position[0], position[1], 2);
                                     console.log("enemy falls in a hole.");
                                     egret.setTimeout(() => {
                                         this._ball.removeBallBmp(i);
-                                        this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
+                                        if (!this.gameScreen.testMode) {
+                                            this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
+                                        }
                                     }, this, 1000);
                                 }
                                 else {
@@ -374,6 +384,57 @@ module game {
                                 }
                             }
                         });
+                    }
+                });
+
+                this._wall.wallBodys.forEach((i, wallIndex) => {
+                    if (t.bodyA == i || t.bodyB == i) {
+                        console.log(t);
+                        let ball = t.bodyA == i ? t.bodyB : t.bodyA;
+                        let pointX = ball.position[0] + t.contactEquations[0].contactPointA[0];
+                        let pointY = ball.position[1] + t.contactEquations[0].contactPointA[1];
+                        let dragonBone = DragonBones.createDragonBone("caodead", "hityellow");
+                        dragonBone.x = pointX;
+                        dragonBone.y = pointY;
+                        this.gameScreen.addChild(dragonBone);
+                        dragonBone.animation.play("newAnimation", 1);
+                        let onHitCompleted = () => {
+                            dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onHitCompleted, this);
+                            this.gameScreen.removeChild(dragonBone);
+                        };
+                        dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onHitCompleted, this);
+                    }
+                });
+
+                this._wall.airWallBodys.forEach((i, wallIndex) => {
+                    if (t.bodyA === i || t.bodyB === i) {
+                        let ball = t.bodyA == i ? t.bodyB : t.bodyA;
+                        let pointX = ball.position[0] + t.contactEquations[0].contactPointA[0];
+                        let pointY = ball.position[1] + t.contactEquations[0].contactPointA[1];
+
+                        let dragonBone;
+                        if (this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_WALL
+                            || this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_MOVING_WALL
+                            || this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_MOVING_WALL_V) {
+
+                            dragonBone = DragonBones.createDragonBone("caodead", "hitred");
+                            dragonBone.x = pointX;
+                            dragonBone.y = pointY;
+                            this.gameScreen.addChild(dragonBone);
+                            dragonBone.animation.play("beici", 1);
+                        }
+                        else {
+                            dragonBone = DragonBones.createDragonBone("caodead", "hityellow");
+                            dragonBone.x = pointX;
+                            dragonBone.y = pointY;
+                            this.gameScreen.addChild(dragonBone);
+                            dragonBone.animation.play("newAnimation", 1);
+                        }
+                        let onHitCompleted = () => {
+                            dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onHitCompleted, this);
+                            this.gameScreen.removeChild(dragonBone);
+                        };
+                        dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onHitCompleted, this);
                     }
                 });
             });
@@ -406,7 +467,9 @@ module game {
                                             ballUI.dead();
                                             egret.setTimeout(() => {
                                                 this._ball.removeBallBmp(index);
-                                                this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
+                                                if (!this.gameScreen.testMode) {
+                                                    this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
+                                                }
                                             }, this, 1000);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
@@ -424,16 +487,15 @@ module game {
             });
         }
 
-
         // 创建调试试图
         private createDebug(): void {
-
-            this.debugDraw = new p2DebugDraw(this.world);
-            var sprite: egret.Sprite = new egret.Sprite();
-            this.gameScreen.addChild(sprite);
-            this.debugDraw.setSprite(sprite);
+            if (platform.env == "dev") {
+                this.debugDraw = new p2DebugDraw(this.world);
+                var sprite: egret.Sprite = new egret.Sprite();
+                this.gameScreen.addChild(sprite);
+                this.debugDraw.setSprite(sprite);
+            }
         }
-
 
         private mouseStart: Array<number>;
         private mouseMove: Array<number>;
@@ -599,9 +661,14 @@ module game {
 
         private loop(): void {
             this.world.step(60 / 1000);
-            this.debugDraw.drawDebug();
-            this.world.step(.1),
+            if (platform.env == "dev") {
                 this.debugDraw.drawDebug();
+            }
+
+            this.world.step(.1);
+            if (platform.env == "dev") {
+                this.debugDraw.drawDebug();
+            }
             for (var t = 0; t < this.world.bodies.length; t++) {
                 var i = this.world.bodies[t]
                     , o = i.displays[0];

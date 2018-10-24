@@ -25,6 +25,10 @@ module game {
         public scoreStarUI1: ScoreStarUI;
         public scoreStarUI2: ScoreStarUI;
 
+        public toggleSwitch: eui.ToggleSwitch;
+
+        public testMode: boolean = true;
+
         //bindings:
         public currentLevel: string = "第 1 关";
         public powerLabelBinding: string = "0/20";
@@ -45,6 +49,8 @@ module game {
             super();
             this.skinName = "skins.GameScreen";
             this.addEventListener(eui.UIEvent.ADDED, this.createCompleteEvent, this);
+
+            this.testMode = platform.env == "dev";
         }
 
         public createCompleteEvent(event: eui.UIEvent): void {
@@ -59,6 +65,8 @@ module game {
             this.stage.addChild(this.scoreStarUI0);
             this.stage.addChild(this.scoreStarUI1);
             this.stage.addChild(this.scoreStarUI2);
+
+            this.toggleSwitch.selected = this.testMode;
         }
 
         public partAdded(partName: string, instance: any): void {

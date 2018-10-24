@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="skins.LoadingUI" minWidth="450" xmlns:e="http://ns.egret.com/eui"
         xmlns:game="game.*">
-	<e:Image id="loadingBackground" left="0" right="0" bottom="0" top="0" source="loading-background" />
+	<e:Image id="loadingBackground" left="0" right="0" bottom="0" top="0" source="start-background" />
 	<e:Group id="loadingLabel" horizontalCenter="0">
 		<e:Label id="loadingText" text="数据加载中，请等待..." fontFamily="Arial" bold="true" textColor="0xfdb449" anchorOffsetX="0" left="0"
 		         verticalCenter="0" />
