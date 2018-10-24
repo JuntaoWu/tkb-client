@@ -60,6 +60,7 @@
 		"bin-debug/view/panel/GameScreen.js",
 		"bin-debug/view/panel/Holes.js",
 		"bin-debug/view/panel/Level.js",
+		"bin-debug/view/panel/LevelItemRenderer.js",
 		"bin-debug/view/panel/LevelScreen.js",
 		"bin-debug/view/panel/ScoreStarUI.js",
 		"bin-debug/view/panel/Shade.js",

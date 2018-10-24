@@ -7,21 +7,21 @@
         <e:Group left="0" verticalCenter="0">
             <e:Image source="bg-star" verticalCenter="0"></e:Image>
             <e:Image source="icon-star-start"></e:Image>
-            <e:Label text="150/300" verticalCenter="0" x="74" size="40"></e:Label>
+            <e:Label text="{starLabelBinding}" verticalCenter="0" x="74" size="40"></e:Label>
         </e:Group>
         <e:Group horizontalCenter="0" verticalCenter="0">
             <e:Image source="bg-power" verticalCenter="0"></e:Image>
             <e:Image source="icon-power-start"></e:Image>
-            <e:Label text="10/15" verticalCenter="0" x="51" size="40"></e:Label>
+            <e:Label text="{powerLabelBinding}" verticalCenter="0" x="51" size="40"></e:Label>
         </e:Group>
     </e:Group>
     <e:Image source="logo" horizontalCenter="0" y="134"></e:Image>
     <e:Group horizontalCenter="0" y="408">
         <e:Image left="0" right="0" top="0" bottom="0" source="middle" width="650" height="670"></e:Image>
         <e:Group id="mainTitle" anchorOffsetY="0" height="102" anchorOffsetX="0" width="342" y="0" horizontalCenter="0">
-            <e:BitmapLabel text="第 01-20 关" font="level-number-start_fnt" horizontalCenter="0" verticalCenter="0"></e:BitmapLabel>
+            <e:BitmapLabel text="{currentChapterLabelBinding}" font="level-number-start_fnt" horizontalCenter="0" verticalCenter="0"></e:BitmapLabel>
         </e:Group>
-        <e:Button horizontalCenter="0" verticalCenter="0">
+        <e:Button id="btnChooseLevel" horizontalCenter="0" verticalCenter="0">
             <e:Skin>
                 <e:Image source="chapter-1" horizontalCenter="0" verticalCenter="0"></e:Image>
             </e:Skin>
@@ -29,14 +29,14 @@
         <e:Group horizontalCenter="0" y="586">
             <e:Image source="bg-star" verticalCenter="0"></e:Image>
             <e:Image source="icon-star-start"></e:Image>
-            <e:Label text="14/31" verticalCenter="0" size="40" x="95"></e:Label>
+            <e:Label text="{currentStarLabelBinding}" verticalCenter="0" size="40" x="95"></e:Label>
         </e:Group>
-        <e:Button verticalCenter="0" x="-25">
+        <e:Button id="btnLeft" verticalCenter="0" x="-25">
             <e:Skin>
                 <e:Image source="btn-arrow-left"></e:Image>
             </e:Skin>
         </e:Button>
-        <e:Button verticalCenter="0" right="-25">
+        <e:Button id="btnRight" verticalCenter="0" right="-25">
             <e:Skin>
                 <e:Image source="btn-arrow-right"></e:Image>
             </e:Skin>

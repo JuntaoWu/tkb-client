@@ -15,6 +15,13 @@ module game {
             this.updateConfig(this.config);
         }
 
+        public clear() {
+            this.starBmps.forEach(ballBmp => {
+                ballBmp && this.removeChild(ballBmp);
+            });
+            this.starBmps.length = 0;
+        }
+
         public removeStarBmp = function (e) {
             if (this.starBmps[e]) {
                 this.removeChild(this.starBmps[e]);

@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="skins.VictoryWindow" width="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+<e:Skin class="skins.VictoryWindow" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
         xmlns:game="game.*">
     <game:Shade id="overlay" />
     <e:Group id="container" horizontalCenter="0" height="900">
         <e:Image id="victoryBackground" left="0" right="0" source="victory-background" y="240" />
-        <e:Group id="groupBanner" width="706" height="356">
+        <e:Group id="groupBanner" width="706">
             <e:Image id="imgBanner" source="banner-victory" horizontalCenter="0" verticalCenter="0"></e:Image>
         </e:Group>
-        <e:BitmapLabel text="第 1 关" y="365" horizontalCenter="0" font="level-number-victory_fnt"></e:BitmapLabel>
+        <e:BitmapLabel text="{currentLevelBinding}" y="365" horizontalCenter="0" font="level-number-victory_fnt"></e:BitmapLabel>
         <e:Group id="groupLevel" y="392" horizontalCenter="0">
             <e:Image id="star0" source="icon-star-victory"></e:Image>
             <e:Image id="star1" source="icon-star-victory" y="40" horizontalCenter="0"></e:Image>
             <e:Image id="star2" source="icon-star-victory" x="288"></e:Image>
         </e:Group>
-        <e:Group x="160" y="630">
+        <e:Group id="groupPower" y="630" width="200" x="160">
             <e:Image source="icon-power-bg" verticalCenter="0"></e:Image>
             <e:Image source="icon-power-start"></e:Image>
-            <e:Label text="10/15" verticalCenter="0" x="62" size="40"></e:Label>
+            <e:Label text="{powerLabelBinding}" verticalCenter="0" x="62" size="40"></e:Label>
         </e:Group>
-        <e:Group x="399" y="635">
+        <e:Group visible="{powerUpBinding}" x="399" y="635">
             <e:Image source="icon-plus" verticalCenter="0"></e:Image>
-            <e:Image source="icon-power-value" y="0" x="65"></e:Image>
+            <e:Image source="icon-power-start" y="0" x="65"></e:Image>
+            <e:BitmapLabel text="{powerUpBinding}" font="power-number-victory_fnt" right="0" bottom="0" scaleX="1.5" scaleY="1.5"></e:BitmapLabel>
         </e:Group>
-        <e:Button x="87" bottom="0">
+        <e:Button id="btnNext" x="87" bottom="0">
             <e:Skin states="up,down,disabled">
                 <e:Image source="btn-next" scaleX.down="0.9" scaleY.down="0.9" />
             </e:Skin>

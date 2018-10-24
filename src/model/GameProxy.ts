@@ -9,6 +9,13 @@ module game {
 
 		public levelsArray: Level[];
 
+		public currentChapter: number = 0;
+		public currentLevel: number = 0;
+		public collectedCount: number = 0;
+		public passInfo: any[] = [];
+		public shouldPowerUp: boolean = false;
+		public currentPower: number = 20;
+
 		public constructor() {
 			super(GameProxy.NAME);
 
@@ -34,80 +41,57 @@ module game {
 			}
 		}
 
-		public static PLAYER_UPDATE: string = "player_update";
-		public static SEAT_UPDATE: string = "seat_update";
-		public static CHOOSE_JS_END: string = "choose_js_end";
-		public static FIRST_ONE: string = "first_one";
-		public static NEXT_NR: string = "next_nr";
-		public static TONGZHI: string = "tongzhi";
-		public static BAOWU_TONGZHI: string = "baowu_tongzhi";
-		public static TOUPIAO_UI: string = "toupiao_ui";
-		public static ZONG_PIAOSHU: string = "zong_piaoshu";
-		public static INPUT_NUMBER: string = "input_number";
-		public static FINISH_INPUT: string = "finish_input";
-		public static PIAO_SHU: string = "piao_shu";
-		public static TOUPIAO_END: string = "toupiao_end";
-		public static START_TWO: string = "start_two";
-		public static ONE_YBRSKILL: string = "one_ybrskill";
-		public static ONE_ZGQSKILL: string = "one_zgqskill";
-		public static TOUREN: string = "touren";
-		public static TOUREN_JIEGUO: string = "touren_jieguo";
-		public static START_TOUPIAO_BUTTON: string = "start_toupiao_button";
-		public static ROLEING: string = "roleing";
-		public static AUTH_EDN: string = "auth_end";
+		public static LEVEL_UPDATED: string = "level_updated";
+		public static POWER_CHANGED: string = "power_changed";
+		public static STAR_CHANGED: string = "star_changed";
+		public static GAME_DISPOSE: string = "game_dispose";
 
-		public roomName: string;
+		public startGame(level: number) {
 
-		public isCreating: boolean;
-
-		private _actorNr: number;
-		public get actorNr(): number {
-			return this._actorNr;
-		}
-		public set actorNr(v: number) {
-			this._actorNr = v;
-			platform.setStorage("currentRoom", {
-				roomName: this.roomName,
-				actorNr: this.actorNr
-			});
-		}
-
-		public get currentRoom(): any {
-			return platform.getStorage("currentRoom");
-		}
-		public set currentRoom(value: any) {
-			platform.setStorage("currentRoom", value);
-		}
-
-		private _antiquesMap: Map<string, any>;
-		public get antiquesMap(): Map<string, any> {
-			if (!this._antiquesMap) {
-				this._antiquesMap = new Map<string, any>(Object.entries(RES.getRes("antiques_json")));
-			}
-			return this._antiquesMap;
-		}
-
-		private _seatsMap: Map<string, any>;
-		public get seatsMap(): Map<string, any> {
-			if (!this._seatsMap) {
-				this._seatsMap = new Map<string, any>(Object.entries(RES.getRes("seats_json")));
-			}
-			return this._seatsMap;
-		}
-
-
-		private _rolesMap: Map<string, Role>;
-		public get rolesMap(): Map<string, Role> {
-			if (!this._rolesMap) {
-				this._rolesMap = new Map<string, Role>(Object.entries(RES.getRes("role_json")));
-			}
-			return this._rolesMap;
-		}
-
-		public startGame() {
+			this.currentLevel = level;
+			this.currentLevel %= 80;
+			this.currentChapter = Math.floor(this.currentLevel / 20);
 
 			//sync gameState
 			console.log("MasterClient startGame: setCustomProperty");
+		}
+
+		public nextLevel() {
+			console.log("Next level");
+			++this.currentLevel;
+			this.currentLevel %= 80;
+			this.currentChapter = Math.floor(this.currentLevel / 20);
+			this.sendNotification(GameProxy.LEVEL_UPDATED);
+		}
+
+		public updateLevel(level: number) {
+			this.currentLevel = level;
+			this.currentLevel %= 80;
+			this.currentChapter = Math.floor(this.currentLevel / 20);
+			this.sendNotification(GameProxy.LEVEL_UPDATED);
+		}
+
+		public setResult(collectedCount: number) {
+			this.collectedCount = collectedCount;
+			this.shouldPowerUp = false;
+			if (!this.passInfo[this.currentLevel] || collectedCount > this.passInfo[this.currentLevel].stars) {
+				this.passInfo[this.currentLevel] = {
+					stars: collectedCount,
+				};
+				this.shouldPowerUp = collectedCount >= 3;
+				this.currentPower += 3;
+				this.sendNotification(GameProxy.POWER_CHANGED);
+				this.sendNotification(GameProxy.STAR_CHANGED);
+			}
+		}
+
+		public decreasePower(power: number) {
+			this.currentPower -= power;
+			this.sendNotification(GameProxy.POWER_CHANGED);
+		}
+
+		public disposeGame() {
+			this.sendNotification(GameProxy.GAME_DISPOSE);
 		}
 
 		private generateRoomNumber() {

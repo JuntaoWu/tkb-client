@@ -13,6 +13,8 @@ module game {
          */
         public static START_GAME: string = "start_game";
 
+        public static NEXT_LEVEL: string = "next_level";
+
         public static CREATE_ROOM: string = "create_room";
 
         public static JOIN_ROOM: string = "join_room";
@@ -27,6 +29,7 @@ module game {
             this.facade().registerCommand(GameCommand.JOIN_ROOM, GameCommand);
             this.facade().registerCommand(GameCommand.JOIN_SEAT,GameCommand);
             this.facade().registerCommand(GameCommand.CHOOSE_ROLE,GameCommand);
+            this.facade().registerCommand(GameCommand.NEXT_LEVEL, GameCommand);
         }
 
         public static JOIN_SEAT:string = "join_seat";
@@ -38,7 +41,11 @@ module game {
             switch (notification.getName()) {
                 case GameCommand.START_GAME: {
                     this.sendNotification(SceneCommand.CHANGE, Scene.Game);
-                    gameProxy.startGame();
+                    gameProxy.startGame(+data.level - 1);
+                    break;
+                }
+                case GameCommand.NEXT_LEVEL: {
+                    gameProxy.nextLevel();
                     break;
                 }
             }

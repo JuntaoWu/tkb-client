@@ -27,6 +27,7 @@ module game {
 
         //bindings:
         public currentLevel: string = "第 1 关";
+        public powerLabelBinding: string = "0/20";
 
         private _starCount: number = 0;
         public get starCount(): number {

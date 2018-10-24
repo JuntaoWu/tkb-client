@@ -8,9 +8,14 @@ module game {
         // controls:
         public listLevel: eui.List;
         public btnBack: eui.Button;
+        public btnLeft: eui.Button;
+        public btnRight: eui.Button;
 
         //bindings:
         public currentLevel: string = "第 1 关";
+        public powerLabelBinding: string = "0/20";
+        public currentChapterLabelBinding: string = "第 01-20 关";
+        public currentStarLabelBinding: string = "0/60"
 
         public constructor() {
             super();

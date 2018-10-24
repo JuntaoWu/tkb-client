@@ -29,7 +29,7 @@
         </e:Group>
         <e:Group id="groupPower" horizontalCenter="0">
             <e:Image source="icon-power"></e:Image>
-            <e:Label text="10/15" verticalCenter="0" x="49"></e:Label>
+            <e:Label text="{powerLabelBinding}" verticalCenter="0" x="49"></e:Label>
         </e:Group>
         <e:Group id="groupLevel" y="80" horizontalCenter="0">
             <e:BitmapLabel text="{currentLevel}" font="level-number_fnt" horizontalCenter="0" y="0"></e:BitmapLabel>

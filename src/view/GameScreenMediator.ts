@@ -46,16 +46,20 @@ module game {
             this.proxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
             await this.proxy.initialize();
 
+            this.currentLevel = this.proxy.currentLevel;
+
+            this.gameScreen.powerLabelBinding = `${this.proxy.currentPower}/20`;
+
             this.createWorld();
             this.createCueArea();
             this.createDebug();
 
-            this.gameScreen.stage.addChild(this._wall = new game.Wall(this.world, this.proxy.levelsArray[this.currentLevel].walls));
-            this.gameScreen.stage.addChild(this._holes = new game.Holes(this.world, this.proxy.levelsArray[this.currentLevel].holes));
-            this.gameScreen.stage.addChild(this._ball = new game.Balls(this.world, this.proxy.levelsArray[this.currentLevel].balls));
-            this.gameScreen.stage.addChild(this._star = new game.Stars(this.world, this.proxy.levelsArray[this.currentLevel].stars));
+            this.gameScreen.addChild(this._wall = new game.Wall(this.world, this.proxy.levelsArray[this.currentLevel].walls));
+            this.gameScreen.addChild(this._holes = new game.Holes(this.world, this.proxy.levelsArray[this.currentLevel].holes));
+            this.gameScreen.addChild(this._ball = new game.Balls(this.world, this.proxy.levelsArray[this.currentLevel].balls));
+            this.gameScreen.addChild(this._star = new game.Stars(this.world, this.proxy.levelsArray[this.currentLevel].stars));
 
-            this.gameScreen.stage.addChild(this._cue = new game.Cue(360, 1100, this.world));
+            this.gameScreen.addChild(this._cue = new game.Cue(360, 1100, this.world));
             this._cue.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
@@ -69,7 +73,7 @@ module game {
 
             this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
             this.gameScreen.btnGo.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeLevel, this);
-            this.gameScreen.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevel, this);
+            this.gameScreen.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
             this.gameScreen.btnTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playPredefinedTips, this);
             this.gameScreen.btnCurrentTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playCurrentTips, this);
             this.gameScreen.btnConfirmTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.confirmTips, this);
@@ -77,11 +81,12 @@ module game {
             this.reloadCurrentLevel();
         }
 
-        public navigateToLevel() {
+        public navigateToLevelScreen() {
             this._wall.clear();
             this._ball.clear();
             this._holes.clear();
             this._cue.clear();
+            this._star.clear();
             this.world.clear();
             this.sendNotification(SceneCommand.CHANGE, Scene.Level);
         }
@@ -151,7 +156,7 @@ module game {
         }
 
         public async reloadCurrentLevel() {
-            this.updateLevel(this.currentLevel);
+            this.loadLevel(this.currentLevel);
         }
 
         public async changeLevel() {
@@ -159,10 +164,10 @@ module game {
             if (!level) {
                 return;
             }
-            this.updateLevel(level - 1);
+            this.proxy.updateLevel(level - 1);
         }
 
-        public async updateLevel(level: number) {
+        public async loadLevel(level: number) {
 
             this.gameScreen.starCount = 0;
             this.collectedStar = [false, false, false];
@@ -172,7 +177,7 @@ module game {
                 this._cue = undefined;
             }
 
-            this.gameScreen.stage.addChild(this._cue = new game.Cue(360, 1100, this.world));
+            this.gameScreen.addChild(this._cue = new game.Cue(360, 1100, this.world));
             this._cue.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
             this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
@@ -351,7 +356,7 @@ module game {
                                 if (this._ball.types[i] == game.BodyType.TYPE_HERO) {
                                     console.log("hero falls in a hole.");
                                     this._ball.removeBallBmp(i);
-                                    this.updateLevel(this.currentLevel);
+                                    this.loadLevel(this.currentLevel);
                                 }
                                 else if (this._ball.types[i] == game.BodyType.TYPE_ENEMY) {
 
@@ -359,10 +364,9 @@ module game {
                                     ballUI.dead();
                                     this.collectScore(position[0], position[1], 2);
                                     console.log("enemy falls in a hole.");
-                                    //this.updateLevel(this.currentLevel + 1);
                                     egret.setTimeout(() => {
                                         this._ball.removeBallBmp(i);
-                                        this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW);
+                                        this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
                                     }, this, 1000);
                                 }
                                 else {
@@ -392,19 +396,17 @@ module game {
                                             console.log("hero dead.");
                                             this.world.removeBody(m);
                                             this._ball.removeBallBmp(index);
-                                            this.updateLevel(this.currentLevel);
+                                            this.loadLevel(this.currentLevel);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_ENEMY) {
                                             console.log("enemy dead.");
                                             this.collectScore(m.position[0], m.position[1], 2);
                                             this.world.removeBody(m);
-                                            //this.updateLevel(this.currentLevel + 1);
                                             let ballUI = this._ball.ballBmps[index] as BallUI;
                                             ballUI.dead();
-                                            //this.updateLevel(this.currentLevel + 1);
                                             egret.setTimeout(() => {
                                                 this._ball.removeBallBmp(index);
-                                                this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW);
+                                                this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
                                             }, this, 1000);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
@@ -415,18 +417,6 @@ module game {
                                     }
                                 }
                             });
-
-                            // if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_HERO))) {
-                            //     console.log("hero dead.");
-                            //     this.updateLevel(this.currentLevel);
-                            // }
-                            // else if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_ENEMY))) {
-                            //     console.log("enemy dead.");
-                            //     this.updateLevel(this.currentLevel + 1);
-                            // }
-                            // else if (this._ball.hps.some((hp, index) => (hp <= 0 && this._ball.types[index] == game.BodyType.TYPE_MASS))) {
-                            //     console.log("mass dead.");
-                            // }
                         }
                     }
 
@@ -440,7 +430,7 @@ module game {
 
             this.debugDraw = new p2DebugDraw(this.world);
             var sprite: egret.Sprite = new egret.Sprite();
-            this.gameScreen.stage.addChild(sprite);
+            this.gameScreen.addChild(sprite);
             this.debugDraw.setSprite(sprite);
         }
 
@@ -462,7 +452,7 @@ module game {
 
             let scoreStarUI: ScoreStarUI = this.gameScreen[`scoreStarUI${starIndex}`];
 
-            this.gameScreen.stage.addChild(scoreStarUI);
+            this.gameScreen.addChild(scoreStarUI);
 
             scoreStarUI.groupStar.visible = true;
             scoreStarUI.x = x;
@@ -573,10 +563,11 @@ module game {
 
                             this.collectScore(e.stageX, e.stageY, 0);
                         }
-
                     }
 
                     this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                    this.proxy.decreasePower(1);
 
                     // egret.Tween.get(this._cue.cueBmp).to({
                     //     scaleX: 1.5,
@@ -625,38 +616,34 @@ module game {
                     // this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
                     // this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
                 }
-                this._cue && this.gameScreen.stage.addChild(this._cue);
+                this._cue && this.gameScreen.addChild(this._cue);
                 this.cueState = game.CueState.CUEON;
             }
         }
 
         public listNotificationInterests(): Array<any> {
             return [
-                GameProxy.PLAYER_UPDATE,
-                GameProxy.SEAT_UPDATE,
-                GameProxy.FIRST_ONE,
-                GameProxy.NEXT_NR,
-                GameProxy.TONGZHI,
-                GameProxy.BAOWU_TONGZHI,
-                GameProxy.TOUPIAO_UI,
-                GameProxy.PIAO_SHU,
-                GameProxy.ZONG_PIAOSHU,
-                GameProxy.START_TWO,
-                GameProxy.ONE_YBRSKILL,
-                GameProxy.ONE_ZGQSKILL,
-                GameProxy.TOUREN,
-                GameProxy.TOUREN_JIEGUO,
-                GameCommand.JOIN_ROOM,
-                GameProxy.START_TOUPIAO_BUTTON,
-                GameProxy.ROLEING,
-                GameProxy.AUTH_EDN
+                GameProxy.LEVEL_UPDATED,
+                GameProxy.POWER_CHANGED,
+                GameProxy.GAME_DISPOSE,
             ];
         }
 
         public handleNotification(notification: puremvc.INotification): void {
             var data: any = notification.getBody();
             switch (notification.getName()) {
-
+                case GameProxy.LEVEL_UPDATED: {
+                    this.loadLevel(this.proxy.currentLevel);
+                    break;
+                }
+                case GameProxy.POWER_CHANGED: {
+                    this.gameScreen.powerLabelBinding = `${this.proxy.currentPower}/20`;
+                    break;
+                }
+                case GameProxy.GAME_DISPOSE: {
+                    this.navigateToLevelScreen();
+                    break;
+                }
             }
         }
 
