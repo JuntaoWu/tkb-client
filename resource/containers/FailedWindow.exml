@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.FailedWindow" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+        xmlns:game="game.*">
+    <game:Shade id="overlay" />
+    <e:Group id="container" horizontalCenter="0" height="900">
+        <e:Image id="failedBackground" left="0" right="0" source="victory-background" y="196" />
+        <e:Group id="groupBanner" width="706">
+            <e:Image id="imgBanner" source="banner-failed" horizontalCenter="0" verticalCenter="0"></e:Image>
+        </e:Group>
+        <e:Image source="content-failed" horizontalCenter="0" verticalCenter="0"></e:Image>
+        <e:Group id="groupPower" y="630" width="200" x="160">
+            <e:Image source="icon-power-bg" verticalCenter="0"></e:Image>
+            <e:Image source="icon-power-start"></e:Image>
+            <e:Label text="{powerLabelBinding}" verticalCenter="0" x="62" size="40"></e:Label>
+        </e:Group>
+        <e:Group visible="{powerUpBinding}" x="399" y="635">
+            <e:Button id="btnVideoAd">
+                <e:Skin>
+                    <e:Image source="btn-video-ads"></e:Image>
+                </e:Skin>
+            </e:Button>
+        </e:Group>
+        <e:Button id="btnRetry" x="87" bottom="0">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-retry" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+        <e:Button x="415" bottom="0">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-share-victory" scaleX.down="0.9" scaleY.down="0.9"></e:Image>
+            </e:Skin>
+        </e:Button>
+        <e:Button id="closeButton" right="17" y="178">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-close" scaleX.down="0.9" scaleY.down="0.9"></e:Image>
+            </e:Skin>
+        </e:Button>
+    </e:Group>
+</e:Skin>

@@ -24,6 +24,8 @@ module game {
         public angle?: any;
         public offset?: number;
         public hp?: number;
+        public speed?: any;
+        public reverseDirection?: any
     }
 
     export enum BodyType {

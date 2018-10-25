@@ -14,6 +14,7 @@ module game {
         public static CHANGE: string = "scene_change";
 
         public static SHOW_VICTORY_WINDOW: string = "show_victory_window";
+        public static SHOW_FAILED_WINDOW: string = "show_failed_window";
         public static NAVIGATE_TO_LEVEL_SCREEN: string = "navigate_to_level_screen";
 
         public register(): void {
@@ -24,6 +25,7 @@ module game {
             super.initializeNotifier(key);
             this.facade().registerCommand(SceneCommand.CHANGE, SceneCommand);
             this.facade().registerCommand(SceneCommand.SHOW_VICTORY_WINDOW, SceneCommand);
+            this.facade().registerCommand(SceneCommand.SHOW_FAILED_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.NAVIGATE_TO_LEVEL_SCREEN, SceneCommand);
         }
 
@@ -48,6 +50,11 @@ module game {
                 case SceneCommand.SHOW_VICTORY_WINDOW: {
                     gameProxy.setResult(data);
                     appMediator.main.showVictoryWindow();
+                    break;
+                }
+                case SceneCommand.SHOW_FAILED_WINDOW: {
+                    gameProxy.setResult(0);
+                    appMediator.main.showFailedWindow();
                     break;
                 }
                 case SceneCommand.NAVIGATE_TO_LEVEL_SCREEN: {

@@ -126,6 +126,7 @@ module game {
                 const airBody = new p2.Body({
                     mass: 0,
                     position: [clone.x, clone.y],
+                    type: p2.Body.KINEMATIC
                 });
                 airBody.angle = -airWall.angle;
                 airBody.addShape(airBox);
@@ -357,17 +358,23 @@ module game {
         public postStepMove() {
             // Kinematic bodies are controlled via velocity.
             this.config && this.config.forEach((airWall, index) => {
-                let clone = {
-                    x: parseFloat(airWall.x as string) * 100,
-                    y: 1280 - parseFloat(airWall.y as string) * 100,
-                };
-                let originalPositionX = clone.x;
-                let originalPositionY = clone.y;
-                if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL) {
-                    this.airWallBodys[index].position[0] = originalPositionX + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
-                }
-                else if (airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
-                    this.airWallBodys[index].position[1] = originalPositionY + (-airWall.offset * 50 || -100) * Math.sin(2 / 10 * this.world.time);
+                if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL
+                    || airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
+                    let clone = {
+                        x: parseFloat(airWall.x as string) * 100,
+                        y: 1280 - parseFloat(airWall.y as string) * 100,
+                        speed: (parseFloat(airWall.speed as string) || 20) / 100,
+                        direction: (airWall.reverseDirection && airWall.reverseDirection.toString() == "true") ? -1 : 1
+                    };
+                    let originalPositionX = clone.x;
+                    let originalPositionY = clone.y;
+                    // let direction
+                    if (airWall.bodyType == BodyType.TYPE_MOVING_WALL || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL) {
+                        this.airWallBodys[index].position[0] = originalPositionX + clone.direction * (-airWall.offset * 50 || -100) * Math.sin(clone.speed * this.world.time);
+                    }
+                    else if (airWall.bodyType == BodyType.TYPE_MOVING_WALL_V || airWall.bodyType == BodyType.TYPE_ATTACK_MOVING_WALL_V) {
+                        this.airWallBodys[index].position[1] = originalPositionY + clone.direction * (-airWall.offset * 50 || -100) * Math.sin(clone.speed * this.world.time);
+                    }
                 }
             });
         }

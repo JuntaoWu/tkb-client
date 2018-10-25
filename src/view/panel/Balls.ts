@@ -55,13 +55,16 @@ module game {
 
                 var t = new p2.Circle({
                     radius: clone.width / 2
-                })
-                    , i = new p2.Body({
-                        mass: 1,
-                        position: [clone.x, clone.y]
-                    });
-                i.addShape(t),
-                    this.world.addBody(i);
+                });
+                var i = new p2.Body({
+                    mass: 1,
+                    position: [clone.x, clone.y],
+                });
+                //i.allowSleep = false;
+                i.sleepTimeLimit = 10;
+
+                i.addShape(t);
+                this.world.addBody(i);
 
                 const o = new game.BallUI();
                 switch (+ball.bodyType) {

@@ -49,6 +49,8 @@ module game {
             if (this.gameProxy.currentChapter >= 3) {
                 return;
             }
+
+            SoundPool.playSoundEffect("tap-sound");
             ++this.gameProxy.currentChapter;
 
             const lowerBound = this.gameProxy.currentChapter * 20;
@@ -59,11 +61,14 @@ module game {
         }
 
         public previousChapter() {
+
             if (this.gameProxy.currentChapter <= 0) {
                 return;
             }
-            --this.gameProxy.currentChapter;
             
+            SoundPool.playSoundEffect("tap-sound");
+            --this.gameProxy.currentChapter;
+
             const lowerBound = this.gameProxy.currentChapter * 20;
             const higherBound = lowerBound + 20;
             this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
@@ -72,6 +77,7 @@ module game {
         }
 
         public chooseLevel() {
+            SoundPool.playSoundEffect("tap-sound");
             this.sendNotification(SceneCommand.CHANGE, Scene.Level);
         }
 

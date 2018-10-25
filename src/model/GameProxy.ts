@@ -59,6 +59,10 @@ module game {
 			console.log("MasterClient startGame: setCustomProperty");
 		}
 
+		public retryLevel() {
+			this.sendNotification(GameProxy.LEVEL_UPDATED);
+		}
+
 		public nextLevel() {
 			console.log("Next level");
 			++this.currentLevel;
@@ -74,7 +78,14 @@ module game {
 			this.sendNotification(GameProxy.LEVEL_UPDATED);
 		}
 
-		public setResult(collectedCount: number) {
+		public setResult(collectedCount?: number) {
+
+			if(!collectedCount) {
+				//todo: failed.
+				
+				return;
+			}
+
 			this.collectedCount = collectedCount;
 			this.shouldPowerUp = false;
 			if (!this.passInfo[this.currentLevel] || collectedCount > this.passInfo[this.currentLevel].stars) {

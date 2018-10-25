@@ -33,27 +33,12 @@ module game {
             const lowerBound = this.proxy.currentChapter * 20;
             const higherBound = lowerBound + 20;
             this.levelScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
-            const currentCollectedStars = _(this.proxy.passInfo.filter((value) => value)).sumBy("stars");
             const currentChapterCollectedStars = _(this.proxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
             this.levelScreen.currentStarLabelBinding = `${currentChapterCollectedStars}/60`;
 
             this.currentPage = Math.floor((this.proxy.currentLevel % 20) / 6);
-            const currentPageLowerBound = this.currentPage * 6;
-            const currentPageHigherBound = currentPageLowerBound + 6;
-
-            let currentPageArray = [];
-            for (let i = currentPageLowerBound; i < currentPageHigherBound && i < 20; ++i) {
-                let level = this.proxy.currentChapter * 20 + i;
-                currentPageArray.push({
-                    level: level + 1,
-                    stars: this.proxy.passInfo[level] && this.proxy.passInfo[level].stars || 0,
-                    isLocked: ((i != 0 && !this.proxy.passInfo[this.proxy.currentChapter * 20]) || currentCollectedStars < 3 * (level + 1) - 10),
-                    isPlayed: !!this.proxy.passInfo[level]
-                });
-            }
-
-            this.levelScreen.listLevel.dataProvider = new eui.ArrayCollection(currentPageArray);
-            this.levelScreen.listLevel.itemRenderer = LevelItemRenderer;
+            
+            this.refreshItems();
         }
 
         private refreshItems() {
@@ -65,11 +50,12 @@ module game {
             let currentPageArray = [];
             for (let i = currentPageLowerBound; i < currentPageHigherBound && i < 20; ++i) {
                 let level = this.proxy.currentChapter * 20 + i;
+                let isLocked = ((i != 0 && !this.proxy.passInfo[this.proxy.currentChapter * 20]) || currentCollectedStars < 3 * (level + 1) - 10);
                 currentPageArray.push({
                     level: level + 1,
-                    stars: this.proxy.passInfo[level] && this.proxy.passInfo[level].stars || 0,
-                    isLocked: ((i != 0 && !this.proxy.passInfo[this.proxy.currentChapter * 20]) || currentCollectedStars < 3 * (level + 1) - 10),
-                    isPlayed: !!this.proxy.passInfo[level]
+                    stars: !isLocked && this.proxy.passInfo[level] && this.proxy.passInfo[level].stars || 0,
+                    isLocked: isLocked,
+                    isPlayed: !isLocked && this.proxy.passInfo[level]
                 });
             }
 
@@ -82,6 +68,7 @@ module game {
             if (this.currentPage <= 0) {
                 return;
             }
+            SoundPool.playSoundEffect("tap-sound");
             --this.currentPage;
             this.refreshItems();
         }
@@ -90,11 +77,13 @@ module game {
             if (this.currentPage >= 3) {
                 return;
             }
+            SoundPool.playSoundEffect("tap-sound");
             ++this.currentPage;
             this.refreshItems();
         }
 
         public navigateToStart() {
+            SoundPool.playSoundEffect("tap-sound");
             this.sendNotification(SceneCommand.CHANGE, Scene.Start);
         }
 
@@ -103,6 +92,7 @@ module game {
                 event.stopImmediatePropagation();
                 return;
             }
+            SoundPool.playSoundEffect("tap-sound");
             this.sendNotification(GameCommand.START_GAME, event.item);
         }
 

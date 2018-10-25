@@ -35,10 +35,15 @@ module game {
 
             egret.setTimeout(() => {
                 this.victoryWindow.dragonBone.animation.play("vector", 1);
-                this.victoryWindow.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, () => {
-                    // this.victoryWindow.imgBanner.visible = true;
+
+                SoundPool.playSoundEffect("victory-music");
+
+                let vectorCompleted = () => {
+                    this.victoryWindow.dragonBone.removeEvent(dragonBones.EventObject.COMPLETE, vectorCompleted, this);
                     this.victoryWindow.dragonBone.animation.play("stop");
-                }, this);
+                };
+                this.victoryWindow.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, vectorCompleted, this);
+
             }, this, 300);
         }
 
@@ -46,16 +51,14 @@ module game {
             this.sendNotification(SceneCommand.CHANGE, Scene.Start);
         }
 
-        public navigateToLevelScreen() {
+        public navigateToLevelScreen(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
             //Use this command due to some clearance needed.
             this.sendNotification(SceneCommand.NAVIGATE_TO_LEVEL_SCREEN);
         }
 
-        public navigateToGame() {
-            this.sendNotification(GameCommand.START_GAME);
-        }
-
-        public nextLevel() {
+        public nextLevel(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
             this.victoryWindow.close();
             this.sendNotification(GameCommand.NEXT_LEVEL);
         }

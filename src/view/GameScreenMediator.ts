@@ -80,14 +80,19 @@ module game {
 
             this.gameScreen.toggleSwitch.addEventListener(egret.Event.CHANGE, this.toggleTestMode, this);
 
-            this.reloadCurrentLevel();
+            this.loadLevel(this.currentLevel);
         }
 
         public toggleTestMode(event: egret.Event) {
             this.gameScreen.testMode = this.gameScreen.toggleSwitch.selected;
         }
 
-        public navigateToLevelScreen() {
+        public navigateToLevelScreen(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
+            this.backToLevelScreen();
+        }
+
+        private backToLevelScreen() {
             this._wall.clear();
             this._ball.clear();
             this._holes.clear();
@@ -161,11 +166,13 @@ module game {
             this.world.addContactMaterial(ballBallContactMaterial);
         }
 
-        public async reloadCurrentLevel() {
+        public async reloadCurrentLevel(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
             this.loadLevel(this.currentLevel);
         }
 
-        public async changeLevel() {
+        public async changeLevel(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
             const level = +this.gameScreen.txtLevel.text;
             if (!level) {
                 return;
@@ -173,7 +180,7 @@ module game {
             this.proxy.updateLevel(level - 1);
         }
 
-        public async loadLevel(level: number) {
+        private async loadLevel(level: number) {
 
             this.gameScreen.starCount = 0;
             this.collectedStar = [false, false, false];
@@ -205,11 +212,13 @@ module game {
             this.predefinedAnswer = levelsArray[this.currentLevel].answer;
         }
 
-        public playPredefinedTips() {
+        public playPredefinedTips(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
             this.playTips(this.predefinedAnswer);
         }
 
-        public playCurrentTips() {
+        public playCurrentTips(event: egret.TouchEvent) {
+            SoundPool.playSoundEffect("tap-sound");
             this.playTips(this.currentAnswer);
         }
 
@@ -218,104 +227,197 @@ module game {
                 console.log("No answer recorded");
                 return;
             }
-            const { time, x, y } = answer;
-            this.reloadCurrentLevel();
+
+            const { x, y, time } = answer;
+
+            this.loadLevel(this.currentLevel);
 
             this._cue.dragonBone.visible = true;
             this._cue.dragonBone.animation.play("hover", 0);
-
             egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 200);
 
-            let started = false;
-            let postStepAnswer = () => {
-                if (!started && this.world.time >= time) {
-                    started = true;
-                    console.log("postStepAnswer:", this.world.time);
-                    this._cue.cueBody.position = [x, y];
-                    this.mouseStart = [x, y];
-
-                    this._cue.dragonBone.animation.play("expoler", 1);
-
-                    // egret.setTimeout(() => {
-                    //     this.world.off("postStep", postStepAnswer);
-
-                    //     this._cue.cueBody.shapes[1].collisionMask = -1;
-                    //     this.cueState = game.CueState.CUEOFF;
-
-                    //     this.mouseEnd = new Array(x, y);
-
-                    //     this._ball.ballBody.forEach(ballBody => {
-                    //         let aRedBall = new Array();
-                    //         p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
-
-                    //         if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
-                    //             if (aRedBall && aRedBall.length > 1) {
-                    //                 p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
-                    //                 console.log("applyImpulse: ", this.world.time, aRedBall);
-                    //                 ballBody.applyImpulse(aRedBall, this.mouseEnd);
-                    //             }
-                    //         }
-                    //     });
-                    //     this.mouseStart = null;
-                    //     this.mouseEnd = null;
-
-                    //     let onExplorerCompleted = () => {
-
-                    //         this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
-
-                    //         if (this.cueArea.getAABB().containsPoint([x, y])) {
-                    //             console.log("TOUCH_END: inside cueArea, contains point true");
-
-                    //             this.collectScore(x, y, 0);
-                    //         }
-                    //     }
-
-                    //     this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
-                    // }, this, 200);
-                }
-                if (this.world.time >= time + 2.1) {
-
-                    this.world.off("postStep", postStepAnswer);
-
-                    this._cue.cueBody.shapes[1].collisionMask = -1;
-                    this.cueState = game.CueState.CUEOFF;
-
-                    this.mouseEnd = new Array(x, y);
-
-                    this._ball.ballBody.forEach(ballBody => {
-                        let aRedBall = new Array();
-                        p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
-
-                        if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
-                            if (aRedBall && aRedBall.length > 1) {
-                                p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
-                                console.log("applyImpulse: ", this.world.time, aRedBall);
-                                ballBody.applyImpulse(aRedBall, this.mouseEnd);
-                            }
-                        }
-                    });
-                    this.mouseStart = null;
-                    this.mouseEnd = null;
-
-                    let onExplorerCompleted = () => {
-
-                        this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
-
-                        if (this.cueArea.getAABB().containsPoint([x, y])) {
-                            console.log("TOUCH_END: inside cueArea, contains point true");
-
-                            this.collectScore(x, y, 0);
-                        }
-                    }
-
-                    this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
-                }
-            }
-
-            this.world.on("postStep", postStepAnswer);
+            this.play(x, y, time);
         }
 
-        public confirmTips() {
+        private postStepAnswer() {
+            let cueX = this.cueX;
+            let cueY = this.cueY;
+
+            if (!this.started && this.world.time >= this.cueTime) {
+
+                cueX = this.cueX;
+                cueY = this.cueY;
+
+                this.started = true;
+                console.log("play start:", this.world.time);
+                this._cue.cueBody.position = [cueX, cueY];
+                this.mouseStart = [cueX, cueY];
+
+                this._cue.dragonBone.animation.play("expoler", 1);
+                SoundPool.playSoundEffect("zhangfei-sound");
+            }
+            if (!this.impulsed && this.world.time >= this.cueTime + 2.1) {
+                this.impulsed = true;
+
+                this._cue.cueBody.shapes[1].collisionMask = -1;
+
+                this.mouseEnd = [cueX, cueY];
+
+                this._ball.ballBody.forEach(ballBody => {
+                    let aRedBall = new Array();
+                    p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+
+                    if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
+                        if (aRedBall && aRedBall.length > 1) {
+                            p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+                            console.log("applyImpulse: ", this.world.time, aRedBall);
+                            ballBody.applyImpulse(aRedBall, this.mouseEnd);
+                        }
+                    }
+                });
+
+                this.mouseStart = null;
+                this.mouseEnd = null;
+
+                let onExplorerCompleted = () => {
+
+                    this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+                    if (this.cueArea.getAABB().containsPoint([cueX, cueY])) {
+                        console.log("TOUCH_END: inside cueArea, contains point true");
+
+                        this.collectScore(cueX, cueY, 0);
+                    }
+                }
+
+                this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+            }
+            else if (this.impulsed) {
+                if (this._ball.ballBody.some(m => m.world && m.sleepState != p2.Body.SLEEPING)) {
+                    return;
+                }
+                let sleepCount = this._ball.ballBody.filter(m => {
+                    return m.sleepState == p2.Body.SLEEPING;
+                }).length;
+                console.log(`Current sleeping: ${sleepCount}`);
+
+                this.failed();
+            }
+        }
+
+        private clearState() {
+            this.cueTime = 0;
+            this.started = false;
+            this.impulsed = false;
+
+            if (this.world.has("postStep", this.postStepAnswer)) {
+                this.world.off("postStep", this.postStepAnswer);
+            }
+        }
+
+        private victory() {
+            this.clearState();
+
+            if (!this.gameScreen.testMode) {
+                egret.setTimeout(() => {
+                    this.cueX = 0;
+                    this.cueY = 0;
+                    this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
+                }, this, 1000);
+            }
+            else {
+                this.cueX = 0;
+                this.cueY = 0;
+            }
+        }
+
+        private failed() {
+            this.clearState();
+
+            this.cueX = 0;
+            this.cueY = 0;
+            if (!this.gameScreen.testMode) {
+                this.sendNotification(SceneCommand.SHOW_FAILED_WINDOW);
+            }
+        }
+
+        private started: boolean = false;
+        private impulsed: boolean = false;
+        private cueX: number = 0;
+        private cueY: number = 0;
+        private cueTime: number = 0;
+
+        private play(x: number, y: number, time: number = 0) {
+            this.cueX = x;
+            this.cueY = y;
+            this.cueTime = time;
+            this.started = false;
+            this.impulsed = false;
+            //play expoler only when not started.
+            // let started = false;
+            // let impulsed = false;
+            // let postStepAnswer = () => {
+            //     if (!started && this.world.time >= time) {
+            //         started = true;
+            //         console.log("play start:", this.world.time);
+            //         this._cue.cueBody.position = [x, y];
+            //         this.mouseStart = [x, y];
+
+            //         this._cue.dragonBone.animation.play("expoler", 1);
+            //         SoundPool.playSoundEffect("zhangfei-sound");
+            //     }
+            //     if (!impulsed && this.world.time >= time + 2.1) {
+            //         impulsed = true;
+
+            //         this._cue.cueBody.shapes[1].collisionMask = -1;
+            //         this.cueState = game.CueState.CUEOFF;
+
+            //         this.mouseEnd = new Array(x, y);
+
+            //         this._ball.ballBody.forEach(ballBody => {
+            //             let aRedBall = new Array();
+            //             p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
+
+            //             if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
+            //                 if (aRedBall && aRedBall.length > 1) {
+            //                     p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
+            //                     console.log("applyImpulse: ", this.world.time, aRedBall);
+            //                     ballBody.applyImpulse(aRedBall, this.mouseEnd);
+            //                 }
+            //             }
+            //         });
+
+            //         this.mouseStart = null;
+            //         this.mouseEnd = null;
+
+            //         let onExplorerCompleted = () => {
+
+            //             this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+
+            //             if (this.cueArea.getAABB().containsPoint([x, y])) {
+            //                 console.log("TOUCH_END: inside cueArea, contains point true");
+
+            //                 this.collectScore(x, y, 0);
+            //             }
+            //         }
+
+            //         this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+            //     }
+            //     else if (impulsed) {
+            //         //this.world.off("postStep", postStepAnswer);
+            //         let sleepCount = this.world.bodies.filter(m => {
+            //             return m.sleepState == p2.Body.SLEEPING;
+            //         }).length;
+            //         console.log(`Current sleeping: ${sleepCount}`);
+            //     }
+            // };
+            if (this.world.has("postStep", this.postStepAnswer)) {
+                this.world.off("postStep", this.postStepAnswer);
+            }
+            this.world.on("postStep", this.postStepAnswer, this);
+        }
+
+        public confirmTips(event: egret.TouchEvent) {
             let token = localStorage.getItem("token");
             if (platform.env == "prod") {
                 token = "";
@@ -362,21 +464,24 @@ module game {
                                 let position = ballBody.position;
                                 this.world.removeBody(ballBody);
 
+                                SoundPool.playSoundEffect("dead-sound");
+
                                 if (this._ball.types[i] == game.BodyType.TYPE_HERO) {
                                     console.log("hero falls in a hole.");
                                     this._ball.removeBallBmp(i);
-                                    this.loadLevel(this.currentLevel);
+
+                                    this.failed();
                                 }
                                 else if (this._ball.types[i] == game.BodyType.TYPE_ENEMY) {
                                     let ballUI = this._ball.ballBmps[i] as BallUI;
                                     ballUI.dead();
                                     this.collectScore(position[0], position[1], 2);
                                     console.log("enemy falls in a hole.");
+
+                                    this.victory();
+
                                     egret.setTimeout(() => {
                                         this._ball.removeBallBmp(i);
-                                        if (!this.gameScreen.testMode) {
-                                            this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
-                                        }
                                     }, this, 1000);
                                 }
                                 else {
@@ -398,6 +503,9 @@ module game {
                         dragonBone.y = pointY;
                         this.gameScreen.addChild(dragonBone);
                         dragonBone.animation.play("newAnimation", 1);
+
+                        SoundPool.playSoundEffect("hit-sound");
+
                         let onHitCompleted = () => {
                             dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onHitCompleted, this);
                             this.gameScreen.removeChild(dragonBone);
@@ -429,6 +537,8 @@ module game {
                             dragonBone.y = pointY;
                             this.gameScreen.addChild(dragonBone);
                             dragonBone.animation.play("newAnimation", 1);
+
+                            SoundPool.playSoundEffect("hit-sound");
                         }
                         let onHitCompleted = () => {
                             dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onHitCompleted, this);
@@ -453,11 +563,15 @@ module game {
                                     this._ball.updateHP(index, -1);
 
                                     if (this._ball.hps[index] <= 0) {
+
+                                        SoundPool.playSoundEffect("dead-sound");
+
                                         if (this._ball.types[index] == game.BodyType.TYPE_HERO) {
                                             console.log("hero dead.");
                                             this.world.removeBody(m);
                                             this._ball.removeBallBmp(index);
-                                            this.loadLevel(this.currentLevel);
+
+                                            this.failed();
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_ENEMY) {
                                             console.log("enemy dead.");
@@ -465,11 +579,11 @@ module game {
                                             this.world.removeBody(m);
                                             let ballUI = this._ball.ballBmps[index] as BallUI;
                                             ballUI.dead();
+
+                                            this.victory();
+
                                             egret.setTimeout(() => {
                                                 this._ball.removeBallBmp(index);
-                                                if (!this.gameScreen.testMode) {
-                                                    this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
-                                                }
                                             }, this, 1000);
                                         }
                                         else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
@@ -477,6 +591,9 @@ module game {
                                             this.world.removeBody(m);
                                             this._ball.removeBallBmp(index);
                                         }
+                                    }
+                                    else {
+                                        SoundPool.playSoundEffect("cut-sound");
                                     }
                                 }
                             });
@@ -500,7 +617,6 @@ module game {
         private mouseStart: Array<number>;
         private mouseMove: Array<number>;
         private mouseEnd: Array<number>;
-
 
         private collectScore(x: number, y: number, starIndex: number) {
 
@@ -527,6 +643,9 @@ module game {
                 let star = this.gameScreen[`star${collectedCount}`];
                 egret.Tween.get(scoreStarUI).to({ x: star.x + 261 + star.width / 2, y: star.y + 80 + star.height / 2 }, 500).call(() => {
                     scoreStarUI.dragonBone.animation.play("starin", 1);
+
+                    SoundPool.playSoundEffect("star-sound");
+
                     let starinComplete = () => {
                         scoreStarUI.dragonBone.removeEvent(dragonBones.EventObject.COMPLETE, starinComplete, this);
                         scoreStarUI.groupStar.visible = false;
@@ -539,51 +658,27 @@ module game {
         }
 
         private touchEvent(e: egret.TouchEvent) {
+            if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
+                return;
+            }
+
             switch (e.type) {
                 case egret.TouchEvent.TOUCH_BEGIN: {
-
-                    if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
-                        return;
-                    }
-
-                    this._cue.cueBody.shapes[1].collisionMask = 0;
-
-                    if (!this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
-                        console.log("TOUCH_BEGIN: outside cueArea, contains point false");
-                    }
-
                     console.log("TOUCH_BEGIN");
 
+                    this._cue.cueBody.shapes[1].collisionMask = 0;
                     this._cue.dragonBone.visible = true;
-
                     this._cue.dragonBone.animation.play("hover", 0);
 
-                    //                if (this.cueBallState == game.CueBallState.CUEBALLVISIBLE) {
-
-                    // if (this._cueBall.cueBallBody) {
-                    //     this._cueBall.cueBallBody.sleepState = p2.Body.SLEEPY;
-                    // }
-
-                    // if (!this._cue) {
-                    //this.stage.addChild(this._cue = new game.Cue(600, 200, this.world));
-                    // }
-
-                    // this._cue.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
-                    // this._cue.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
                     this.createMaterial();
-                    //                }
 
                     this._cue.cueBody.position = [e.stageX, e.stageY];
-                    // this._cue.cueGroup.y = e.stageY;
                     this.mouseStart = new Array(e.stageX, e.stageY);
-                    //this.mouseStart = new Array(this._cueBall.cueBallBody.position[0], this._cueBall.cueBallBody.position[1]);
+
                     break;
                 }
                 case egret.TouchEvent.TOUCH_END: {
-
-                    if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
-                        return;
-                    }
+                    console.log("TOUCH_END");
 
                     this.currentAnswer = {
                         time: this.world.time,
@@ -591,69 +686,17 @@ module game {
                         y: e.stageY,
                     };
 
-                    console.log("TOUCH_END: world time:", this.world.time);
-
-                    this._cue.dragonBone.animation.play("expoler", 1);
-
-                    egret.setTimeout(() => {
-                        this._cue.cueBody.shapes[1].collisionMask = -1;
-                        this.cueState = game.CueState.CUEOFF;
-
-                        this.mouseEnd = new Array(e.stageX, e.stageY);
-
-                        this._ball.ballBody.forEach(ballBody => {
-                            let aRedBall = new Array();
-                            p2.vec2.subtract(aRedBall, ballBody.position, this.mouseEnd);
-
-                            if (this._cue.cueBody.aabb.containsPoint(ballBody.position)) {
-                                if (aRedBall && aRedBall.length > 1) {
-                                    p2.vec2.scale(aRedBall, aRedBall, 200 / Math.sqrt(aRedBall[0] * aRedBall[0] + aRedBall[1] * aRedBall[1]));
-                                    ballBody.applyImpulse(aRedBall, this.mouseEnd);
-                                }
-                            }
-                        });
-                        this.mouseStart = null;
-                        this.mouseEnd = null;
-                    }, this, 200);
-
-                    let onExplorerCompleted = () => {
-
-                        this._cue.dragonBone.removeEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
-
-                        if (this.cueArea.getAABB().containsPoint([e.stageX, e.stageY])) {
-                            console.log("TOUCH_END: inside cueArea, contains point true");
-
-                            this.collectScore(e.stageX, e.stageY, 0);
-                        }
-                    }
-
-                    this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
+                    this.play(e.stageX, e.stageY, this.world.time);
 
                     this.proxy.decreasePower(1);
-
-                    // egret.Tween.get(this._cue.cueBmp).to({
-                    //     scaleX: 1.5,
-                    //     scaleY: 1.5
-                    // }, 500).call(() => {
-                    //     //this.world.removeBody(this._cue.cueBody);
-                    //     //this.stage.removeChild(this._cue);
-                    //     this._cue.cueBody.shapes[1].collisionMask = -1;
-                    //     this._cue.cueBmp.scaleX = 1;
-                    //     this._cue.cueBmp.scaleY = 1;
-                    //     this.cueState = game.CueState.CUEOFF;
-                    // });
 
                     break;
                 }
                 case egret.TouchEvent.TOUCH_MOVE: {
-
-                    if (e.stageX < 40 || e.stageX > 680 || e.stageY < 240 || e.stageY > 1220) {
-                        return;
-                    }
-
                     console.log("TOUCH_MOVE");
+
                     this._cue.cueBody.position = [e.stageX, e.stageY];
-                    // this._cue.cueGroup.y = e.stageY;
+
                     break;
                 }
             }
@@ -708,7 +751,7 @@ module game {
                     break;
                 }
                 case GameProxy.GAME_DISPOSE: {
-                    this.navigateToLevelScreen();
+                    this.backToLevelScreen();
                     break;
                 }
             }
