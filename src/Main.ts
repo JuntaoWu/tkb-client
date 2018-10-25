@@ -65,7 +65,13 @@ class Main extends eui.UILayer {
     private async runGame() {
         await this.loadResource();
 
-        await AccountAdapter.login();
+        try {
+            await AccountAdapter.login();
+            console.log(`login success, continue with logon: ${!!game.CommonData.logon}`);
+        }
+        catch (error) {
+            console.error("login failed, continue without identity.", error);
+        }
 
         this.createGameScene();
     }

@@ -5,6 +5,8 @@ module game {
 	export class GameProxy extends puremvc.Proxy implements puremvc.IProxy {
 		public static NAME: string = "GameProxy";
 
+		public accountProxy: AccountProxy;
+
 		public userInfo: UserInfo;
 
 		public levelsArray: Level[];
@@ -18,8 +20,6 @@ module game {
 
 		public constructor() {
 			super(GameProxy.NAME);
-
-			const self = this;
 
 			platform.onNetworkStatusChange((res) => {
 				console.log(res);
@@ -80,9 +80,9 @@ module game {
 
 		public setResult(collectedCount?: number) {
 
-			if(!collectedCount) {
+			if (!collectedCount) {
 				//todo: failed.
-				
+
 				return;
 			}
 
@@ -98,7 +98,13 @@ module game {
 				this.sendNotification(GameProxy.STAR_CHANGED);
 
 				//todo: save current power & passInfo
+				this.accountProxy = this.facade().retrieveProxy(AccountProxy.NAME) as AccountProxy;
+				this.accountProxy.savePassInfo(this.passInfo);
 			}
+		}
+
+		public updatePassInfo(passInfo: any[]) {
+			this.passInfo = passInfo;
 		}
 
 		public decreasePower(power: number) {

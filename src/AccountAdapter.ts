@@ -7,9 +7,7 @@ class AccountAdapter {
                 //log the login information into backend.
                 //https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
                 console.log(`Login app server begin, code: ${wxRes.code}`);
-                if(1 == 1) {
-                    return resolve();
-                }
+
                 var request = new egret.HttpRequest();
                 request.responseType = egret.HttpResponseType.TEXT;
                 request.open(`${game.Constants.Endpoints.service}users/login?code=${wxRes.code}`, egret.HttpMethod.POST);
@@ -28,8 +26,10 @@ class AccountAdapter {
                         resolve();
                     }
                 }, this);
-                // request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onGetIOError, this);
-                // request.addEventListener(egret.ProgressEvent.PROGRESS, this.onGetProgress, this);
+                request.addEventListener(egret.IOErrorEvent.IO_ERROR, (error) => {
+                    reject(error);
+                }, this);
+                //request.addEventListener(egret.ProgressEvent.PROGRESS, this.onGetProgress, this);
             });
         });
     }

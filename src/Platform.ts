@@ -43,6 +43,28 @@ declare interface Platform {
     showBannerAd(name: string);
 
     hideAllBannerAds();
+
+    setStorageAsync(key, value);
+
+    getStorageAsync(key): Promise<any>;
+
+    getLaunchInfo();
+
+    authorizeUserInfo(callback);
+
+    createBannerAd(name: string, adUnitId: string, style: any);
+
+    showBannerAd(name: string);
+
+    hideAllBannerAds();
+
+    createRewardedVideoAd(name: string, adUnitId: string, callback: Function, onError: Function);
+
+    showVideoAd(name: string);
+
+    isVideoAdDisabled(name: string);
+
+    disableVideoAd(name: string);
 }
 
 class DebugPlatform implements Platform {
@@ -56,7 +78,7 @@ class DebugPlatform implements Platform {
     }
 
     public get appVersion(): string {
-        return "0.1.0";
+        return "0.1.1";
     }
 
     public async getUserInfo() {
@@ -82,14 +104,6 @@ class DebugPlatform implements Platform {
         console.log(message);
     }
 
-    public setStorage(key, data) {
-        sessionStorage.setItem(key, JSON.stringify(data));
-    }
-
-    public getStorage(key) {
-        return JSON.parse(sessionStorage.getItem(key));
-    }
-
     public playVideo() {
         return {};
     }
@@ -113,16 +127,56 @@ class DebugPlatform implements Platform {
 
     }
 
+    public setStorage(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    public getStorage(key) {
+        return JSON.parse(localStorage.getItem(key));
+    }
+
+    public setStorageAsync(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    public async getStorageAsync(key): Promise<any> {
+        return JSON.parse(localStorage.getItem(key));
+    }
+
+    public getLaunchInfo() {
+
+    }
+
+    public authorizeUserInfo(callback) {
+
+    }
+
     public createBannerAd(name: string, adUnitId: string, style: any) {
 
     }
 
-    public showBannerAd(name: string = "bottom") {
+    public showBannerAd(name: string) {
 
     }
 
     public hideAllBannerAds() {
-        
+
+    }
+
+    public async createRewardedVideoAd(name: string, adUnitId: string, callback: Function, onError: Function) {
+
+    }
+
+    public async showVideoAd(name: string) {
+
+    }
+
+    public async isVideoAdDisabled(name: string) {
+
+    }
+
+    public async disableVideoAd(name: string) {
+
     }
 }
 

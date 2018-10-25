@@ -16,7 +16,7 @@ module game {
         private _star: game.Stars;
         private _cue: game.Cue;
 
-        private cueState: CueState;
+        private cueStarted: boolean = false;
 
         private _currentLevel: number = 0;
         public get currentLevel(): number {
@@ -181,6 +181,8 @@ module game {
         }
 
         private async loadLevel(level: number) {
+
+            this.cueStarted = false;
 
             this.gameScreen.starCount = 0;
             this.collectedStar = [false, false, false];
@@ -348,6 +350,9 @@ module game {
         private cueTime: number = 0;
 
         private play(x: number, y: number, time: number = 0) {
+
+            this.cueStarted = true;
+
             this.cueX = x;
             this.cueY = y;
             this.cueTime = time;
@@ -662,6 +667,10 @@ module game {
                 return;
             }
 
+            if (!this.gameScreen.testMode && this.cueStarted) {
+                return;
+            }
+
             switch (e.type) {
                 case egret.TouchEvent.TOUCH_BEGIN: {
                     console.log("TOUCH_BEGIN");
@@ -677,6 +686,13 @@ module game {
 
                     break;
                 }
+                case egret.TouchEvent.TOUCH_MOVE: {
+                    console.log("TOUCH_MOVE");
+
+                    this._cue.cueBody.position = [e.stageX, e.stageY];
+
+                    break;
+                }
                 case egret.TouchEvent.TOUCH_END: {
                     console.log("TOUCH_END");
 
@@ -689,13 +705,6 @@ module game {
                     this.play(e.stageX, e.stageY, this.world.time);
 
                     this.proxy.decreasePower(1);
-
-                    break;
-                }
-                case egret.TouchEvent.TOUCH_MOVE: {
-                    console.log("TOUCH_MOVE");
-
-                    this._cue.cueBody.position = [e.stageX, e.stageY];
 
                     break;
                 }
@@ -717,17 +726,6 @@ module game {
                     , o = i.displays[0];
                 o && (o.x = i.position[0],
                     o.y = i.position[1])
-            }
-
-            if (this.cueState != game.CueState.CUEON) {
-                if (!this._cue) {
-
-                    // this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchEvent, this);
-                    // this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
-                    // this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
-                }
-                this._cue && this.gameScreen.addChild(this._cue);
-                this.cueState = game.CueState.CUEON;
             }
         }
 

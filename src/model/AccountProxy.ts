@@ -7,6 +7,8 @@ module game {
 
         public userInfo: UserInfo;
 
+        public gameProxy: GameProxy;
+
         /**
          * 获取用户信息完毕
          */
@@ -16,9 +18,9 @@ module game {
             super(AccountProxy.NAME);
         }
 
-		/**
-		 * 获取用户信息
-		 */
+        /**
+         * 获取用户信息
+         */
         public loadUserInfo(): Promise<UserInfo> {
 
             return new Promise((resolve, reject) => {
@@ -32,40 +34,69 @@ module game {
                         this.userInfo = user;
                         console.log(`platform.getUserInfo end.`);
 
-                        if (CommonData.logon && CommonData.logon.openId) {
-                            console.log(`load users/info via app server begin, openId: ${CommonData.logon.openId}.`);
-                            this.userInfo.openId = CommonData.logon.openId;
-
-                            var request = new egret.HttpRequest();
-                            request.responseType = egret.HttpResponseType.TEXT;
-                            request.open(`${game.Constants.Endpoints.service}records/?openId=${CommonData.logon.openId}`, egret.HttpMethod.POST);
-                            request.setRequestHeader("Content-Type", "application/json");
-                            request.send({
-                                userInfo: user
+                        return this.loadUserInfoViaAppServer(user)
+                            .then(data => {
+                                resolve(data);
+                            }).catch(error => {
+                                reject(error);
                             });
-                            request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
-                                console.log(`load users/info via app server end.`);
 
-                                let req = <egret.HttpRequest>(event.currentTarget);
-                                let res = JSON.parse(req.response);
-                                if (res.error) {
-                                    console.error(res.message);
-                                    reject(res.message);
-                                }
-                                //todo: Invalid code
+                    }).catch(error => {
+                        console.error(error);
 
-                                this.userInfo.gameRecords = res.data as MyStats;
+                        platform.authorizeUserInfo((user: UserInfo) => {
+                            this.userInfo = user;
+                            console.log(`platform.getUserInfo end.`);
 
-                                resolve(this.userInfo);
-                            }, this);
-                        }
-                        else {
-                            console.log(`We don't have openId now, skip.`);
-                            resolve(this.userInfo);
-                        }
-                        // request.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onGetIOError, this);
-                        // request.addEventListener(egret.ProgressEvent.PROGRESS, this.onGetProgress, this);
+                            return this.loadUserInfoViaAppServer(user)
+                                .then(data => {
+                                    resolve(data);
+                                }).catch(error => {
+                                    reject(error);
+                                });
+                        });
                     });
+                }
+            });
+        }
+
+		/**
+		 * 获取用户信息
+		 */
+        public loadUserInfoViaAppServer(user: UserInfo): Promise<UserInfo> {
+
+            return new Promise((resolve, reject) => {
+
+                if (CommonData.logon && CommonData.logon.openId) {
+                    console.log(`load users/info via app server begin, openId: ${CommonData.logon.openId}.`);
+                    this.userInfo.openId = CommonData.logon.openId;
+
+                    var request = new egret.HttpRequest();
+                    request.responseType = egret.HttpResponseType.TEXT;
+                    request.open(`${game.Constants.Endpoints.service}passInfo/?openId=${CommonData.logon.openId}`, egret.HttpMethod.POST);
+                    request.setRequestHeader("Content-Type", "application/json");
+                    request.send({
+                        userInfo: user
+                    });
+                    request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+                        console.log(`load users/info via app server end.`);
+
+                        let req = <egret.HttpRequest>(event.currentTarget);
+                        let res = JSON.parse(req.response);
+                        if (res.error) {
+                            console.error(res.message);
+                            reject(res.message);
+                        }
+                        //todo: Invalid code
+                        this.gameProxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
+                        this.gameProxy.updatePassInfo(res.data.passInfo);
+
+                        resolve(this.userInfo);
+                    }, this);
+                }
+                else {
+                    console.log(`We don't have openId now, skip.`);
+                    resolve(this.userInfo);
                 }
             });
         }
@@ -73,23 +104,23 @@ module game {
         /**
          * 
          */
-        public saveUserGameRecords(record) {
+        public savePassInfo(passInfo) {
 
             if (CommonData.logon && CommonData.logon.openId) {
-                console.log(`saveUserGameRecords via app server begin, openId: ${CommonData.logon.openId}.`);
+                console.log(`saveUserGamePassInfos via app server begin, openId: ${CommonData.logon.openId}.`);
 
                 var request = new egret.HttpRequest();
                 request.responseType = egret.HttpResponseType.TEXT;
-                request.open(`${game.Constants.Endpoints.service}records/create/?openId=${CommonData.logon.openId}`, egret.HttpMethod.POST);
+                request.open(`${game.Constants.Endpoints.service}passInfo/update/?openId=${CommonData.logon.openId}`, egret.HttpMethod.POST);
                 request.setRequestHeader("Content-Type", "application/json");
 
                 request.send(JSON.stringify({
-                    ...record,
+                    passInfo,
                     openId: CommonData.logon.openId
                 }));
 
                 request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
-                    console.log(`saveUserGameRecords via app server end.`);
+                    console.log(`saveUserGamePassInfos via app server end.`);
 
                     let req = <egret.HttpRequest>(event.currentTarget);
                     let res = JSON.parse(req.response);
@@ -98,7 +129,7 @@ module game {
                     }
                     else {
                         console.log("update current userInfo object");
-                        this.userInfo.gameRecords = res.data as MyStats;
+                        this.gameProxy.updatePassInfo(res.data.passInfo);
                     }
                 }, this);
             }
