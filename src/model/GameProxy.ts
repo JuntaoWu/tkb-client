@@ -14,9 +14,30 @@ module game {
 		public currentChapter: number = 0;
 		public currentLevel: number = 0;
 		public collectedCount: number = 0;
-		public passInfo: any[] = [];
+
+		public playerInfo: PlayerInfo = {
+			currentPower: 20,
+			passInfo: [],
+			__v: 0
+		};
+
 		public shouldPowerUp: boolean = false;
-		public currentPower: number = 20;
+
+		public get passInfo(): any[] {
+			return this.playerInfo && this.playerInfo.passInfo;
+		}
+		public set passInfo(v: any[]) {
+			this.playerInfo = this.playerInfo || {};
+			this.playerInfo.passInfo = v;
+		}
+
+		public get currentPower(): number {
+			return this.playerInfo && this.playerInfo.currentPower;
+		}
+		public set currentPower(v: number) {
+			this.playerInfo = this.playerInfo || {};
+			this.playerInfo.currentPower = v || 20;
+		}
 
 		public constructor() {
 			super(GameProxy.NAME);
@@ -99,15 +120,27 @@ module game {
 
 				//todo: save current power & passInfo
 				this.accountProxy = this.facade().retrieveProxy(AccountProxy.NAME) as AccountProxy;
-				this.accountProxy.savePassInfo(this.passInfo);
+				this.accountProxy.savePlayerInfo(this.playerInfo);
 			}
 		}
 
-		public updatePassInfo(passInfo: any[]) {
-			this.passInfo = passInfo;
+		public updatePlayerInfo(playerInfo: PlayerInfo) {
+			this.playerInfo = playerInfo || this.playerInfo;
+		}
+
+		public mergeRemoteVersionNumber(data, version: number) {
+			if (data) {
+				data.__v = version;
+			}
 		}
 
 		public decreasePower(power: number) {
+
+			if (this.passInfo[this.currentLevel] && this.passInfo[this.currentLevel].stars >= 3) {
+				console.log("No need to decreasePower for currentLevel");
+				return;
+			}
+
 			this.currentPower -= power;
 			this.sendNotification(GameProxy.POWER_CHANGED);
 		}

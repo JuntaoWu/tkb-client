@@ -19,7 +19,7 @@ module game {
 
             platform.hideAllBannerAds();
 
-            //SoundPool.playBGM("background-music");
+            SoundPool.playBGM("background-music");
             // const gameScreen = this.getChildByName("gameScreen");
             // gameScreen && this.removeChild(this.gameScreen);
             this.removeChildren();
@@ -68,6 +68,19 @@ module game {
             this.addChild(this.failedWindow);
             this.failedWindow.show(true);
         }
-        
+
+        private _settingsWindow: SettingsWindow;
+        public get settingsWindow(): SettingsWindow {
+            if (!this._settingsWindow) {
+                this._settingsWindow = new SettingsWindow();
+            }
+            return this._settingsWindow;
+        }
+
+        public showSettingsWindow() {
+            this.addChild(this.settingsWindow);
+            this.settingsWindow.show(true);
+        }
+
     }
 }

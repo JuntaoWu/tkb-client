@@ -140,7 +140,7 @@ class DebugPlatform implements Platform {
     }
 
     public async getStorageAsync(key): Promise<any> {
-        return JSON.parse(localStorage.getItem(key));
+        return { data: JSON.parse(localStorage.getItem(key)) };
     }
 
     public getLaunchInfo() {

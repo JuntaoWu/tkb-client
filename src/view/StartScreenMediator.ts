@@ -15,6 +15,7 @@ module game {
             this.startScreen.btnRight.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextChapter, this);
             this.startScreen.btnLeft.addEventListener(egret.TouchEvent.TOUCH_TAP, this.previousChapter, this);
             this.startScreen.btnChooseLevel.addEventListener(egret.TouchEvent.TOUCH_TAP, this.chooseLevel, this);
+            this.startScreen.btnSetting.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showSettingsWindow, this);
         }
 
         public async initData() {
@@ -22,17 +23,9 @@ module game {
             this.accountProxy = this.facade().retrieveProxy(AccountProxy.NAME) as AccountProxy;
             this.gameProxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
 
-            if (platform.name == "DebugPlatform") {
-                console.log("DebugPlatform");
+            const userInfo = await this.accountProxy.loadUserInfo();
 
-                await this.gameProxy.initialize();
-            }
-            else if (platform.name == "wxgame") {
-                console.log("wxgame");
-                const userInfo = await this.accountProxy.loadUserInfo();
-
-                await this.gameProxy.initialize();
-            }
+            await this.gameProxy.initialize();
 
             this.startScreen.powerLabelBinding = `${this.gameProxy.currentPower}/20`;
             const collectedStars = _(this.gameProxy.passInfo).sumBy("stars");
@@ -65,7 +58,7 @@ module game {
             if (this.gameProxy.currentChapter <= 0) {
                 return;
             }
-            
+
             SoundPool.playSoundEffect("tap-sound");
             --this.gameProxy.currentChapter;
 
@@ -91,6 +84,10 @@ module game {
                 "https://gdjzj.hzsdgames.com:8084/miniGame/resource/assets/start/qrcode-tk2048.jpg"
             ]
             platform.showPreImage(imgList);
+        }
+
+        public showSettingsWindow(event: egret.TouchEvent) {
+            this.sendNotification(SceneCommand.SHOW_SETTINGS_WINDOW);
         }
 
         public listNotificationInterests(): Array<any> {

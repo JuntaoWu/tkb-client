@@ -54,12 +54,19 @@ module game {
             this.hpLabelBinding = `${this.maxHP}/${this.maxHP}`;
 
             if (source == "caocao") {
-                this.dragonBone = DragonBones.createDragonBone("caodead", "caodead");
+                this.dragonBone = DragonBones.createDragonBone("deadhit", "caodead");
                 // this.dragonBone.anchorOffsetX = this.width / 2;
                 // this.dragonBone.anchorOffsetY = this.height / 2;
-                this.dragonBone.visible = false;
-                this.groupDragonBone.addChild(this.dragonBone);
             }
+            else if (source == "liubei") {
+                this.dragonBone = DragonBones.createDragonBone("deadhit", "liudead");
+            }
+            else {
+                this.dragonBone = DragonBones.createDragonBone("deadhit", "bindead");
+            }
+
+            this.dragonBone.visible = false;
+            this.groupDragonBone.addChild(this.dragonBone);
         }
 
         public updateHP(hp: number) {
@@ -69,7 +76,7 @@ module game {
         public dead() {
             this.groupNormal.visible = false;
             this.dragonBone.visible = true;
-            this.dragonBone.animation.play("caocao", 1);
+            this.dragonBone.animation.play(null, 1);
         }
     }
 

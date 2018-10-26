@@ -62,7 +62,7 @@ module game {
                 });
                 //i.allowSleep = false;
                 i.sleepTimeLimit = 10;
-
+                // i.wakeUp();
                 i.addShape(t);
                 this.world.addBody(i);
 

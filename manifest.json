@@ -66,6 +66,7 @@
 		"bin-debug/view/panel/LevelItemRenderer.js",
 		"bin-debug/view/panel/LevelScreen.js",
 		"bin-debug/view/panel/ScoreStarUI.js",
+		"bin-debug/view/panel/SettingsWindow.js",
 		"bin-debug/view/panel/Shade.js",
 		"bin-debug/view/panel/Star.js",
 		"bin-debug/view/panel/StartScreen.js",

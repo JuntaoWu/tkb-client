@@ -183,6 +183,7 @@ module game {
         private async loadLevel(level: number) {
 
             this.cueStarted = false;
+            this.clearState();
 
             this.gameScreen.starCount = 0;
             this.collectedStar = [false, false, false];
@@ -312,19 +313,22 @@ module game {
             this.started = false;
             this.impulsed = false;
 
+            //egret.Tween.removeAllTweens();
+            //this.gameScreen.starCount = 0;
+
             if (this.world.has("postStep", this.postStepAnswer)) {
                 this.world.off("postStep", this.postStepAnswer);
             }
         }
 
-        private victory() {
+        private setResult(result: boolean = false) {
             this.clearState();
 
             if (!this.gameScreen.testMode) {
                 egret.setTimeout(() => {
                     this.cueX = 0;
                     this.cueY = 0;
-                    this.sendNotification(SceneCommand.SHOW_VICTORY_WINDOW, this.collectedStar.filter(m => m).length);
+                    this.sendNotification(result ? SceneCommand.SHOW_VICTORY_WINDOW : SceneCommand.SHOW_FAILED_WINDOW, this.collectedStar.filter(m => m).length);
                 }, this, 1000);
             }
             else {
@@ -333,14 +337,12 @@ module game {
             }
         }
 
-        private failed() {
-            this.clearState();
+        private victory() {
+            this.setResult(true);
+        }
 
-            this.cueX = 0;
-            this.cueY = 0;
-            if (!this.gameScreen.testMode) {
-                this.sendNotification(SceneCommand.SHOW_FAILED_WINDOW);
-            }
+        private failed() {
+            this.setResult(false);
         }
 
         private started: boolean = false;
@@ -472,10 +474,15 @@ module game {
                                 SoundPool.playSoundEffect("dead-sound");
 
                                 if (this._ball.types[i] == game.BodyType.TYPE_HERO) {
+                                    let ballUI = this._ball.ballBmps[i] as BallUI;
+                                    ballUI.dead();
                                     console.log("hero falls in a hole.");
-                                    this._ball.removeBallBmp(i);
 
                                     this.failed();
+
+                                    egret.setTimeout(() => {
+                                        this._ball.removeBallBmp(i);
+                                    }, this, 1000);
                                 }
                                 else if (this._ball.types[i] == game.BodyType.TYPE_ENEMY) {
                                     let ballUI = this._ball.ballBmps[i] as BallUI;
@@ -490,7 +497,12 @@ module game {
                                     }, this, 1000);
                                 }
                                 else {
-                                    this._ball.removeBallBmp(i);
+                                    let ballUI = this._ball.ballBmps[i] as BallUI;
+                                    ballUI.dead();
+
+                                    egret.setTimeout(() => {
+                                        this._ball.removeBallBmp(i);
+                                    }, this, 1000);
                                 }
                             }
                         });
@@ -503,7 +515,7 @@ module game {
                         let ball = t.bodyA == i ? t.bodyB : t.bodyA;
                         let pointX = ball.position[0] + t.contactEquations[0].contactPointA[0];
                         let pointY = ball.position[1] + t.contactEquations[0].contactPointA[1];
-                        let dragonBone = DragonBones.createDragonBone("caodead", "hityellow");
+                        let dragonBone = DragonBones.createDragonBone("deadhit", "hityellow");
                         dragonBone.x = pointX;
                         dragonBone.y = pointY;
                         this.gameScreen.addChild(dragonBone);
@@ -530,14 +542,14 @@ module game {
                             || this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_MOVING_WALL
                             || this._wall.airWallTypes[wallIndex] == game.BodyType.TYPE_ATTACK_MOVING_WALL_V) {
 
-                            dragonBone = DragonBones.createDragonBone("caodead", "hitred");
+                            dragonBone = DragonBones.createDragonBone("deadhit", "hitred");
                             dragonBone.x = pointX;
                             dragonBone.y = pointY;
                             this.gameScreen.addChild(dragonBone);
                             dragonBone.animation.play("beici", 1);
                         }
                         else {
-                            dragonBone = DragonBones.createDragonBone("caodead", "hityellow");
+                            dragonBone = DragonBones.createDragonBone("deadhit", "hityellow");
                             dragonBone.x = pointX;
                             dragonBone.y = pointY;
                             this.gameScreen.addChild(dragonBone);
@@ -574,7 +586,12 @@ module game {
                                         if (this._ball.types[index] == game.BodyType.TYPE_HERO) {
                                             console.log("hero dead.");
                                             this.world.removeBody(m);
-                                            this._ball.removeBallBmp(index);
+                                            let ballUI = this._ball.ballBmps[index] as BallUI;
+                                            ballUI.dead();
+
+                                            egret.setTimeout(() => {
+                                                this._ball.removeBallBmp(index);
+                                            }, this, 1000);
 
                                             this.failed();
                                         }
@@ -594,7 +611,12 @@ module game {
                                         else if (this._ball.types[index] == game.BodyType.TYPE_MASS) {
                                             console.log("mass dead.");
                                             this.world.removeBody(m);
-                                            this._ball.removeBallBmp(index);
+                                            let ballUI = this._ball.ballBmps[index] as BallUI;
+                                            ballUI.dead();
+
+                                            egret.setTimeout(() => {
+                                                this._ball.removeBallBmp(index);
+                                            }, this, 1000);
                                         }
                                     }
                                     else {
@@ -629,6 +651,8 @@ module game {
                 return;
             }
 
+            console.log("cueStarted:", this.cueStarted);
+
             let collectedCount = this.collectedStar.filter(m => m).length;
 
             this.collectedStar[starIndex] = true;
@@ -645,8 +669,10 @@ module game {
 
             let starmoveComplete = () => {
                 scoreStarUI.dragonBone.removeEvent(dragonBones.EventObject.COMPLETE, starmoveComplete, this);
+
                 let star = this.gameScreen[`star${collectedCount}`];
                 egret.Tween.get(scoreStarUI).to({ x: star.x + 261 + star.width / 2, y: star.y + 80 + star.height / 2 }, 500).call(() => {
+
                     scoreStarUI.dragonBone.animation.play("starin", 1);
 
                     SoundPool.playSoundEffect("star-sound");
@@ -654,6 +680,10 @@ module game {
                     let starinComplete = () => {
                         scoreStarUI.dragonBone.removeEvent(dragonBones.EventObject.COMPLETE, starinComplete, this);
                         scoreStarUI.groupStar.visible = false;
+
+                        if (!this.cueStarted) {
+                            return;
+                        }
                         ++this.gameScreen.starCount;
                     };
                     scoreStarUI.dragonBone.once(dragonBones.EventObject.COMPLETE, starinComplete, this);

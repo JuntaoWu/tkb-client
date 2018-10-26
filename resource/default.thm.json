@@ -24,6 +24,7 @@
 		"resource/containers/GameScreen.exml",
 		"resource/containers/LevelScreen.exml",
 		"resource/containers/LoadingUI.exml",
+		"resource/containers/SettingsWindow.exml",
 		"resource/containers/StartScreen.exml",
 		"resource/containers/VictoryWindow.exml",
 		"resource/eui_skins/ButtonSkin.exml",

@@ -17,8 +17,8 @@ class AccountAdapter {
                     let req = <egret.HttpRequest>(event.currentTarget);
                     let res = JSON.parse(req.response);
                     if (res.error) {
-                        console.error(res.message);
-                        reject(res.message);
+                        console.error(res);
+                        reject(res);
                     }
                     else {
                         game.CommonData.logon = { ...game.CommonData.logon, ...res.data };  //this is the unique Id.
