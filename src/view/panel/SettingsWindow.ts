@@ -3,10 +3,10 @@ module game {
 
     export class SettingsWindow extends game.BasePanel {
 
+        public btnSoundEffect: eui.ToggleSwitch;
+        public btnSoundMusic: eui.ToggleSwitch;
+
         //bindings:
-        public currentLevelBinding: string = "第 1 关";
-        public powerUpBinding: boolean = false;
-        public powerLabelBinding: string = "0/20";
 
         public constructor() {
             super();
@@ -17,7 +17,7 @@ module game {
 
         public createCompleteEvent(event: eui.UIEvent): void {
             this.removeEventListener(eui.UIEvent.ADDED, this.createCompleteEvent, this);
-            //ApplicationFacade.instance.registerMediator(new SettingsWindowMediator(this));
+            ApplicationFacade.instance.registerMediator(new SettingsWindowMediator(this));
         }
 
         public partAdded(partName: string, instance: any): void {

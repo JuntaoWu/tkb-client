@@ -68,17 +68,17 @@ module game {
             return new Promise((resolve, reject) => {
 
                 this.gameProxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
-                
+
                 if (CommonData.logon && CommonData.logon.openId) {
                     console.log(`load users/info via app server begin, openId: ${CommonData.logon.openId}.`);
                     this.userInfo.openId = CommonData.logon.openId;
 
                     var request = new egret.HttpRequest();
                     request.responseType = egret.HttpResponseType.TEXT;
-                    request.open(`${game.Constants.Endpoints.service}passInfo/?openId=${CommonData.logon.openId}`, egret.HttpMethod.POST);
+                    request.open(`${game.Constants.Endpoints.service}passInfo/?openId=${CommonData.logon.openId}&token=${CommonData.logon.token}`, egret.HttpMethod.POST);
                     request.setRequestHeader("Content-Type", "application/json");
                     request.send({
-                        userInfo: user
+                        ...user
                     });
                     request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
                         console.log(`load users/info via app server end.`);
@@ -135,7 +135,7 @@ module game {
 
                 var request = new egret.HttpRequest();
                 request.responseType = egret.HttpResponseType.TEXT;
-                request.open(`${game.Constants.Endpoints.service}passInfo/update/?openId=${CommonData.logon.openId}`, egret.HttpMethod.POST);
+                request.open(`${game.Constants.Endpoints.service}passInfo/update/?openId=${CommonData.logon.openId}&token=${CommonData.logon.token}`, egret.HttpMethod.POST);
                 request.setRequestHeader("Content-Type", "application/json");
 
                 request.send(JSON.stringify({
@@ -201,6 +201,40 @@ module game {
             return {
                 playerInfo: localPlayerInfo,
             };
+        }
+
+        public async loadRankList(): Promise<any> {
+            return new Promise((resolve, reject) => {
+                var request = new egret.HttpRequest();
+                request.responseType = egret.HttpResponseType.TEXT;
+                request.open(`${game.Constants.Endpoints.service}users/leaderBoard?token=${CommonData.logon.token}`, egret.HttpMethod.GET);
+                request.setRequestHeader("Content-Type", "application/json");
+                request.send();
+                request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+                    let req = <egret.HttpRequest>(event.currentTarget);
+                    let res = JSON.parse(req.response);
+
+                    resolve(res.data);  //leaderBoard
+
+                }, this);
+            });
+        }
+
+        public async loadMyRank(): Promise<any> {
+            return new Promise((resolve, reject) => {
+                var request = new egret.HttpRequest();
+                request.responseType = egret.HttpResponseType.TEXT;
+                request.open(`${game.Constants.Endpoints.service}users/playerRank?token=${CommonData.logon.token}`, egret.HttpMethod.GET);
+                request.setRequestHeader("Content-Type", "application/json");
+                request.send();
+                request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+                    let req = <egret.HttpRequest>(event.currentTarget);
+                    let res = JSON.parse(req.response);
+
+                    resolve(res.data);  //playerRank
+
+                }, this);
+            });
         }
 
     }

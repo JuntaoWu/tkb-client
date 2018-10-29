@@ -16,6 +16,7 @@ module game {
             this.startScreen.btnLeft.addEventListener(egret.TouchEvent.TOUCH_TAP, this.previousChapter, this);
             this.startScreen.btnChooseLevel.addEventListener(egret.TouchEvent.TOUCH_TAP, this.chooseLevel, this);
             this.startScreen.btnSetting.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showSettingsWindow, this);
+            this.startScreen.btnRank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showRankWindow, this);
         }
 
         public async initData() {
@@ -88,6 +89,10 @@ module game {
 
         public showSettingsWindow(event: egret.TouchEvent) {
             this.sendNotification(SceneCommand.SHOW_SETTINGS_WINDOW);
+        }
+        public showRankWindow() {
+            SoundPool.playSoundEffect("tap-sound");
+            this.sendNotification(SceneCommand.SHOW_RANK_WINDOW);
         }
 
         public listNotificationInterests(): Array<any> {

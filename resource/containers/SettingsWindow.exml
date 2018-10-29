@@ -5,14 +5,22 @@
     <e:Group id="container" horizontalCenter="0">
         <e:Image id="settingsBackground" source="settings-background" horizontalCenter="0" verticalCenter="0" />
         <e:Image source="content-logo" horizontalCenter="0" y="185"></e:Image>
-        <e:Group id="groupControlEffect" y="480" width="200" x="120">
-            <e:Image source="btn-sound-effect" verticalCenter="0" horizontalCenter="0"></e:Image>
-            <e:Image source="label-music-on" horizontalCenter="0" y="238"></e:Image>
-        </e:Group>
-        <e:Group id="groupControlMusic" y="480" width="200" x="349">
-            <e:Image source="btn-sound-music" verticalCenter="0" horizontalCenter="0"></e:Image>
-            <e:Image source="label-music-off" y="234" horizontalCenter="0"></e:Image>
-        </e:Group>
+        <e:ToggleButton id="btnSoundEffect" y="480" width="200" x="120">
+            <e:Skin states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected">
+                <e:Image includeIn="up,down" source="btn-sound-effect" verticalCenter="0" horizontalCenter="0"></e:Image>
+                <e:Image includeIn="up,down" source="label-sound-on" horizontalCenter="0" y="238"></e:Image>
+                <e:Image includeIn="upAndSelected,downAndSelected" source="btn-sound-effect-off" verticalCenter="0" horizontalCenter="0"></e:Image>
+                <e:Image includeIn="upAndSelected,downAndSelected" source="label-sound-off" horizontalCenter="0" y="238"></e:Image>
+            </e:Skin>
+        </e:ToggleButton>
+        <e:ToggleButton id="btnSoundMusic" y="480" width="200" x="349">
+            <e:Skin states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected">
+                <e:Image includeIn="up,down" source="btn-sound-music" verticalCenter="0" horizontalCenter="0"></e:Image>
+                <e:Image includeIn="up,down" source="label-music-on" horizontalCenter="0" y="238"></e:Image>
+                <e:Image includeIn="upAndSelected,downAndSelected" source="btn-sound-music-off" verticalCenter="0" horizontalCenter="0"></e:Image>
+                <e:Image includeIn="upAndSelected,downAndSelected" source="label-music-off" horizontalCenter="0" y="238"></e:Image>
+            </e:Skin>
+        </e:ToggleButton>
         <e:Button id="closeButton" bottom="0" horizontalCenter="0">
             <e:Skin states="up,down,disabled">
                 <e:Image source="btn-back-level" scaleX.down="0.9" scaleY.down="0.9" />

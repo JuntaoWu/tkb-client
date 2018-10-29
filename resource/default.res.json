@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right,moving-v-right,moving-v,moving-v-left,stars_tex_png,stars_ske_json,stars_tex_json,level-number-victory_fnt,level-number-victory_png,victory-background,banner-victory,btn-close,btn-next,btn-share-victory,icon-plus,icon-power-bg,icon-power-value,icon-star-victory,jiesuan_tex_png,jiesuan_tex_json,jiesuan_ske_json,icon-star-victory-black,power-number-victory_fnt,power-number-victory_png,background-music,btn-retry,banner-failed,content-failed,btn-video-ads,deadhit_tex_png,deadhit_tex_json,deadhit_ske_json,btn-sound-effect,btn-sound-music,content-logo,label-music-off,label-music-on,settings-background",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right,moving-v-right,moving-v,moving-v-left,stars_tex_png,stars_ske_json,stars_tex_json,level-number-victory_fnt,level-number-victory_png,victory-background,banner-victory,btn-close,btn-next,btn-share-victory,icon-plus,icon-power-bg,icon-power-value,icon-star-victory,jiesuan_tex_png,jiesuan_tex_json,jiesuan_ske_json,icon-star-victory-black,power-number-victory_fnt,power-number-victory_png,background-music,btn-retry,banner-failed,content-failed,btn-video-ads,deadhit_tex_png,deadhit_tex_json,deadhit_ske_json,btn-sound-effect,btn-sound-music,content-logo,label-music-off,label-music-on,settings-background,btn-sound-effect-off,btn-sound-music-off,label-sound-off,label-sound-on,info_0,info_1,rank-background,player,ranker,icon-star-rank,avatar-background,rank-1,rank-2,rank-3",
 			"name": "preload"
 		},
 		{
@@ -694,6 +694,76 @@
 			"url": "assets/settings/settings-background.png",
 			"type": "image",
 			"name": "settings-background"
+		},
+		{
+			"url": "assets/settings/btn-sound-effect-off.png",
+			"type": "image",
+			"name": "btn-sound-effect-off"
+		},
+		{
+			"url": "assets/settings/btn-sound-music-off.png",
+			"type": "image",
+			"name": "btn-sound-music-off"
+		},
+		{
+			"url": "assets/settings/label-sound-off.png",
+			"type": "image",
+			"name": "label-sound-off"
+		},
+		{
+			"url": "assets/settings/label-sound-on.png",
+			"type": "image",
+			"name": "label-sound-on"
+		},
+		{
+			"url": "assets/rank/info_0.png",
+			"type": "image",
+			"name": "info_0"
+		},
+		{
+			"url": "assets/rank/info_1.png",
+			"type": "image",
+			"name": "info_1"
+		},
+		{
+			"url": "assets/rank/rank-background.png",
+			"type": "image",
+			"name": "rank-background"
+		},
+		{
+			"url": "assets/rank/player.png",
+			"type": "image",
+			"name": "player"
+		},
+		{
+			"url": "assets/rank/ranker.png",
+			"type": "image",
+			"name": "ranker"
+		},
+		{
+			"url": "assets/rank/icon-star-rank.png",
+			"type": "image",
+			"name": "icon-star-rank"
+		},
+		{
+			"url": "assets/rank/avatar-background.png",
+			"type": "image",
+			"name": "avatar-background"
+		},
+		{
+			"url": "assets/rank/rank-1.png",
+			"type": "image",
+			"name": "rank-1"
+		},
+		{
+			"url": "assets/rank/rank-2.png",
+			"type": "image",
+			"name": "rank-2"
+		},
+		{
+			"url": "assets/rank/rank-3.png",
+			"type": "image",
+			"name": "rank-3"
 		}
 	]
 }

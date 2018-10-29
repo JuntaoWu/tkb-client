@@ -82,5 +82,18 @@ module game {
             this.settingsWindow.show(true);
         }
 
+        private _rankWindow: RankWindow;
+        public get rankWindow(): RankWindow {
+            if (!this._rankWindow) {
+                this._rankWindow = new RankWindow();
+            }
+            return this._rankWindow;
+        }
+
+        public showRankWindow() {
+            this.addChild(this.rankWindow);
+            this.rankWindow.show(true);
+        }
+
     }
 }

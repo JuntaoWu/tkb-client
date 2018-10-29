@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.RankWindow" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+        xmlns:game="game.*">
+    <game:Shade id="overlay" />
+    <e:Group id="container" horizontalCenter="0">
+        <e:Image source="rank-background"></e:Image>
+        <e:Group width="545" height="665" anchorOffsetY="0" anchorOffsetX="0" x="50" y="134">
+            <e:List id="listRank"></e:List>
+        </e:Group>
+        <e:Group anchorOffsetY="0" height="148" y="837" anchorOffsetX="0" width="542" horizontalCenter="0">
+            <e:Group x="24" verticalCenter="0">
+                <e:Image visible="{data.rankRes}" source="{data.rankRes}"></e:Image>
+                <e:Label visible="{data.rankLabel}" text="{data.rankLabel}"></e:Label>
+            </e:Group>
+            <e:Group x="119" width="100" height="100" verticalCenter="0">
+                <e:Image source="avatar-background"></e:Image>
+                <e:Image source="{data.avatarUrl}" width="95" height="95" horizontalCenter="0" verticalCenter="0"></e:Image>
+            </e:Group>
+            <e:Group anchorOffsetY="0" height="38" y="24" anchorOffsetX="0" width="262" x="247">
+                <e:Image source="player"></e:Image>
+                <e:Label text="{data.nickName}" verticalCenter="0"></e:Label>
+            </e:Group>
+            <e:Group anchorOffsetY="0" height="38" y="73" anchorOffsetX="0" width="207" x="248">
+                <e:Image source="ranker"></e:Image>
+                <e:Image source="icon-star-rank"></e:Image>
+                <e:Label text="{data.score}" verticalCenter="0" x="49"></e:Label>
+            </e:Group>
+        </e:Group>
+        <e:Button id="closeButton" horizontalCenter="0" y="987">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-back-level" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+    </e:Group>
+</e:Skin>

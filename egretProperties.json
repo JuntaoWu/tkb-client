@@ -3,7 +3,7 @@
 	"compilerVersion": "5.2.11",
 	"template": {},
 	"target": {
-		"current": "web"
+		"current": "wxgame"
 	},
 	"eui": {
 		"exmlRoot": [
@@ -25,9 +25,6 @@
 			"name": "assetsmanager"
 		},
 		{
-
-
-			
 			"name": "tween"
 		},
 		{

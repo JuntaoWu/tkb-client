@@ -3,9 +3,28 @@ module game {
 
     export class SoundPool {
 
+        public static disableSound: boolean = false;
+
+        public static _disableMusic: boolean = false;
+        public static get disableMusic(): boolean {
+            return this._disableMusic;
+        }
+        public static set disableMusic(v: boolean) {
+            this._disableMusic = v;
+            if(v) {
+                this.stopBGM();
+            }
+            else {
+                this.playBGM("background-music");
+            }
+        }
+
         public static musicClips = {};
 
         public static playSoundEffect(soundName: string): egret.SoundChannel {
+            if (this.disableSound) {
+                return;
+            }
             let sound: egret.Sound = RES.getRes(soundName);
             if (!sound) {
                 console.error(`playSoundEffect: Unable to load sound: ${soundName}`);
@@ -26,6 +45,10 @@ module game {
         public static playBGM(soundName: string): egret.SoundChannel {
 
             SoundPool.stopBGM();
+
+            if (this.disableMusic) {
+                return;
+            }
 
             let music: egret.Sound = RES.getRes(soundName);
 
