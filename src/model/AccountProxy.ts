@@ -91,7 +91,7 @@ module game {
                         }
                         //todo: Invalid code
 
-                        this.mergeRemoteInfoToStorage(res.data).then(({ playerInfo }) => {
+                        this.mergeRemoteInfoToStorage({playerInfo: res.data}).then(({ playerInfo }) => {
                             this.gameProxy.updatePlayerInfo(playerInfo);
                         });
 

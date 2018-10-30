@@ -6,8 +6,8 @@
         <e:Label visible="{data.rankLabel}" text="{data.rankLabel}"></e:Label>
     </e:Group>
     <e:Group x="119" width="100" height="100" verticalCenter="0">
-        <e:Image source="avatar-background"></e:Image>
-        <e:Image width="95" height="95" verticalCenter="0" horizontalCenter="0" source="{data.avatarUrl}"></e:Image>
+        <e:Image source="{data.avatarUrl}" width="80" height="80" horizontalCenter="0" verticalCenter="0"></e:Image>
+        <e:Image source="avatar-background" horizontalCenter="0" verticalCenter="0"></e:Image>
     </e:Group>
     <e:Group anchorOffsetY="0" height="38" y="24" anchorOffsetX="0" width="262" x="247">
         <e:Label text="{data.nickName}" verticalCenter="0"></e:Label>

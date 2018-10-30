@@ -47,9 +47,12 @@ module game {
                         avatarUrl: userInfo.avatarUrl,
                         nickName: userInfo.nickName,
                         score: this.proxy.collectedCount,
-                        rankLabel: ""
                     }
                 }
+
+                myRank.rankRes = myRank.rank <= 3 && `rank-${myRank.rank}`;
+                myRank.rankLabel = myRank.rank > 3 && myRank.rank;
+
                 this.rankWindow.update(myRank);
 
 

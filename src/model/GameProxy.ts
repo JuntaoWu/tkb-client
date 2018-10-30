@@ -16,6 +16,7 @@ module game {
 		public collectedCount: number = 0;
 
 		public playerInfo: PlayerInfo = {
+			restoredAt: new Date(),
 			currentPower: 20,
 			passInfo: [],
 			__v: 0
@@ -32,7 +33,7 @@ module game {
 		}
 
 		public get currentPower(): number {
-			return this.playerInfo && this.playerInfo.currentPower;
+			return this.playerInfo && this.playerInfo.currentPower || 20;
 		}
 		public set currentPower(v: number) {
 			this.playerInfo = this.playerInfo || {};
@@ -126,6 +127,10 @@ module game {
 
 		public updatePlayerInfo(playerInfo: PlayerInfo) {
 			this.playerInfo = playerInfo || this.playerInfo;
+			if (this.playerInfo.currentPower <= 20 && (!this.playerInfo.restoredAt || this.playerInfo.restoredAt < new Date(new Date().setHours(0, 0, 0, 0)))) {
+				this.playerInfo.currentPower = 20;
+				this.playerInfo.restoredAt = new Date();
+			}
 		}
 
 		public mergeRemoteVersionNumber(data, version: number) {

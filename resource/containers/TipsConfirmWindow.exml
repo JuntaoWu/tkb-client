@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.TipsConfirmWindow" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+        xmlns:game="game.*">
+    <game:Shade id="overlay" />
+    <e:Group id="container" horizontalCenter="0">
+        <e:Image id="tipsConfirmBackground" source="tips-background" horizontalCenter="0" verticalCenter="0" />
+        <e:Image source="content-tips" horizontalCenter="0" y="185"></e:Image>
+        <e:Group y="475" horizontalCenter="0" width="200">
+            <e:Image source="bg-power" verticalCenter="0"></e:Image>
+            <e:Image source="icon-power-start"></e:Image>
+            <e:Label text="{powerLabelBinding}" verticalCenter="0" x="51" size="40"></e:Label>
+        </e:Group>
+        <e:Button id="btnConfirm" y="615" x="41">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-confirm" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+        <e:Button id="closeButton" bottom="0" x="375">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-cancel" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+    </e:Group>
+</e:Skin>

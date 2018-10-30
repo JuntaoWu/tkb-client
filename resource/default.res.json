@@ -764,6 +764,26 @@
 			"url": "assets/rank/rank-3.png",
 			"type": "image",
 			"name": "rank-3"
+		},
+		{
+			"url": "assets/modal/btn-cancel.png",
+			"type": "image",
+			"name": "btn-cancel"
+		},
+		{
+			"url": "assets/modal/btn-confirm.png",
+			"type": "image",
+			"name": "btn-confirm"
+		},
+		{
+			"url": "assets/modal/content-tips.png",
+			"type": "image",
+			"name": "content-tips"
+		},
+		{
+			"url": "assets/modal/tips-background.png",
+			"type": "image",
+			"name": "tips-background"
 		}
 	]
 }

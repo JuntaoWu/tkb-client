@@ -10,7 +10,8 @@ module game {
             nickName: "",
             avatarUrl: "",
             score: 0,
-            rank: 999
+            rankRes: "",
+            rankLabel: "",
         };
 
         public constructor() {
@@ -33,7 +34,8 @@ module game {
             this.data.nickName = data.nickName;
             this.data.avatarUrl = data.avatarUrl;
             this.data.score = data.score;
-            this.data.rank = data.rank;
+            this.data.rankRes = data.rankRes;
+            this.data.rankLabel = data.rankLabel;
         }
     }
 
