@@ -15,6 +15,7 @@ module game {
             this.victoryWindow.addEventListener(egret.Event.ADDED_TO_STAGE, this.initData, this);
             this.victoryWindow.closeButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
             this.victoryWindow.btnNext.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextLevel, this);
+            this.victoryWindow.btnShareVictory.addEventListener(egret.TouchEvent.TOUCH_TAP, this.share, this);
         }
 
         public async initData() {
@@ -28,7 +29,7 @@ module game {
             else {
                 this.victoryWindow.groupPower.x = 250;
             }
-            this.victoryWindow.powerLabelBinding = `${this.proxy.currentPower}/20`;
+            this.victoryWindow.powerLabelBinding = `${+this.proxy.currentPower || 0}/20`;
 
             this.victoryWindow.imgBanner.visible = false;
             console.log("VictoryWindow initData");
@@ -45,6 +46,14 @@ module game {
                 this.victoryWindow.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, vectorCompleted, this);
 
             }, this, 300);
+        }
+
+        public share(event: egret.TouchEvent) {
+            platform.shareAppMessage(null, `targetOpenId=${CommonData.logon && CommonData.logon.openId}&action=victory&level=${this.proxy.currentLevel}&transactionId=${Guid.uuidv4()}`, () => {
+                //todo: shareVictory completed.
+                console.log("shareVictory completed");
+                this.proxy.increasePower(5);
+            });
         }
 
         public navigateToStart() {

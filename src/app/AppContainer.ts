@@ -1,7 +1,7 @@
 
 module game {
 
-    export class AppContainer extends eui.UILayer {
+    export class AppContainer extends eui.Component {
 
         public startScreen: StartScreen = new StartScreen();
         public gameScreen: GameScreen = new GameScreen();
@@ -93,6 +93,34 @@ module game {
         public showRankWindow() {
             this.addChild(this.rankWindow);
             this.rankWindow.show(true);
+        }
+
+        private _tipsConfirmWindow: TipsConfirmWindow;
+        public get tipsConfirmWindow(): TipsConfirmWindow {
+            if (!this._tipsConfirmWindow) {
+                this._tipsConfirmWindow = new TipsConfirmWindow();
+            }
+            return this._tipsConfirmWindow;
+        }
+
+        public showTipsConfirmWindow(callback?: Function) {
+            this.addChild(this.tipsConfirmWindow);
+            this.tipsConfirmWindow.updateCallback(callback);
+            this.tipsConfirmWindow.show();
+        }
+
+        private _noPowerWindow: NoPowerWindow;
+        public get noPowerWindow(): NoPowerWindow {
+            if (!this._noPowerWindow) {
+                this._noPowerWindow = new NoPowerWindow();
+            }
+            return this._noPowerWindow;
+        }
+
+        public showNoPowerWindow(callback?: Function) {
+            this.addChild(this.noPowerWindow);
+            this.noPowerWindow.updateCallback(callback);
+            this.noPowerWindow.show();
         }
 
     }

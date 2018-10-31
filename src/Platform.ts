@@ -34,7 +34,7 @@ declare interface Platform {
 
     hideLoading();
 
-    shareAppMessage();
+    shareAppMessage(message?: string, query?: string, callback?: Function);
 
     showPreImage(data: Array<string>);
 

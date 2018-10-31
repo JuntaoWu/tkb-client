@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.NoPowerWindow" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+        xmlns:game="game.*">
+    <game:Shade id="overlay" />
+    <e:Group id="container" horizontalCenter="0">
+        <e:Image id="NoPowerBackground" source="power-tips-background" horizontalCenter="0" verticalCenter="0" />
+        <e:Image id="contentNoPower" source="content-no-power" y="185" horizontalCenter="0"></e:Image>
+        <e:Button visible="{isVideoAvailable}" id="btnVideo" horizontalCenter="0" verticalCenter="0">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-video" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+        <e:Button visible="{isVideoDisabled}" horizontalCenter="0" verticalCenter="0">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-video-disabled" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+        <e:Button id="closeButton" x="375" horizontalCenter="0" y="612">
+            <e:Skin states="up,down,disabled">
+                <e:Image source="btn-cancel" scaleX.down="0.9" scaleY.down="0.9" />
+            </e:Skin>
+        </e:Button>
+    </e:Group>
+</e:Skin>

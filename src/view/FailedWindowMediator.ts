@@ -15,6 +15,7 @@ module game {
             this.failedWindow.addEventListener(egret.Event.ADDED_TO_STAGE, this.initData, this);
             this.failedWindow.closeButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
             this.failedWindow.btnRetry.addEventListener(egret.TouchEvent.TOUCH_TAP, this.retryLevel, this);
+            this.failedWindow.btnShareFailed.addEventListener(egret.TouchEvent.TOUCH_TAP, this.shareFailed, this);
         }
 
         public async initData() {
@@ -26,7 +27,7 @@ module game {
             else {
                 this.failedWindow.groupPower.x = 250;
             }
-            this.failedWindow.powerLabelBinding = `${this.proxy.currentPower}/20`;
+            this.failedWindow.powerLabelBinding = `${+this.proxy.currentPower || 0}/20`;
 
             this.failedWindow.imgBanner.visible = false;
             console.log("FailedWindow initData");
@@ -42,6 +43,17 @@ module game {
                 };
                 this.failedWindow.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, vectorCompleted, this);
 
+            }, this, 300);
+        }
+
+        public shareFailed(event: egret.TouchEvent) {
+            this.failedWindow.close();
+            egret.setTimeout(() => {
+                platform.shareAppMessage(null, `targetOpenId=${CommonData.logon && CommonData.logon.openId}&action=failed&level=${this.proxy.currentLevel}&transactionId=${Guid.uuidv4()}`, () => {
+                    //todo: shareFailed completed.
+                    console.log("shareFailed completed");
+                    this.proxy.increasePower(5);
+                });
             }, this, 300);
         }
 

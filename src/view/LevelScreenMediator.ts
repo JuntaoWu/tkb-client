@@ -29,12 +29,12 @@ module game {
         }
 
         public refresh() {
-            this.levelScreen.powerLabelBinding = `${this.proxy.currentPower}/20`;
+            this.levelScreen.powerLabelBinding = `${+this.proxy.currentPower || 0}/20`;
             const lowerBound = this.proxy.currentChapter * 20;
             const higherBound = lowerBound + 20;
             this.levelScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
             const currentChapterCollectedStars = _(this.proxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
-            this.levelScreen.currentStarLabelBinding = `${currentChapterCollectedStars}/60`;
+            this.levelScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
 
             this.currentPage = Math.floor((this.proxy.currentLevel % 20) / 6);
             
@@ -107,7 +107,7 @@ module game {
             var data: any = notification.getBody();
             switch (notification.getName()) {
                 case GameProxy.POWER_CHANGED: {
-                    this.levelScreen.powerLabelBinding = `${this.proxy.currentPower}/20`;
+                    this.levelScreen.powerLabelBinding = `${+this.proxy.currentPower || 0}/20`;
                     break;
                 }
                 case GameProxy.STAR_CHANGED: {

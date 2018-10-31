@@ -30,18 +30,8 @@ module game {
 
         }
 
-        public navigateToStart() {
-            this.sendNotification(SceneCommand.CHANGE, Scene.Start);
-        }
-
         public closeWindow(event: egret.TouchEvent) {
             SoundPool.playSoundEffect("tap-sound");
-        }
-
-        public nextLevel(event: egret.TouchEvent) {
-            SoundPool.playSoundEffect("tap-sound");
-            this.settingsWindow.close();
-            this.sendNotification(GameCommand.NEXT_LEVEL);
         }
 
         public listNotificationInterests(): Array<any> {

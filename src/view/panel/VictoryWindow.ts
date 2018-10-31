@@ -10,6 +10,7 @@ module game {
         public groupPower: eui.Group;
 
         public btnNext: eui.Button;
+        public btnShareVictory: eui.Button;
 
         public star0: eui.Image;
         public star1: eui.Image;

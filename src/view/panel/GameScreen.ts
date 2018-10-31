@@ -49,7 +49,6 @@ module game {
             super();
             this.skinName = "skins.GameScreen";
             this.addEventListener(eui.UIEvent.ADDED, this.createCompleteEvent, this);
-
             this.testMode = platform.env == "dev";
         }
 

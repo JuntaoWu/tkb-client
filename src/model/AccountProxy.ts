@@ -91,7 +91,7 @@ module game {
                         }
                         //todo: Invalid code
 
-                        this.mergeRemoteInfoToStorage({playerInfo: res.data}).then(({ playerInfo }) => {
+                        this.mergeRemoteInfoToStorage({ playerInfo: res.data }).then(({ playerInfo }) => {
                             this.gameProxy.updatePlayerInfo(playerInfo);
                         });
 
@@ -235,6 +235,28 @@ module game {
 
                 }, this);
             });
+        }
+
+        public sendLaunchAction(launch) {
+            if (CommonData.logon && CommonData.logon.openId) {
+                var request = new egret.HttpRequest();
+                request.responseType = egret.HttpResponseType.TEXT;
+                request.open(`${game.Constants.ServiceEndpoint}launch/${CommonData.logon.openId}`, egret.HttpMethod.POST);
+                request.setRequestHeader("Content-Type", "application/json");
+
+                console.log("launchInfo: ", launch);
+
+                request.send(JSON.stringify(launch));
+                request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+                    let req = <egret.HttpRequest>(event.currentTarget) as egret.HttpRequest;
+                    let res = req.response;
+                    const launchResult = JSON.parse(res);
+
+                    if (launchResult) {
+                        console.log(launchResult);
+                    }
+                }, this);
+            }
         }
 
     }

@@ -17,6 +17,7 @@ module game {
         private _cue: game.Cue;
 
         private cueStarted: boolean = false;
+        private playingTips: boolean = false;
 
         private _currentLevel: number = 0;
         public get currentLevel(): number {
@@ -43,12 +44,22 @@ module game {
 
         public async initData() {
             console.log("GameScreen initData");
+
             this.proxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
             await this.proxy.initialize();
 
+            this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
+            this.gameScreen.btnGo.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeLevel, this);
+            this.gameScreen.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
+            this.gameScreen.btnTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playPredefinedTips, this);
+            this.gameScreen.btnCurrentTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playCurrentTips, this);
+            this.gameScreen.btnConfirmTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.confirmTips, this);
+
+            this.gameScreen.toggleSwitch.addEventListener(egret.Event.CHANGE, this.toggleTestMode, this);
+
             this.currentLevel = this.proxy.currentLevel;
 
-            this.gameScreen.powerLabelBinding = `${this.proxy.currentPower}/20`;
+            this.gameScreen.powerLabelBinding = `${+this.proxy.currentPower || 0}/20`;
 
             this.createWorld();
             this.createCueArea();
@@ -70,15 +81,6 @@ module game {
             this.gameScreen.groupPhysics.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEvent, this);
             this.gameScreen.groupPhysics.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchEvent, this);
             this.gameScreen.addEventListener(egret.Event.ENTER_FRAME, this.loop, this);
-
-            this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
-            this.gameScreen.btnGo.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeLevel, this);
-            this.gameScreen.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
-            this.gameScreen.btnTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playPredefinedTips, this);
-            this.gameScreen.btnCurrentTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playCurrentTips, this);
-            this.gameScreen.btnConfirmTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.confirmTips, this);
-
-            this.gameScreen.toggleSwitch.addEventListener(egret.Event.CHANGE, this.toggleTestMode, this);
 
             this.loadLevel(this.currentLevel);
         }
@@ -182,6 +184,7 @@ module game {
 
         private async loadLevel(level: number) {
 
+            this.playingTips = false;
             this.cueStarted = false;
             this.clearState();
 
@@ -231,15 +234,28 @@ module game {
                 return;
             }
 
+            if (this.proxy.currentPower < 5) {
+                this.sendNotification(SceneCommand.SHOW_NO_POWER_WINDOW);
+                return;
+            }
+
             const { x, y, time } = answer;
 
-            this.loadLevel(this.currentLevel);
+            this.sendNotification(SceneCommand.SHOW_TIPS_CONFIRM_WINDOW, () => {
 
-            this._cue.dragonBone.visible = true;
-            this._cue.dragonBone.animation.play("hover", 0);
-            egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 200);
+                this.proxy.decreasePower(5);
+                this.proxy.passInfo[this.currentLevel] = this.proxy.passInfo[this.currentLevel] || {};
+                this.proxy.passInfo[this.currentLevel].tipsPlayed = true;
 
-            this.play(x, y, time);
+                this.loadLevel(this.currentLevel);
+
+                this._cue.dragonBone.visible = true;
+                this._cue.dragonBone.animation.play("hover", 0);
+                egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 200);
+
+                this.playingTips = true;
+                this.play(x, y, time);
+            });
         }
 
         private postStepAnswer() {
@@ -323,6 +339,11 @@ module game {
 
         private setResult(result: boolean = false) {
             this.clearState();
+
+            if (this.playingTips) {
+                this.playingTips = false;
+                return;
+            }
 
             if (!this.gameScreen.testMode) {
                 egret.setTimeout(() => {
@@ -732,6 +753,11 @@ module game {
                         y: e.stageY,
                     };
 
+                    if (this.proxy.currentPower < 1 && (!this.proxy.passInfo[this.currentLevel] || this.proxy.passInfo[this.currentLevel].stars < 3)) {
+                        this.sendNotification(SceneCommand.SHOW_NO_POWER_WINDOW);
+                        return;
+                    }
+
                     this.play(e.stageX, e.stageY, this.world.time);
 
                     this.proxy.decreasePower(1);
@@ -775,7 +801,7 @@ module game {
                     break;
                 }
                 case GameProxy.POWER_CHANGED: {
-                    this.gameScreen.powerLabelBinding = `${this.proxy.currentPower}/20`;
+                    this.gameScreen.powerLabelBinding = `${+this.proxy.currentPower || 0}/20`;
                     break;
                 }
                 case GameProxy.GAME_DISPOSE: {

@@ -10,11 +10,13 @@ module game {
         public groupPower: eui.Group;
 
         public btnRetry: eui.Button;
+        public btnShareFailed: eui.Button;
 
         //bindings:
         public currentLevelBinding: string = "第 1 关";
         public powerUpBinding: boolean = false;
         public powerLabelBinding: string = "0/20";
+        public isVideoAvailable: boolean = false;
 
         public constructor() {
             super();

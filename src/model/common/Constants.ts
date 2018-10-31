@@ -3,29 +3,13 @@ module game {
 
     export class Constants {
 
-        private static _photonConfig: Map<string, string>;
-        public static get photonConfig(): Map<string, string> {
-            if (!Constants._photonConfig) {
-                Constants._photonConfig = new Map<string, string>(Object.entries(RES.getRes("photon_json")));
-            }
-            return Constants._photonConfig;
-        }
+        public static get ServiceEndpoint(): string {
+            return this.Endpoints.service;
+        };
 
         public static get ResourceEndpoint(): string {
             return platform.name == "DebugPlatform" ? this.Endpoints.localResource : this.Endpoints.remoteResource;
         };
-
-        public static get photonMasterServer(): string {
-            return platform.name == "DebugPlatform" ? this.photonConfig.get("localMasterServer") : this.photonConfig.get("photonMasterServer");
-        }
-
-        public static get photonNameServer(): string {
-            return this.photonConfig.get("photonNameServer");
-        }
-
-        public static get photonRegion(): string {
-            return this.photonConfig.get("photonRegion");
-        }
 
         public static get Endpoints() {
             if (platform.env == "dev") {

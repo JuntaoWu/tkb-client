@@ -17,6 +17,7 @@ module game {
             this.startScreen.btnChooseLevel.addEventListener(egret.TouchEvent.TOUCH_TAP, this.chooseLevel, this);
             this.startScreen.btnSetting.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showSettingsWindow, this);
             this.startScreen.btnRank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showRankWindow, this);
+            this.startScreen.btnShare.addEventListener(egret.TouchEvent.TOUCH_TAP, this.share, this);
         }
 
         public async initData() {
@@ -28,15 +29,32 @@ module game {
 
             await this.gameProxy.initialize();
 
-            this.startScreen.powerLabelBinding = `${this.gameProxy.currentPower}/20`;
+            this.startScreen.powerLabelBinding = `${+this.gameProxy.currentPower || 0}/20`;
             const collectedStars = _(this.gameProxy.passInfo).sumBy("stars");
-            this.startScreen.starLabelBinding = `${collectedStars}/240`;
+            this.startScreen.starLabelBinding = `${+collectedStars || 0}/240`;
 
             const lowerBound = this.gameProxy.currentChapter * 20;
             const higherBound = lowerBound + 20;
             this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
             const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
-            this.startScreen.currentStarLabelBinding = `${currentChapterCollectedStars}/60`;
+            this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
+
+            const launchInfo = platform.getLaunchInfo();
+            if(launchInfo && launchInfo.query && launchInfo.query.targetOpenId) {
+                this.accountProxy.sendLaunchAction(launchInfo.query);
+                //todo: navigate to friend's level.
+                if(launchInfo.query.action == "failed" && launchInfo.query.level) {
+                    this.sendNotification(SceneCommand.NAVIGATE_TO_FRIENDS_GAME, launchInfo);
+                }
+            }
+        }
+
+        public share(event: egret.TouchEvent) {
+            platform.shareAppMessage(null, `targetOpenId=${CommonData.logon && CommonData.logon.openId}&action=start&transactionId=${Guid.uuidv4()}`, () => {
+                //todo: share completed.
+                console.log("share completed");
+                this.gameProxy.increasePower(5);
+            });
         }
 
         public nextChapter() {
@@ -51,7 +69,7 @@ module game {
             const higherBound = lowerBound + 20;
             this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
             const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
-            this.startScreen.currentStarLabelBinding = `${currentChapterCollectedStars}/60`;
+            this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
         }
 
         public previousChapter() {
@@ -67,7 +85,7 @@ module game {
             const higherBound = lowerBound + 20;
             this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
             const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
-            this.startScreen.currentStarLabelBinding = `${currentChapterCollectedStars}/60`;
+            this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
         }
 
         public chooseLevel() {
@@ -106,17 +124,17 @@ module game {
             var data: any = notification.getBody();
             switch (notification.getName()) {
                 case GameProxy.POWER_CHANGED: {
-                    this.startScreen.powerLabelBinding = `${this.gameProxy.currentPower}/20`;
+                    this.startScreen.powerLabelBinding = `${+this.gameProxy.currentPower || 0}/20`;
                     break;
                 }
                 case GameProxy.STAR_CHANGED: {
                     const collectedStars = _(this.gameProxy.passInfo).sumBy("stars");
-                    this.startScreen.starLabelBinding = `${collectedStars}/240`;
+                    this.startScreen.starLabelBinding = `${+collectedStars || 0}/240`;
                     const lowerBound = this.gameProxy.currentChapter * 20;
                     const higherBound = lowerBound + 20;
                     this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
                     const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
-                    this.startScreen.currentStarLabelBinding = `${currentChapterCollectedStars}/60`;
+                    this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
                 }
             }
         }

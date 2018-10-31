@@ -13,7 +13,7 @@
             <e:Image source="icon-power-start"></e:Image>
             <e:Label text="{powerLabelBinding}" verticalCenter="0" x="62" size="40"></e:Label>
         </e:Group>
-        <e:Group visible="{powerUpBinding}" x="399" y="635">
+        <e:Group visible="{isVideoAvailable}" x="438" y="584" scaleX="0.8" scaleY="0.8">
             <e:Button id="btnVideoAd">
                 <e:Skin>
                     <e:Image source="btn-video-ads"></e:Image>
@@ -25,7 +25,7 @@
                 <e:Image source="btn-retry" scaleX.down="0.9" scaleY.down="0.9" />
             </e:Skin>
         </e:Button>
-        <e:Button x="415" bottom="0">
+        <e:Button id="btnShareFailed" x="415" bottom="0">
             <e:Skin states="up,down,disabled">
                 <e:Image source="btn-share-victory" scaleX.down="0.9" scaleY.down="0.9"></e:Image>
             </e:Skin>

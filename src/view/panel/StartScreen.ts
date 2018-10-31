@@ -14,6 +14,7 @@ module game {
         public btnLeft: eui.Button;
         public btnRight: eui.Button;
         public btnChooseLevel: eui.Button;
+        public btnShare: eui.Button;
 
         //bindings:
         public powerLabelBinding: string = "0/20";

@@ -17,7 +17,10 @@ module game {
         public static SHOW_FAILED_WINDOW: string = "show_failed_window";
         public static SHOW_SETTINGS_WINDOW: string = "show_settings_window";
         public static SHOW_RANK_WINDOW: string = "show_rank_window";
+        public static SHOW_TIPS_CONFIRM_WINDOW: string = "show_tips_confirm_window";
+        public static SHOW_NO_POWER_WINDOW: string = "show_no_power_window";
         public static NAVIGATE_TO_LEVEL_SCREEN: string = "navigate_to_level_screen";
+        public static NAVIGATE_TO_FRIENDS_GAME: string = "navigate_to_friends_game";
 
         public register(): void {
             this.initializeNotifier("ApplicationFacade");
@@ -30,7 +33,10 @@ module game {
             this.facade().registerCommand(SceneCommand.SHOW_FAILED_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.SHOW_SETTINGS_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.SHOW_RANK_WINDOW, SceneCommand);
+            this.facade().registerCommand(SceneCommand.SHOW_TIPS_CONFIRM_WINDOW, SceneCommand);
+            this.facade().registerCommand(SceneCommand.SHOW_NO_POWER_WINDOW, SceneCommand);
             this.facade().registerCommand(SceneCommand.NAVIGATE_TO_LEVEL_SCREEN, SceneCommand);
+            this.facade().registerCommand(SceneCommand.NAVIGATE_TO_FRIENDS_GAME, SceneCommand);
         }
 
         public async execute(notification: puremvc.INotification): Promise<any> {
@@ -71,6 +77,19 @@ module game {
                 }
                 case SceneCommand.SHOW_RANK_WINDOW: {
                     appMediator.main.showRankWindow();
+                    break;
+                }
+                case SceneCommand.SHOW_TIPS_CONFIRM_WINDOW: {
+                    appMediator.main.showTipsConfirmWindow(data);
+                    break;
+                }
+                case SceneCommand.SHOW_NO_POWER_WINDOW: {
+                    appMediator.main.showNoPowerWindow(data);
+                    break;
+                }
+                case SceneCommand.NAVIGATE_TO_FRIENDS_GAME: {
+                    gameProxy.setLaunchInfo(data);
+                    appMediator.main.enterGameScreen();
                     break;
                 }
             }

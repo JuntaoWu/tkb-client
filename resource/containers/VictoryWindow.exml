@@ -28,7 +28,7 @@
                 <e:Image source="btn-next" scaleX.down="0.9" scaleY.down="0.9" />
             </e:Skin>
         </e:Button>
-        <e:Button x="415" bottom="0">
+        <e:Button id="btnShareVictory" x="415" bottom="0">
             <e:Skin states="up,down,disabled">
                 <e:Image source="btn-share-victory" scaleX.down="0.9" scaleY.down="0.9"></e:Image>
             </e:Skin>
