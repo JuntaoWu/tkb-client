@@ -80,6 +80,12 @@ export class WxgamePlugin implements plugins.Command {
                     content += ";window.p2 = p2";
                 }
 
+                if (filename == 'libs/modules/socket.io/socket.io.js' || filename == 'libs/modules/socket.io/socket.io.min.js') {
+                    content = content.replace(`module.exports = f();`, `{module.exports = window.io = f();}`);
+                    content = content.replace(`module.exports=t();`, `{module.exports=window.io=t();}`);
+                    content += ";window.io = io";
+                }
+
                 file.contents = new Buffer(content);
             }
         }

@@ -53,6 +53,10 @@
 		{
 			"name": "physics",
 			"path": "../3rdparty-libs/physics/libsrc"
+		},
+		{
+			"name": "socket.io",
+			"path": "../3rdparty-libs/socket.io/libsrc"
 		}
 	]
 }

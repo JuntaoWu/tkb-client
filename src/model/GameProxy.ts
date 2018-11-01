@@ -87,6 +87,31 @@ module game {
 			this.sendNotification(GameProxy.LEVEL_UPDATED);
 		}
 
+		public createOnlineGame() {
+
+			let socketIO = io(Constants.ServiceEndpoint);
+
+			socketIO.on("onconnected", (message) => {
+				console.log("onconnected", message);
+
+				socketIO.send(`create.${CommonData.logon.openId}`);
+			});
+
+			socketIO.on("message", (messageParts) => {
+				console.log(messageParts);
+			});
+
+			// let socketTask = platform.connectSocket(Constants.WSEndpoint);
+			// platform.onSocketOpen((res) => {
+			// 	console.log(res);
+			// 	platform.sendSocketMessage(`create.${CommonData.logon.openId}`);
+			// });
+
+			// socketTask.onMessage((data) => {
+			// 	console.log(data);
+			// });
+		}
+
 		public nextLevel() {
 			this.launchInfo = null;
 			console.log("Next level");

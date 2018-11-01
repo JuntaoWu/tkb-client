@@ -3,6 +3,10 @@ module game {
 
     export class Constants {
 
+        public static get WSEndpoint(): string {
+            return platform.name == "DebugPlatform" ? this.Endpoints.ws : this.Endpoints.wss;
+        }
+
         public static get ServiceEndpoint(): string {
             return this.Endpoints.service;
         };
@@ -14,16 +18,23 @@ module game {
         public static get Endpoints() {
             if (platform.env == "dev") {
                 return {
-                    service: "http://gdjzj.hzsdgames.com:8092/",
+                    // service: "http://gdjzj.hzsdgames.com:8092/",
+                    // localResource: "",
+                    // remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/"
+                    service: "http://localhost:4040/",
                     localResource: "",
-                    remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/"
+                    remoteResource: "http://localhost:4040/miniGame/",
+                    ws: "ws://localhost:4040/socket.io",
+                    wss: "ws://localhost:4040/socket.io"
                 };
             }
             if (platform.env == "prod") {
                 return {
                     service: "http://gdjzj.hzsdgames.com:8092/",
                     localResource: "",
-                    remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/"
+                    remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/",
+                    ws: "ws://localhost:4040/socket.io",
+                    wss: "wss://localhost:4040/socket.io"
                 };
             }
         }

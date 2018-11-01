@@ -65,6 +65,12 @@ declare interface Platform {
     isVideoAdDisabled(name: string);
 
     disableVideoAd(name: string);
+
+    connectSocket(args);
+
+    onSocketOpen(callback); 
+
+    sendSocketMessage(message: string);
 }
 
 class DebugPlatform implements Platform {
@@ -177,6 +183,18 @@ class DebugPlatform implements Platform {
 
     public async disableVideoAd(name: string) {
 
+    }
+
+    public connectSocket(args) {
+        
+    }
+
+    public onSocketOpen(callback) {
+        
+    }
+
+    public sendSocketMessage(message: string) {
+        
     }
 }
 

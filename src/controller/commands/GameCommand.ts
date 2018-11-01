@@ -16,6 +16,8 @@ module game {
         public static RETRY_LEVEL: string = "retry_level";
         public static NEXT_LEVEL: string = "next_level";
 
+        public static CREATE_ONLINE_GAME: string = "create_online_game";
+
         /**
          * 注册消息
          */
@@ -24,6 +26,7 @@ module game {
             this.facade().registerCommand(GameCommand.START_GAME, GameCommand);
             this.facade().registerCommand(GameCommand.RETRY_LEVEL, GameCommand);
             this.facade().registerCommand(GameCommand.NEXT_LEVEL, GameCommand);
+            this.facade().registerCommand(GameCommand.CREATE_ONLINE_GAME, GameCommand);
         }
 
         public async execute(notification: puremvc.INotification): Promise<any> {
@@ -41,6 +44,10 @@ module game {
                 }
                 case GameCommand.RETRY_LEVEL: {
                     gameProxy.retryLevel();
+                    break;
+                }
+                case GameCommand.CREATE_ONLINE_GAME: {
+                    gameProxy.createOnlineGame();
                     break;
                 }
             }

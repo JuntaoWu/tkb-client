@@ -48,11 +48,20 @@ module game {
 
         public shareFailed(event: egret.TouchEvent) {
             this.failedWindow.close();
+
+            this.sendNotification(GameCommand.CREATE_ONLINE_GAME, CommonData.logon && CommonData.logon.openId);
+
+            if (1 == 1) {
+                return;
+            }
+
             egret.setTimeout(() => {
                 platform.shareAppMessage(null, `targetOpenId=${CommonData.logon && CommonData.logon.openId}&action=failed&level=${this.proxy.currentLevel}&transactionId=${Guid.uuidv4()}`, () => {
                     //todo: shareFailed completed.
                     console.log("shareFailed completed");
                     this.proxy.increasePower(5);
+
+                    this.sendNotification(GameCommand.CREATE_ONLINE_GAME, CommonData.logon && CommonData.logon.openId);
                 });
             }, this, 300);
         }
