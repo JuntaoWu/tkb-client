@@ -42,6 +42,16 @@ module game {
 			this.playerInfo.currentPower = v || 0;
 		}
 
+		/**
+		 * 
+		 */
+
+		public core: GameCore;
+
+		public players: _.Dictionary<GamePlayer>;
+
+		private ghosts: _.Dictionary<GamePlayer>;
+
 		public constructor() {
 			super(GameProxy.NAME);
 
@@ -89,27 +99,9 @@ module game {
 
 		public createOnlineGame() {
 
-			let socketIO = io(Constants.ServiceEndpoint);
+			this.core = this.facade().retrieveProxy(GameCore.NAME) as GameCore;
 
-			socketIO.on("onconnected", (message) => {
-				console.log("onconnected", message);
-
-				socketIO.send(`create.${CommonData.logon.openId}`);
-			});
-
-			socketIO.on("message", (messageParts) => {
-				console.log(messageParts);
-			});
-
-			// let socketTask = platform.connectSocket(Constants.WSEndpoint);
-			// platform.onSocketOpen((res) => {
-			// 	console.log(res);
-			// 	platform.sendSocketMessage(`create.${CommonData.logon.openId}`);
-			// });
-
-			// socketTask.onMessage((data) => {
-			// 	console.log(data);
-			// });
+			this.core.connect();
 		}
 
 		public nextLevel() {

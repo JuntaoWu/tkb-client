@@ -16,6 +16,8 @@
         </e:Group>
     </e:Group>
     <e:Image source="logo" horizontalCenter="0" y="134"></e:Image>
+    <e:TextInput id="txtOpenId" y="300" x="120"></e:TextInput>
+    <e:Button id="btnOpenId" label="openId" x="430" y="295"></e:Button>
     <e:Group horizontalCenter="0" y="408">
         <e:Image left="0" right="0" top="0" bottom="0" source="middle" width="650" height="670"></e:Image>
         <e:Group id="mainTitle" anchorOffsetY="0" height="102" anchorOffsetX="0" width="342" y="0" horizontalCenter="0">

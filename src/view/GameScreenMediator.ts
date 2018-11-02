@@ -5,6 +5,7 @@ module game {
         public static NAME: string = "GameScreenMediator";
 
         private proxy: GameProxy;
+        private coreProxy: GameCore;
 
         private world: p2.World;
         private cueArea: p2.Body;
@@ -46,6 +47,7 @@ module game {
             console.log("GameScreen initData");
 
             this.proxy = this.facade().retrieveProxy(GameProxy.NAME) as GameProxy;
+            this.coreProxy = this.facade().retrieveProxy(GameCore.NAME) as GameCore;
             await this.proxy.initialize();
 
             this.gameScreen.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.reloadCurrentLevel, this);
@@ -783,6 +785,21 @@ module game {
                 o && (o.x = i.position[0],
                     o.y = i.position[1])
             }
+
+            // todo: test online game.
+            if (platform.mode == "online" && this.coreProxy.connected && this.cueStarted) {
+                if (!this.coreProxy.players["self"].host) {
+                    this.coreProxy.clientUpdate({
+                        x: this._cue.cueBody.position[0],
+                        y: this._cue.cueBody.position[1]
+                    });
+                }
+                else {
+                    this._cue.cueBody.position = [this.coreProxy.players["other"].pos.x, this.coreProxy.players["other"].pos.y];
+                    this._cue.cueBody.displays[0].x = this.coreProxy.players["other"].pos.x;
+                    this._cue.cueBody.displays[0].y = this.coreProxy.players["other"].pos.y;
+                }
+            }
         }
 
         public listNotificationInterests(): Array<any> {
@@ -790,6 +807,7 @@ module game {
                 GameProxy.LEVEL_UPDATED,
                 GameProxy.POWER_CHANGED,
                 GameProxy.GAME_DISPOSE,
+                GameCore.CUE_STARTED,
             ];
         }
 
@@ -806,6 +824,19 @@ module game {
                 }
                 case GameProxy.GAME_DISPOSE: {
                     this.backToLevelScreen();
+                    break;
+                }
+                case GameCore.CUE_STARTED: {
+                    const [x, y] = data.split(",");
+                    this.cueStarted = true;
+                    this._cue.dragonBone.visible = true;
+                    this._cue.dragonBone.animation.play("hover", 0);
+                    egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 200);
+                    break;
+                }
+                case GameCore.CUE_ENDED: {
+                    const [x, y, time] = data.split(",");
+                    this.play(x, y, time);
                     break;
                 }
             }

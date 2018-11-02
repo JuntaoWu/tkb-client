@@ -18,6 +18,8 @@ module game {
             this.startScreen.btnSetting.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showSettingsWindow, this);
             this.startScreen.btnRank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.showRankWindow, this);
             this.startScreen.btnShare.addEventListener(egret.TouchEvent.TOUCH_TAP, this.share, this);
+
+            this.startScreen.btnOpenId.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeOpenIdClick, this);
         }
 
         public async initData() {
@@ -40,10 +42,10 @@ module game {
             this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
 
             const launchInfo = platform.getLaunchInfo();
-            if(launchInfo && launchInfo.query && launchInfo.query.targetOpenId) {
+            if (launchInfo && launchInfo.query && launchInfo.query.targetOpenId) {
                 this.accountProxy.sendLaunchAction(launchInfo.query);
                 //todo: navigate to friend's level.
-                if(launchInfo.query.action == "failed" && launchInfo.query.level) {
+                if (launchInfo.query.action == "failed" && launchInfo.query.level) {
                     this.sendNotification(SceneCommand.NAVIGATE_TO_FRIENDS_GAME, launchInfo);
                 }
             }
@@ -95,7 +97,33 @@ module game {
 
         public async changeOpenIdClick(event: egret.TouchEvent) {
             event.stopImmediatePropagation();
-            await this.gameProxy.initialize();
+            const openId = this.startScreen.txtOpenId.text;
+            CommonData.logon.openId = openId;
+
+            try {
+                const userInfo = await this.accountProxy.loadUserInfo();
+                await this.gameProxy.initialize();
+            } catch (error) {
+
+            }
+
+            if (CommonData.logon.openId == "debug2") {
+                const launchInfo = {
+                    query: {
+                        level: 0,
+                        targetOpenId: "debug1",
+                        action: "failed",
+                    }
+                };
+                if (launchInfo && launchInfo.query && launchInfo.query.targetOpenId) {
+                    //this.accountProxy.sendLaunchAction(launchInfo.query);
+                    //todo: navigate to friend's level.
+                    if (launchInfo.query.action == "failed" && launchInfo.query.level) {
+                        this.sendNotification(SceneCommand.NAVIGATE_TO_FRIENDS_GAME, launchInfo);
+                    }
+                }
+            }
+
         }
 
         public viewMoreClick(event: egret.TouchEvent) {

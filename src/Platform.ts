@@ -9,6 +9,7 @@ declare interface Platform {
     env: string;
     name: string;
     appVersion: string;
+    mode: string;
 
     getUserInfo(): Promise<any>;
 
@@ -85,6 +86,10 @@ class DebugPlatform implements Platform {
 
     public get appVersion(): string {
         return "0.1.1";
+    }
+
+    public get mode(): string {
+        return "online";
     }
 
     public async getUserInfo() {
@@ -208,8 +213,3 @@ declare interface Window {
 
     platform: Platform
 }
-
-
-
-
-

@@ -16,6 +16,9 @@ module game {
         public btnChooseLevel: eui.Button;
         public btnShare: eui.Button;
 
+        public txtOpenId: eui.TextInput;
+        public btnOpenId: eui.Button;
+
         //bindings:
         public powerLabelBinding: string = "0/20";
         public starLabelBinding: string = "0/240";
@@ -30,6 +33,10 @@ module game {
         }
 
         public createCompleteEvent(event: eui.UIEvent): void {
+
+            this.txtOpenId.visible = platform.name == "DebugPlatform";
+            this.btnOpenId.visible = platform.name == "DebugPlatform";
+
             this.navigationBar.y = this.stage.stageHeight - this.navigationBar.height;
             // this.poweredLabel.y = this.stage.stageHeight - this.poweredLabel.height - 30;
 
@@ -41,5 +48,5 @@ module game {
             super.partAdded(partName, instance);
         }
     }
-    
+
 }

@@ -5,7 +5,7 @@
     <e:Group id="container" horizontalCenter="0">
         <e:Image id="tipsConfirmBackground" source="tips-background" horizontalCenter="0" verticalCenter="0" />
         <e:Image source="content-tips" horizontalCenter="0" y="185"></e:Image>
-        <e:BitmapLabel text="5" y="253" x="332" size="45" textColor="0xfff6dc" bold="true" font="power-number-victory_fnt" scaleX="1.5" scaleY="1.5"></e:BitmapLabel>
+        <e:BitmapLabel text="5" y="253" x="332" font="power-number-victory_fnt" scaleX="1.5" scaleY="1.5"></e:BitmapLabel>
         <e:Group y="475" horizontalCenter="0" width="200">
             <e:Image source="bg-power" verticalCenter="0"></e:Image>
             <e:Image source="icon-power-start"></e:Image>
