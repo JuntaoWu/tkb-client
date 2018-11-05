@@ -1,0 +1,10 @@
+{"file":"rank.png","frames":{
+"ranker":{"x":562,"y":46,"w":266,"h":43,"offX":0,"offY":0,"sourceW":266,"sourceH":43},
+"avatar-background":{"x":830,"y":1,"w":102,"h":108,"offX":0,"offY":0,"sourceW":102,"sourceH":108},
+"icon-star-rank":{"x":645,"y":91,"w":46,"h":43,"offX":0,"offY":0,"sourceW":46,"sourceH":43},
+"info_0":{"x":1,"y":139,"w":559,"h":136,"offX":0,"offY":0,"sourceW":559,"sourceH":136},
+"info_1":{"x":1,"y":1,"w":559,"h":136,"offX":0,"offY":0,"sourceW":559,"sourceH":136},
+"player":{"x":562,"y":1,"w":266,"h":43,"offX":0,"offY":0,"sourceW":266,"sourceH":43},
+"rank-1":{"x":934,"y":91,"w":83,"h":91,"offX":0,"offY":0,"sourceW":83,"sourceH":91},
+"rank-2":{"x":562,"y":91,"w":81,"h":89,"offX":0,"offY":0,"sourceW":81,"sourceH":89},
+"rank-3":{"x":934,"y":1,"w":80,"h":88,"offX":0,"offY":0,"sourceW":80,"sourceH":88}}}

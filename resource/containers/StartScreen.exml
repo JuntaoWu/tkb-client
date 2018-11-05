@@ -25,7 +25,7 @@
         </e:Group>
         <e:Button id="btnChooseLevel" horizontalCenter="0" verticalCenter="0">
             <e:Skin>
-                <e:Image source="chapter-1" horizontalCenter="0" verticalCenter="0"></e:Image>
+                <e:Image id="imgContent" source="chapter-0" horizontalCenter="0" verticalCenter="0"></e:Image>
             </e:Skin>
         </e:Button>
         <e:Group horizontalCenter="0" y="586">

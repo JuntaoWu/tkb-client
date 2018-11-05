@@ -69,15 +69,17 @@ declare interface Platform {
 
     connectSocket(args);
 
-    onSocketOpen(callback); 
+    onSocketOpen(callback);
 
     sendSocketMessage(message: string);
+
+    captureAndUpload(level: string): Promise<any>;
 }
 
 class DebugPlatform implements Platform {
 
     public get env(): string {
-        return "dev";
+        return "prod";
     }
 
     public get name(): string {
@@ -191,15 +193,44 @@ class DebugPlatform implements Platform {
     }
 
     public connectSocket(args) {
-        
+
     }
 
     public onSocketOpen(callback) {
-        
+
     }
 
     public sendSocketMessage(message: string) {
-        
+
+    }
+
+    public captureAndUpload(level: string): Promise<any> {
+        let data = document.querySelector("canvas").toDataURL();
+        console.log(data);
+        return new Promise((resolve, reject) => {
+            var request = new egret.HttpRequest();
+            request.responseType = egret.HttpResponseType.TEXT;
+            request.open(`${game.Constants.Endpoints.service}capture`, egret.HttpMethod.POST);
+            request.setRequestHeader("Content-Type", "application/json");
+            request.send(JSON.stringify({
+                level: level,
+                dataUri: data
+            }));
+            request.addEventListener(egret.Event.COMPLETE, (event: egret.Event) => {
+                let req = <egret.HttpRequest>(event.currentTarget);
+                let res = JSON.parse(req.response);
+                if (res.error) {
+                    console.error(res);
+                    reject(res);
+                }
+                else {
+                    resolve();
+                }
+            }, this);
+            request.addEventListener(egret.IOErrorEvent.IO_ERROR, (error) => {
+                reject(error);
+            }, this);
+        });
     }
 }
 

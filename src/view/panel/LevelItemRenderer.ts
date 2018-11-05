@@ -36,6 +36,7 @@ module game {
             this.btnLevelItem.imgCheck.visible = this.data.isPlayed;
             this.btnLevelItem.imgLock.visible = this.data.isLocked;
             this.btnLevelItem.enabled = !this.data.isLocked;
+            (this.btnLevelItem.imgContent as eui.Image).source = ((+this.data.level) - 1).toString();
         }
     }
 

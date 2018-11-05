@@ -19,6 +19,7 @@ module game {
 
         private cueStarted: boolean = false;
         private playingTips: boolean = false;
+        private hasResult: boolean = false;
 
         private _currentLevel: number = 0;
         public get currentLevel(): number {
@@ -56,6 +57,13 @@ module game {
             this.gameScreen.btnTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playPredefinedTips, this);
             this.gameScreen.btnCurrentTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playCurrentTips, this);
             this.gameScreen.btnConfirmTip.addEventListener(egret.TouchEvent.TOUCH_TAP, this.confirmTips, this);
+            this.gameScreen.btnCapture.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+                this.gameScreen.testMode = this.gameScreen.toggleSwitch.selected = false;
+                this.gameScreen.toggleSwitch.visible = false;
+                egret.setTimeout(() => {
+                    this.onCapture(true);
+                }, this, 300);
+            }, this);
 
             this.gameScreen.toggleSwitch.addEventListener(egret.Event.CHANGE, this.toggleTestMode, this);
 
@@ -97,6 +105,10 @@ module game {
         }
 
         private backToLevelScreen() {
+
+            this.cueStarted = false;
+            this.clearState();
+
             this._wall.clear();
             this._ball.clear();
             this._holes.clear();
@@ -186,6 +198,8 @@ module game {
 
         private async loadLevel(level: number) {
 
+            this.hasResult = false;
+
             this.playingTips = false;
             this.cueStarted = false;
             this.clearState();
@@ -218,6 +232,37 @@ module game {
             this.createMaterial();
             this.world.time = 0;
             this.predefinedAnswer = levelsArray[this.currentLevel].answer;
+
+            if (platform.name != "DebugPlatform" && level % 20 == 0) {
+                this.gameScreen.guide.visible = true;
+                this.gameScreen.guide.updateLevel(level);
+
+                switch (level / 20) {
+                    case 1: {
+                        this._wall.wallBmps.forEach(wallBmp => {
+                            this.gameScreen.addChild(wallBmp as eui.Image);
+                        });
+                        break;
+                    }
+                    case 2: {
+                        this._ball.ballBmps.forEach((ballBmp: BallUI, index) => {
+                            if (this._ball.types[index] == BodyType.TYPE_HERO) {
+                                this.gameScreen.addChild(ballBmp as game.BallUI);
+                            }
+                        });
+                        break;
+                    }
+                    case 3: {
+                        this._wall.wallBmps.forEach(wallBmp => {
+                            this.gameScreen.addChild(wallBmp as eui.Image);
+                        });
+                        break;
+                    }
+                }
+            }
+            else {
+                this.gameScreen.guide.visible = false;
+            }
         }
 
         public playPredefinedTips(event: egret.TouchEvent) {
@@ -313,14 +358,14 @@ module game {
 
                 this._cue.dragonBone.addEventListener(dragonBones.EventObject.COMPLETE, onExplorerCompleted, this);
             }
-            else if (this.impulsed) {
+            else if (this.impulsed && !this.hasResult) {
                 if (this._ball.ballBody.some(m => m.world && m.sleepState != p2.Body.SLEEPING)) {
                     return;
                 }
                 let sleepCount = this._ball.ballBody.filter(m => {
                     return m.sleepState == p2.Body.SLEEPING;
                 }).length;
-                console.log(`Current sleeping: ${sleepCount}`);
+                //console.log(`Current sleeping: ${sleepCount}`);
 
                 this.failed();
             }
@@ -349,9 +394,11 @@ module game {
 
             if (!this.gameScreen.testMode) {
                 egret.setTimeout(() => {
-                    this.cueX = 0;
-                    this.cueY = 0;
-                    this.sendNotification(result ? SceneCommand.SHOW_VICTORY_WINDOW : SceneCommand.SHOW_FAILED_WINDOW, this.collectedStar.filter(m => m).length);
+                    if (this.cueStarted) {
+                        this.cueX = 0;
+                        this.cueY = 0;
+                        this.sendNotification(result ? SceneCommand.SHOW_VICTORY_WINDOW : SceneCommand.SHOW_FAILED_WINDOW, this.collectedStar.filter(m => m).length);
+                    }
                 }, this, 1000);
             }
             else {
@@ -361,10 +408,31 @@ module game {
         }
 
         private victory() {
-            this.setResult(true);
+
+            if (this.hasResult) {
+                return;
+            }
+
+            this.hasResult = true;
+
+            if (platform.name != "DebugPlatform" && this.currentLevel == 0) {
+                this.gameScreen.guide.visible = true;
+                this.gameScreen.guide.updateLevel(this.currentLevel, () => {
+                    this.setResult(true);
+                });
+            }
+            else {
+                this.setResult(true);
+            }
         }
 
         private failed() {
+            if (this.hasResult) {
+                return;
+            }
+
+            this.hasResult = true;
+
             this.setResult(false);
         }
 
@@ -449,8 +517,9 @@ module game {
 
         public confirmTips(event: egret.TouchEvent) {
             let token = localStorage.getItem("token");
-            if (platform.env == "prod") {
+            if (platform.env != "backdoor") {
                 token = "";
+                return;
             }
             var request = new egret.HttpRequest();
             request.responseType = egret.HttpResponseType.TEXT;
@@ -473,6 +542,21 @@ module game {
                 this.proxy.levelsArray[this.currentLevel].answer = this.predefinedAnswer;
 
             }, this);
+        }
+
+        public async onCapture(start?: boolean) {
+            if (!start && this.currentLevel == 0) {
+                return;
+            }
+            try {
+                await platform.captureAndUpload(this.currentLevel.toString());
+                await this.loadLevel(this.currentLevel + 1);
+                egret.setTimeout(() => {
+                    this.onCapture();
+                }, this, 500);
+            } catch (error) {
+
+            }
         }
 
         private hitListener() {
@@ -534,7 +618,6 @@ module game {
 
                 this._wall.wallBodys.forEach((i, wallIndex) => {
                     if (t.bodyA == i || t.bodyB == i) {
-                        console.log(t);
                         let ball = t.bodyA == i ? t.bodyB : t.bodyA;
                         let pointX = ball.position[0] + t.contactEquations[0].contactPointA[0];
                         let pointY = ball.position[1] + t.contactEquations[0].contactPointA[1];

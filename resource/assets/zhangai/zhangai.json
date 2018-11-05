@@ -1,0 +1,17 @@
+{"file":"zhangai.png","frames":{
+"moving-v":{"x":127,"y":220,"w":57,"h":30,"offX":0,"offY":0,"sourceW":57,"sourceH":30},
+"moving-v-left":{"x":191,"y":216,"w":57,"h":37,"offX":0,"offY":0,"sourceW":57,"sourceH":37},
+"moving-v-right":{"x":57,"y":1,"w":59,"h":69,"offX":0,"offY":0,"sourceW":59,"sourceH":69},
+"Stabs":{"x":76,"y":72,"w":50,"h":49,"offX":0,"offY":0,"sourceW":50,"sourceH":49},
+"stone":{"x":128,"y":48,"w":45,"h":45,"offX":0,"offY":0,"sourceW":45,"sourceH":45},
+"stone-left":{"x":166,"y":1,"w":45,"h":45,"offX":0,"offY":0,"sourceW":45,"sourceH":45},
+"stone-right":{"x":118,"y":1,"w":46,"h":45,"offX":0,"offY":0,"sourceW":46,"sourceH":45},
+"attack-moving":{"x":154,"y":140,"w":35,"h":78,"offX":0,"offY":0,"sourceW":35,"sourceH":78},
+"attack-moving-left":{"x":1,"y":140,"w":52,"h":76,"offX":0,"offY":0,"sourceW":52,"sourceH":76},
+"attack-moving-right":{"x":1,"y":1,"w":54,"h":78,"offX":0,"offY":0,"sourceW":54,"sourceH":78},
+"attack-moving-v":{"x":55,"y":215,"w":70,"h":30,"offX":0,"offY":0,"sourceW":70,"sourceH":30},
+"attack-moving-v-left":{"x":128,"y":95,"w":63,"h":26,"offX":0,"offY":4,"sourceW":63,"sourceH":30},
+"attack-moving-v-right":{"x":1,"y":81,"w":73,"h":57,"offX":0,"offY":0,"sourceW":73,"sourceH":57},
+"moving":{"x":191,"y":140,"w":35,"h":74,"offX":0,"offY":0,"sourceW":35,"sourceH":74},
+"moving-left":{"x":55,"y":140,"w":49,"h":72,"offX":0,"offY":0,"sourceW":49,"sourceH":72},
+"moving-right":{"x":106,"y":140,"w":46,"h":73,"offX":0,"offY":0,"sourceW":46,"sourceH":73}}}

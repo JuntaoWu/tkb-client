@@ -4,7 +4,8 @@
     <e:Button id="btnLevelItem" name="levelItem">
         <e:Skin states="up,down,disabled">
             <e:Group height="250" x="0" y="16" scaleX.down="0.9" scaleY.down="0.9">
-                <e:Image source="level-1" horizontalCenter="0"></e:Image>
+                <e:Image source="level-small-background" horizontalCenter="0"></e:Image>
+                <e:Image id="imgContent" source="0" horizontalCenter="0"></e:Image>
                 <e:Group>
                     <e:Image source="word-bg"></e:Image>
                     <e:BitmapLabel id="labelLevel" font="level-number-level_fnt" horizontalCenter="0" y="1"></e:BitmapLabel>

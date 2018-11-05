@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin width="720" height="1280" class="skins.GameScreen" xmlns:e="http://ns.egret.com/eui">
+<e:Skin width="720" height="1280" class="skins.GameScreen" xmlns:e="http://ns.egret.com/eui" xmlns:game="game.*">
     <e:Image source="game-background"></e:Image>
     <e:Group id="groupMenu" anchorOffsetX="0" width="720" anchorOffsetY="0" height="180">
         <e:TextInput visible="{testMode}" id="txtLevel" x="461" y="70" width="160" />
@@ -9,8 +9,9 @@
             </e:Skin>
         </e:Button>
         <e:ToggleSwitch id="toggleSwitch" label="TestMode" x="457" y="22" selected="true"></e:ToggleSwitch>
-        <e:Button visible="{testMode}" id="btnCurrentTip" y="124" label="当前提示" x="475"></e:Button>
-        <e:Button visible="{testMode}" id="btnConfirmTip" y="123" label="确认答案" x="605"></e:Button>
+        <e:Button visible="{testMode}" id="btnCurrentTip" y="124" label="提示" x="465" width="60"></e:Button>
+        <e:Button visible="{testMode}" id="btnConfirmTip" y="123" label="确认" x="538" width="60"></e:Button>
+        <e:Button visible="{testMode}" id="btnCapture" width="60" y="123" x="617" label="截图"></e:Button>
         <e:Group id="groupButtons">
             <e:Button id="btnBack" y="15" x="18">
                 <e:Skin states="up,down,disabled">
@@ -40,4 +41,5 @@
         </e:Group>
     </e:Group>
     <e:Group id="groupPhysics" width="100%" height="1100" x="0" y="180"></e:Group>
+    <game:Guide id="guide" width="100%" height="100%" visible="false"></game:Guide>
 </e:Skin>

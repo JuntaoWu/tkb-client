@@ -17,6 +17,7 @@
 	"autoGenerateExmlsList": true,
 	"exmls": [
 		"resource/components/BallUI.exml",
+		"resource/components/Guide.exml",
 		"resource/components/LevelItemRenderer.exml",
 		"resource/components/RankItemRenderer.exml",
 		"resource/components/ScoreStarUI.exml",

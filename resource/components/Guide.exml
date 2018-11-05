@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="skins.Guide" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:game="game.*">
+    <game:Shade id="overlay" />
+    <e:Group id="level0" horizontalCenter="0" verticalCenter="0" visible="false">
+        <e:Label width="488" text="按住屏幕并拖动调整位置放置张飞，张飞周围的单位都会被他震开。利用震击撞击曹操" wordWrap="true" anchorOffsetY="0"
+                 horizontalCenter="0" size="40" textAlign="left" multiline="true" lineSpacing="10"></e:Label>
+        <e:Image source="caocao" width="60" height="60" x="85" y="140"></e:Image>
+        <e:Label text="，使其进入陷阱" y="150" size="40" x="144"></e:Label>
+        <e:Image source="trap" y="140" x="425" width="60" height="60"></e:Image>
+        <e:Label text="过关。" y="200" size="40"></e:Label>
+    </e:Group>
+    <e:Group id="level0Completed" horizontalCenter="0" verticalCenter="0" visible="false">
+        <e:Label width="488" text="曹操死亡1星通关，张飞放置在要求初始区域额外得1星，任何单位碰到星星" wordWrap="true" anchorOffsetY="0" horizontalCenter="0"
+                 size="40" textAlign="left" multiline="true" lineSpacing="10"></e:Label>
+        <e:Image source="star" width="60" height="60" x="405" y="90"></e:Image>
+        <e:Label text="额外再得1颗星。" y="150" size="40"></e:Label>
+    </e:Group>
+    <e:Group id="level1" horizontalCenter="0" verticalCenter="0" visible="false">
+        <e:Label width="488" text="单位每次撞击到刺墙会-1生命，生命为0时死亡" wordWrap="true" anchorOffsetY="0" horizontalCenter="0" size="40"
+                 textAlign="left" multiline="true" lineSpacing="10"></e:Label>
+    </e:Group>
+    <e:Group id="level2" horizontalCenter="0" verticalCenter="0" visible="false">
+        <e:Label width="488" text="消灭曹操的同时，保护刘备" wordWrap="true" anchorOffsetY="0" horizontalCenter="0" size="40"
+                 textAlign="left" multiline="true" lineSpacing="10"></e:Label>
+        <e:Image source="liubei" width="60" height="60" x="3" y="53"></e:Image>
+        <e:Label text="不死亡。" y="64" size="40" x="68"></e:Label>
+    </e:Group>
+    <e:Group id="level3" horizontalCenter="0" verticalCenter="0" visible="false">
+        <e:Label width="488" text="现在，出现了移动障碍，来迎接挑战吧！" wordWrap="true" anchorOffsetY="0" horizontalCenter="0" size="40"
+                 textAlign="left" multiline="true" lineSpacing="10"></e:Label>
+    </e:Group>
+</e:Skin>

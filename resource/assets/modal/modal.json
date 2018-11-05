@@ -1,0 +1,7 @@
+{"file":"modal.png","frames":{
+"btn-video":{"x":1,"y":301,"w":165,"h":203,"offX":0,"offY":0,"sourceW":165,"sourceH":203},
+"btn-video-disabled":{"x":168,"y":301,"w":162,"h":199,"offX":0,"offY":0,"sourceW":162,"sourceH":199},
+"content-no-power":{"x":303,"y":175,"w":432,"h":71,"offX":0,"offY":0,"sourceW":432,"sourceH":71},
+"content-tips":{"x":1,"y":1,"w":301,"h":172,"offX":0,"offY":0,"sourceW":301,"sourceH":172},
+"btn-cancel":{"x":737,"y":1,"w":213,"h":112,"offX":0,"offY":0,"sourceW":213,"sourceH":112},
+"btn-confirm":{"x":1,"y":175,"w":300,"h":124,"offX":0,"offY":0,"sourceW":300,"sourceH":124}}}

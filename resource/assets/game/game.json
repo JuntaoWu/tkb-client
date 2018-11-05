@@ -1,0 +1,13 @@
+{"file":"game.png","frames":{
+"trap":{"x":366,"y":1,"w":110,"h":109,"offX":0,"offY":0,"sourceW":110,"sourceH":109},
+"xiaobin":{"x":1,"y":121,"w":119,"h":119,"offX":0,"offY":0,"sourceW":119,"sourceH":119},
+"xiaobin-label":{"x":192,"y":1,"w":64,"h":29,"offX":0,"offY":0,"sourceW":64,"sourceH":29},
+"zhangfei":{"x":122,"y":121,"w":120,"h":118,"offX":0,"offY":0,"sourceW":120,"sourceH":118},
+"zhangfei-label":{"x":124,"y":1,"w":66,"h":30,"offX":0,"offY":0,"sourceW":66,"sourceH":30},
+"bar":{"x":366,"y":212,"w":100,"h":22,"offX":2,"offY":1,"sourceW":104,"sourceH":24},
+"bar-bg":{"x":366,"y":186,"w":104,"h":24,"offX":0,"offY":0,"sourceW":104,"sourceH":24},
+"caocao":{"x":1,"y":1,"w":121,"h":118,"offX":0,"offY":0,"sourceW":121,"sourceH":118},
+"caocao-label":{"x":444,"y":148,"w":65,"h":34,"offX":0,"offY":0,"sourceW":65,"sourceH":34},
+"liubei":{"x":244,"y":121,"w":120,"h":118,"offX":0,"offY":0,"sourceW":120,"sourceH":118},
+"liubei-label":{"x":444,"y":112,"w":65,"h":34,"offX":0,"offY":0,"sourceW":65,"sourceH":34},
+"star":{"x":366,"y":112,"w":76,"h":72,"offX":0,"offY":0,"sourceW":76,"sourceH":72}}}

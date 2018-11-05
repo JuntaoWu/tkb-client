@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,thumb_pb_png,track_pb_png,track_sb_png,btn-view,game-background,button_down_png,button_up_png,caocao,xiaobin,zhangfei,trap,level-number_fnt,level-number_png,star,icon-star-start,level-number-start_png,level-number-start_fnt,level-1,word-bg,level-number-level_fnt,level-number-level_png,stone-left,stone-right,stone,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,Stabs,attack-moving,attack-moving-v,attack-moving-v-right,attack-moving-v-left,attack-moving-right,attack-moving-left,liubei,moving-left,moving,moving-right,moving-v-right,moving-v,moving-v-left,stars_tex_png,stars_ske_json,stars_tex_json,level-number-victory_fnt,level-number-victory_png,victory-background,banner-victory,btn-close,btn-next,btn-share-victory,icon-plus,icon-power-bg,icon-power-value,icon-star-victory,jiesuan_tex_png,jiesuan_tex_json,jiesuan_ske_json,icon-star-victory-black,power-number-victory_fnt,power-number-victory_png,background-music,btn-retry,banner-failed,content-failed,btn-video-ads,deadhit_tex_png,deadhit_tex_json,deadhit_ske_json,btn-sound-effect,btn-sound-music,content-logo,label-music-off,label-music-on,settings-background,btn-sound-effect-off,btn-sound-music-off,label-sound-off,label-sound-on,info_0,info_1,rank-background,player,ranker,icon-star-rank,avatar-background,rank-1,rank-2,rank-3,power-tips-background,content-no-power,btn-video-disabled,btn-video",
+			"keys": "game-background,level-number_fnt,level-number_png,level-number-start_png,level-number-start_fnt,level-number-level_fnt,level-number-level_png,zhangfei_tex_json,zhangfei_tex_png,zhangfei_ske_json,stars_tex_png,stars_ske_json,stars_tex_json,level-number-victory_fnt,level-number-victory_png,jiesuan_tex_png,jiesuan_tex_json,jiesuan_ske_json,power-number-victory_fnt,power-number-victory_png,background-music,deadhit_tex_png,deadhit_tex_json,deadhit_ske_json,levelthumbs_json,start_json,settings-background,content-logo,settings_json,rank-background,game_json,rank_json,zhangai_json,modal_json,level_json,middle,power-tips-background,tips-background,victory-background,victory_json,failed_json,icons_json,default_json,level-background,start-background",
 			"name": "preload"
 		},
 		{
@@ -15,96 +15,6 @@
 	],
 	"resources": [
 		{
-			"url": "assets/CheckBox/checkbox_select_disabled.png",
-			"type": "image",
-			"name": "checkbox_select_disabled_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_down.png",
-			"type": "image",
-			"name": "checkbox_select_down_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_select_up.png",
-			"type": "image",
-			"name": "checkbox_select_up_png"
-		},
-		{
-			"url": "assets/CheckBox/checkbox_unselect.png",
-			"type": "image",
-			"name": "checkbox_unselect_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up_png"
-		},
-		{
-			"url": "assets/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect_png"
-		},
-		{
-			"url": "assets/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb_png"
-		},
-		{
-			"url": "assets/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb_png"
-		},
-		{
-			"url": "assets/Slider/track.png",
-			"type": "image",
-			"name": "track_png"
-		},
-		{
-			"url": "assets/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off_png"
-		},
-		{
-			"url": "assets/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on_png"
-		},
-		{
-			"url": "assets/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb_png"
-		},
-		{
-			"url": "assets/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb_png"
-		},
-		{
-			"url": "assets/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb_png"
-		},
-		{
 			"url": "assets/loading/progress.png",
 			"type": "image",
 			"name": "progress"
@@ -115,74 +25,9 @@
 			"name": "progress-bg"
 		},
 		{
-			"url": "assets/start/btn-view.png",
-			"type": "image",
-			"name": "btn-view"
-		},
-		{
 			"url": "assets/background/game-background.png",
 			"type": "image",
 			"name": "game-background"
-		},
-		{
-			"url": "assets/Button/button_up.png",
-			"type": "image",
-			"name": "button_up_png"
-		},
-		{
-			"url": "assets/Button/button_down.png",
-			"type": "image",
-			"name": "button_down_png"
-		},
-		{
-			"url": "assets/caocao.png",
-			"type": "image",
-			"name": "caocao"
-		},
-		{
-			"url": "assets/xiaobin.png",
-			"type": "image",
-			"name": "xiaobin"
-		},
-		{
-			"url": "assets/zhangfei.png",
-			"type": "image",
-			"name": "zhangfei"
-		},
-		{
-			"url": "assets/trap.png",
-			"type": "image",
-			"name": "trap"
-		},
-		{
-			"url": "assets/icons/btn-back.png",
-			"type": "image",
-			"name": "btn-back"
-		},
-		{
-			"url": "assets/icons/btn-restart.png",
-			"type": "image",
-			"name": "btn-restart"
-		},
-		{
-			"url": "assets/icons/btn-tip.png",
-			"type": "image",
-			"name": "btn-tip"
-		},
-		{
-			"url": "assets/icons/icon-power.png",
-			"type": "image",
-			"name": "icon-power"
-		},
-		{
-			"url": "assets/icons/icon-star-black.png",
-			"type": "image",
-			"name": "icon-star-black"
-		},
-		{
-			"url": "assets/icons/icon-star.png",
-			"type": "image",
-			"name": "icon-star"
 		},
 		{
 			"url": "assets/fonts/level-number.fnt",
@@ -193,81 +38,6 @@
 			"url": "assets/fonts/level-number.png",
 			"type": "image",
 			"name": "level-number_png"
-		},
-		{
-			"url": "assets/star.png",
-			"type": "image",
-			"name": "star"
-		},
-		{
-			"url": "assets/start/icon-star.png",
-			"type": "image",
-			"name": "icon-star-start"
-		},
-		{
-			"url": "assets/start/bg-power.png",
-			"type": "image",
-			"name": "bg-power"
-		},
-		{
-			"url": "assets/start/bg-star.png",
-			"type": "image",
-			"name": "bg-star"
-		},
-		{
-			"url": "assets/start/btn-arrow-left.png",
-			"type": "image",
-			"name": "btn-arrow-left"
-		},
-		{
-			"url": "assets/start/btn-arrow-right.png",
-			"type": "image",
-			"name": "btn-arrow-right"
-		},
-		{
-			"url": "assets/start/btn-rank.png",
-			"type": "image",
-			"name": "btn-rank"
-		},
-		{
-			"url": "assets/start/btn-settings.png",
-			"type": "image",
-			"name": "btn-settings"
-		},
-		{
-			"url": "assets/start/btn-share.png",
-			"type": "image",
-			"name": "btn-share"
-		},
-		{
-			"url": "assets/start/chapter-1.png",
-			"type": "image",
-			"name": "chapter-1"
-		},
-		{
-			"url": "assets/start/dock.png",
-			"type": "image",
-			"name": "dock"
-		},
-		{
-			"url": "assets/start/icon-power.png",
-			"type": "image",
-			"name": "icon-power-start"
-		},
-		{
-			"url": "assets/start/logo.png",
-			"type": "image",
-			"name": "logo"
-		},
-		{
-			"url": "assets/start/middle.png",
-			"type": "image",
-			"name": "middle"
-		},
-		{
-			"url": "assets/start/status-bar.png",
-			"type": "image",
-			"name": "status-bar"
 		},
 		{
 			"url": "assets/fonts/level-number-start.png",
@@ -285,66 +55,6 @@
 			"name": "start-background"
 		},
 		{
-			"url": "assets/level/icon-check.png",
-			"type": "image",
-			"name": "icon-check"
-		},
-		{
-			"url": "assets/level/icon-lock.png",
-			"type": "image",
-			"name": "icon-lock"
-		},
-		{
-			"url": "assets/level/icon-star-black.png",
-			"type": "image",
-			"name": "icon-star-black-level"
-		},
-		{
-			"url": "assets/level/icon-star-color.png",
-			"type": "image",
-			"name": "icon-star-color"
-		},
-		{
-			"url": "assets/level/level-background.png",
-			"type": "image",
-			"name": "level-background"
-		},
-		{
-			"url": "assets/level/star/star.png",
-			"type": "image",
-			"name": "star_png"
-		},
-		{
-			"url": "assets/level/star/star1.png",
-			"type": "image",
-			"name": "star1_png"
-		},
-		{
-			"url": "assets/level/light/图层 11.png",
-			"type": "image",
-			"name": "图层 11_png"
-		},
-		{
-			"url": "assets/level/light/圆角矩形 2 拷贝.png",
-			"type": "image",
-			"name": "圆角矩形 2 拷贝_png"
-		},
-		{
-			"url": "assets/level/btn-back-level.png",
-			"type": "image",
-			"name": "btn-back-level"
-		},
-		{
-			"url": "assets/level/level-1.png",
-			"type": "image",
-			"name": "level-1"
-		},
-		{
-			"url": "assets/level/word-bg.png",
-			"type": "image",
-			"name": "word-bg"
-		},
-		{
 			"url": "assets/fonts/level-number-level.fnt",
 			"type": "font",
 			"name": "level-number-level_fnt"
@@ -353,21 +63,6 @@
 			"url": "assets/fonts/level-number-level.png",
 			"type": "image",
 			"name": "level-number-level_png"
-		},
-		{
-			"url": "assets/zhangai/stone-left.png",
-			"type": "image",
-			"name": "stone-left"
-		},
-		{
-			"url": "assets/zhangai/stone-right.png",
-			"type": "image",
-			"name": "stone-right"
-		},
-		{
-			"url": "assets/zhangai/stone.png",
-			"type": "image",
-			"name": "stone"
 		},
 		{
 			"url": "assets/dragonBones/zhangfei_tex.json",
@@ -383,107 +78,6 @@
 			"url": "assets/dragonBones/zhangfei_ske.json",
 			"type": "json",
 			"name": "zhangfei_ske_json"
-		},
-		{
-			"url": "assets/zhangai/Stabs.png",
-			"type": "image",
-			"name": "Stabs"
-		},
-		{
-			"url": "assets/zhangai/attack-moving-left.png",
-			"type": "image",
-			"name": "attack-moving-left"
-		},
-		{
-			"url": "assets/zhangai/attack-moving-right.png",
-			"type": "image",
-			"name": "attack-moving-right"
-		},
-		{
-			"url": "assets/zhangai/attack-moving-v-left.png",
-			"type": "image",
-			"name": "attack-moving-v-left"
-		},
-		{
-			"url": "assets/zhangai/attack-moving-v-right.png",
-			"type": "image",
-			"name": "attack-moving-v-right"
-		},
-		{
-			"url": "assets/zhangai/attack-moving-v.png",
-			"type": "image",
-			"name": "attack-moving-v"
-		},
-		{
-			"url": "assets/zhangai/attack-moving.png",
-			"type": "image",
-			"name": "attack-moving"
-		},
-		{
-			"url": "assets/liubei.png",
-			"type": "image",
-			"name": "liubei"
-		},
-		{
-			"url": "assets/zhangai/moving-left.png",
-			"type": "image",
-			"name": "moving-left"
-		},
-		{
-			"url": "assets/zhangai/moving.png",
-			"type": "image",
-			"name": "moving"
-		},
-		{
-			"url": "assets/zhangai/moving-right.png",
-			"type": "image",
-			"name": "moving-right"
-		},
-		{
-			"url": "assets/zhangai/moving-v-right.png",
-			"type": "image",
-			"name": "moving-v-right"
-		},
-		{
-			"url": "assets/zhangai/moving-v.png",
-			"type": "image",
-			"name": "moving-v"
-		},
-		{
-			"url": "assets/zhangai/moving-v-left.png",
-			"type": "image",
-			"name": "moving-v-left"
-		},
-		{
-			"url": "assets/zhangfei-label.png",
-			"type": "image",
-			"name": "zhangfei-label"
-		},
-		{
-			"url": "assets/caocao-label.png",
-			"type": "image",
-			"name": "caocao-label"
-		},
-		{
-			"url": "assets/liubei-label.png",
-			"type": "image",
-			"name": "liubei-label"
-		},
-		{
-			"url": "assets/xiaobin-label.png",
-			"type": "image",
-			"name": "xiaobin-label"
-		},
-		{
-			"url": "assets/bar-bg.png",
-			"type": "image",
-			"name": "bar-bg"
-		},
-		{
-			"url": "assets/bar.png",
-			"type": "image",
-			"name": "bar",
-			"scale9grid": "11,5,62,15"
 		},
 		{
 			"url": "assets/dragonBones/stars_tex.png",
@@ -511,51 +105,6 @@
 			"name": "level-number-victory_png"
 		},
 		{
-			"url": "assets/victory/victory-background.png",
-			"type": "image",
-			"name": "victory-background"
-		},
-		{
-			"url": "assets/victory/banner-victory.png",
-			"type": "image",
-			"name": "banner-victory"
-		},
-		{
-			"url": "assets/victory/btn-close.png",
-			"type": "image",
-			"name": "btn-close"
-		},
-		{
-			"url": "assets/victory/btn-next.png",
-			"type": "image",
-			"name": "btn-next"
-		},
-		{
-			"url": "assets/victory/btn-share-victory.png",
-			"type": "image",
-			"name": "btn-share-victory"
-		},
-		{
-			"url": "assets/victory/icon-plus.png",
-			"type": "image",
-			"name": "icon-plus"
-		},
-		{
-			"url": "assets/victory/icon-power-bg.png",
-			"type": "image",
-			"name": "icon-power-bg"
-		},
-		{
-			"url": "assets/victory/icon-power-value.png",
-			"type": "image",
-			"name": "icon-power-value"
-		},
-		{
-			"url": "assets/victory/icon-star-victory.png",
-			"type": "image",
-			"name": "icon-star-victory"
-		},
-		{
 			"url": "assets/dragonBones/jiesuan_tex.png",
 			"type": "image",
 			"name": "jiesuan_tex_png"
@@ -569,11 +118,6 @@
 			"url": "assets/dragonBones/jiesuan_tex.json",
 			"type": "json",
 			"name": "jiesuan_tex_json"
-		},
-		{
-			"url": "assets/victory/icon-star-victory-black.png",
-			"type": "image",
-			"name": "icon-star-victory-black"
 		},
 		{
 			"url": "assets/fonts/power-number-victory.fnt",
@@ -626,26 +170,6 @@
 			"name": "tap-sound"
 		},
 		{
-			"url": "assets/failed/btn-retry.png",
-			"type": "image",
-			"name": "btn-retry"
-		},
-		{
-			"url": "assets/failed/banner-failed.png",
-			"type": "image",
-			"name": "banner-failed"
-		},
-		{
-			"url": "assets/failed/content-failed.png",
-			"type": "image",
-			"name": "content-failed"
-		},
-		{
-			"url": "assets/failed/btn-video-ads.png",
-			"type": "image",
-			"name": "btn-video-ads"
-		},
-		{
 			"url": "assets/sounds/failed-music.mp3",
 			"type": "sound",
 			"name": "failed-music"
@@ -666,144 +190,122 @@
 			"name": "deadhit_tex_json"
 		},
 		{
-			"url": "assets/settings/btn-sound-effect.png",
-			"type": "image",
-			"name": "btn-sound-effect"
+			"url": "assets/level/levelthumbs.json",
+			"type": "sheet",
+			"name": "levelthumbs_json",
+			"subkeys": "0,1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,47,48,49,5,50,51,52,53,54,55,56,57,58,59,6,60,61,62,63,64,65,66,67,68,69,7,70,71,72,73,74,75,76,77,78,79,8,9"
 		},
 		{
-			"url": "assets/settings/btn-sound-music.png",
-			"type": "image",
-			"name": "btn-sound-music"
+			"url": "assets/level/chapterthumbs.json",
+			"type": "sheet",
+			"name": "chapterthumbs_json",
+			"subkeys": "chapter-0,chapter-1,chapter-2,chapter-3"
 		},
 		{
-			"url": "assets/settings/content-logo.png",
-			"type": "image",
-			"name": "content-logo"
+			"url": "assets/game/game.json",
+			"type": "sheet",
+			"name": "game_json",
+			"subkeys": "bar,bar-bg,caocao,caocao-label,liubei,liubei-label,star,trap,xiaobin,xiaobin-label,zhangfei,zhangfei-label"
 		},
 		{
-			"url": "assets/settings/label-music-off.png",
-			"type": "image",
-			"name": "label-music-off"
+			"url": "assets/start/start.json",
+			"type": "sheet",
+			"name": "start_json",
+			"subkeys": "bg-power,bg-star,btn-arrow-left,btn-arrow-right,btn-rank,btn-settings,btn-share,dock,icon-power-start,icon-star-start,logo,status-bar"
 		},
 		{
-			"url": "assets/settings/label-music-on.png",
+			"url": "assets/background/middle.png",
 			"type": "image",
-			"name": "label-music-on"
+			"name": "middle"
 		},
 		{
-			"url": "assets/settings/settings-background.png",
+			"url": "assets/zhangai/zhangai.json",
+			"type": "sheet",
+			"name": "zhangai_json",
+			"subkeys": "Stabs,attack-moving,attack-moving-left,attack-moving-right,attack-moving-v,attack-moving-v-left,attack-moving-v-right,moving,moving-left,moving-right,moving-v,moving-v-left,moving-v-right,stone,stone-left,stone-right"
+		},
+		{
+			"url": "assets/background/settings-background.png",
 			"type": "image",
 			"name": "settings-background"
 		},
 		{
-			"url": "assets/settings/btn-sound-effect-off.png",
+			"url": "assets/start/content-logo.png",
 			"type": "image",
-			"name": "btn-sound-effect-off"
+			"name": "content-logo"
 		},
 		{
-			"url": "assets/settings/btn-sound-music-off.png",
-			"type": "image",
-			"name": "btn-sound-music-off"
+			"url": "assets/settings/settings.json",
+			"type": "sheet",
+			"name": "settings_json",
+			"subkeys": "btn-sound-effect,btn-sound-effect-off,btn-sound-music,btn-sound-music-off,label-music-off,label-music-on,label-sound-off,label-sound-on"
 		},
 		{
-			"url": "assets/settings/label-sound-off.png",
-			"type": "image",
-			"name": "label-sound-off"
-		},
-		{
-			"url": "assets/settings/label-sound-on.png",
-			"type": "image",
-			"name": "label-sound-on"
-		},
-		{
-			"url": "assets/rank/info_0.png",
-			"type": "image",
-			"name": "info_0"
-		},
-		{
-			"url": "assets/rank/info_1.png",
-			"type": "image",
-			"name": "info_1"
-		},
-		{
-			"url": "assets/rank/rank-background.png",
+			"url": "assets/background/rank-background.png",
 			"type": "image",
 			"name": "rank-background"
 		},
 		{
-			"url": "assets/rank/player.png",
-			"type": "image",
-			"name": "player"
+			"url": "assets/rank/rank.json",
+			"type": "sheet",
+			"name": "rank_json",
+			"subkeys": "avatar-background,icon-star-rank,info_0,info_1,player,rank-1,rank-2,rank-3,ranker"
 		},
 		{
-			"url": "assets/rank/ranker.png",
-			"type": "image",
-			"name": "ranker"
-		},
-		{
-			"url": "assets/rank/icon-star-rank.png",
-			"type": "image",
-			"name": "icon-star-rank"
-		},
-		{
-			"url": "assets/rank/avatar-background.png",
-			"type": "image",
-			"name": "avatar-background"
-		},
-		{
-			"url": "assets/rank/rank-1.png",
-			"type": "image",
-			"name": "rank-1"
-		},
-		{
-			"url": "assets/rank/rank-2.png",
-			"type": "image",
-			"name": "rank-2"
-		},
-		{
-			"url": "assets/rank/rank-3.png",
-			"type": "image",
-			"name": "rank-3"
-		},
-		{
-			"url": "assets/modal/btn-cancel.png",
-			"type": "image",
-			"name": "btn-cancel"
-		},
-		{
-			"url": "assets/modal/btn-confirm.png",
-			"type": "image",
-			"name": "btn-confirm"
-		},
-		{
-			"url": "assets/modal/content-tips.png",
-			"type": "image",
-			"name": "content-tips"
-		},
-		{
-			"url": "assets/modal/tips-background.png",
-			"type": "image",
-			"name": "tips-background"
-		},
-		{
-			"url": "assets/modal/power-tips-background.png",
+			"url": "assets/background/power-tips-background.png",
 			"type": "image",
 			"name": "power-tips-background"
 		},
 		{
-			"url": "assets/modal/content-no-power.png",
+			"url": "assets/background/tips-background.png",
 			"type": "image",
-			"name": "content-no-power"
+			"name": "tips-background"
 		},
 		{
-			"url": "assets/modal/btn-video-disabled.png",
-			"type": "image",
-			"name": "btn-video-disabled"
+			"url": "assets/modal/modal.json",
+			"type": "sheet",
+			"name": "modal_json",
+			"subkeys": "btn-cancel,btn-confirm,btn-video,btn-video-disabled,content-no-power,content-tips"
 		},
 		{
-			"url": "assets/modal/btn-video.png",
+			"url": "assets/level/level.json",
+			"type": "sheet",
+			"name": "level_json",
+			"subkeys": "btn-back-level,icon-check,icon-lock,icon-star-color,level-small-background,word-bg"
+		},
+		{
+			"url": "assets/background/level-background.png",
 			"type": "image",
-			"name": "btn-video"
+			"name": "level-background"
+		},
+		{
+			"url": "assets/background/victory-background.png",
+			"type": "image",
+			"name": "victory-background"
+		},
+		{
+			"url": "assets/victory/victory.json",
+			"type": "sheet",
+			"name": "victory_json",
+			"subkeys": "banner-victory,btn-close,btn-next,btn-share-victory,icon-plus,icon-power-bg,icon-power-value,icon-star-victory,icon-star-victory-black"
+		},
+		{
+			"url": "assets/failed/failed.json",
+			"type": "sheet",
+			"name": "failed_json",
+			"subkeys": "banner-failed,btn-retry,btn-video-ads,content-failed"
+		},
+		{
+			"url": "assets/icons/icons.json",
+			"type": "sheet",
+			"name": "icons_json",
+			"subkeys": "btn-back,btn-restart,btn-tip,icon-power,icon-star,icon-star-black"
+		},
+		{
+			"url": "assets/default/default.json",
+			"type": "sheet",
+			"name": "default_json",
+			"subkeys": "border,button_down,button_up,checkbox_select_disabled,checkbox_select_down,checkbox_select_up,checkbox_unselect,handle,header,off,on,radiobutton_select_disabled,radiobutton_select_down,radiobutton_select_up,radiobutton_unselect,roundthumb,selected,thumb,thumb_pb,track,track_pb,track_sb,tracklight"
 		}
 	]
 }

@@ -1,0 +1,9 @@
+{"file":"settings.png","frames":{
+"btn-sound-effect-off":{"x":166,"y":1,"w":163,"h":163,"offX":0,"offY":0,"sourceW":163,"sourceH":163},
+"btn-sound-music":{"x":1,"y":331,"w":163,"h":163,"offX":0,"offY":0,"sourceW":163,"sourceH":163},
+"btn-sound-music-off":{"x":1,"y":166,"w":163,"h":163,"offX":0,"offY":0,"sourceW":163,"sourceH":163},
+"label-music-off":{"x":331,"y":117,"w":172,"h":56,"offX":0,"offY":0,"sourceW":172,"sourceH":56},
+"label-music-on":{"x":331,"y":1,"w":178,"h":56,"offX":0,"offY":0,"sourceW":178,"sourceH":56},
+"label-sound-off":{"x":166,"y":175,"w":172,"h":56,"offX":0,"offY":0,"sourceW":172,"sourceH":56},
+"label-sound-on":{"x":331,"y":59,"w":178,"h":56,"offX":0,"offY":0,"sourceW":178,"sourceH":56},
+"btn-sound-effect":{"x":1,"y":1,"w":163,"h":163,"offX":0,"offY":0,"sourceW":163,"sourceH":163}}}

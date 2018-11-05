@@ -72,6 +72,9 @@ module game {
             this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
             const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
             this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
+
+            //chapterthumbs
+            (this.startScreen.btnChooseLevel["imgContent"] as eui.Image).source = `chapterthumbs_json#chapter-${this.gameProxy.currentChapter}`;
         }
 
         public previousChapter() {
@@ -88,6 +91,9 @@ module game {
             this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
             const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
             this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
+            
+            //chapterthumbs
+            (this.startScreen.btnChooseLevel["imgContent"] as eui.Image).source = `chapterthumbs_json#chapter-${this.gameProxy.currentChapter}`;
         }
 
         public chooseLevel() {
@@ -163,6 +169,7 @@ module game {
                     this.startScreen.currentChapterLabelBinding = `第 ${lowerBound + 1}-${higherBound} 关`;
                     const currentChapterCollectedStars = _(this.gameProxy.passInfo.filter((value, index) => index >= lowerBound && index < higherBound)).sumBy("stars");
                     this.startScreen.currentStarLabelBinding = `${+currentChapterCollectedStars || 0}/60`;
+                    (this.startScreen.btnChooseLevel["imgContent"] as eui.Image).source = `chapterthumbs_json#chapter-${this.gameProxy.currentChapter}`;
                 }
             }
         }

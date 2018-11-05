@@ -1,0 +1,10 @@
+{"file":"victory.png","frames":{
+"icon-star-victory-black":{"x":630,"y":359,"w":142,"h":137,"offX":0,"offY":0,"sourceW":142,"sourceH":137},
+"banner-victory":{"x":1,"y":1,"w":706,"h":356,"offX":0,"offY":0,"sourceW":706,"sourceH":356},
+"btn-close":{"x":709,"y":1,"w":121,"h":113,"offX":0,"offY":0,"sourceW":121,"sourceH":113},
+"btn-next":{"x":1,"y":359,"w":268,"h":124,"offX":0,"offY":0,"sourceW":268,"sourceH":124},
+"btn-share-victory":{"x":271,"y":359,"w":213,"h":112,"offX":0,"offY":0,"sourceW":213,"sourceH":112},
+"icon-plus":{"x":902,"y":1,"w":46,"h":47,"offX":0,"offY":0,"sourceW":46,"sourceH":47},
+"icon-power-bg":{"x":709,"y":116,"w":201,"h":60,"offX":0,"offY":0,"sourceW":201,"sourceH":60},
+"icon-power-value":{"x":832,"y":1,"w":68,"h":82,"offX":0,"offY":0,"sourceW":68,"sourceH":82},
+"icon-star-victory":{"x":486,"y":359,"w":142,"h":137,"offX":0,"offY":0,"sourceW":142,"sourceH":137}}}

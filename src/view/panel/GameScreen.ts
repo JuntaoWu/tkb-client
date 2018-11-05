@@ -16,6 +16,9 @@ module game {
         public txtLevel: eui.TextInput;
         public btnCurrentTip: eui.Button;
         public btnConfirmTip: eui.Button;
+        public btnCapture: eui.Button;
+
+        public guide: Guide;
 
         public star0: eui.Image;
         public star1: eui.Image;

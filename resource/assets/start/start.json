@@ -1,0 +1,13 @@
+{"file":"start.png","frames":{
+"dock":{"x":1,"y":400,"w":720,"h":82,"offX":0,"offY":0,"sourceW":720,"sourceH":82},
+"icon-power-start":{"x":960,"y":1,"w":61,"h":91,"offX":0,"offY":0,"sourceW":61,"sourceH":91},
+"icon-star-start":{"x":611,"y":161,"w":77,"h":74,"offX":0,"offY":0,"sourceW":77,"sourceH":74},
+"logo":{"x":1,"y":1,"w":608,"h":260,"offX":0,"offY":0,"sourceW":608,"sourceH":260},
+"status-bar":{"x":1,"y":263,"w":720,"h":135,"offX":0,"offY":0,"sourceW":720,"sourceH":135},
+"bg-power":{"x":809,"y":389,"w":172,"h":66,"offX":0,"offY":0,"sourceW":172,"sourceH":66},
+"bg-star":{"x":723,"y":321,"w":243,"h":66,"offX":0,"offY":0,"sourceW":243,"sourceH":66},
+"btn-arrow-left":{"x":723,"y":389,"w":84,"h":147,"offX":0,"offY":0,"sourceW":84,"sourceH":147},
+"btn-arrow-right":{"x":891,"y":161,"w":84,"h":147,"offX":0,"offY":0,"sourceW":84,"sourceH":147},
+"btn-rank":{"x":611,"y":1,"w":179,"h":158,"offX":0,"offY":0,"sourceW":179,"sourceH":158},
+"btn-settings":{"x":723,"y":161,"w":166,"h":158,"offX":0,"offY":0,"sourceW":166,"sourceH":158},
+"btn-share":{"x":792,"y":1,"w":166,"h":158,"offX":0,"offY":0,"sourceW":166,"sourceH":158}}}
