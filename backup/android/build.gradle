@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    signingConfigs {
+        release {
+            storeFile file('D:/Android/keystore/childar.keystore')
+            keyAlias 'childar'
+            storePassword '123456'
+            keyPassword '123456'
+        }
+        debug {
+            storeFile file('D:/Android/keystore/childar.keystore')
+            keyAlias 'childar'
+            storePassword '123456'
+            keyPassword '123456'
+        }
+    }
+    defaultConfig {
+        applicationId "com.toolbar.childar"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        jackOptions {
+            enabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    sourceSets {
+        main {
+            assets.srcDirs = ['../assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildToolsVersion '26.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile(name: 'egret', ext: 'aar')
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+}

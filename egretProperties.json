@@ -1,62 +1,68 @@
 {
-	"engineVersion": "5.2.11",
-	"compilerVersion": "5.2.11",
-	"template": {},
-	"target": {
-		"current": "wxgame"
-	},
-	"eui": {
-		"exmlRoot": [
-			"resource/eui_skins"
-		],
-		"themes": [
-			"resource/default.thm.json"
-		],
-		"exmlPublishPolicy": "commonjs"
-	},
-	"modules": [
-		{
-			"name": "egret"
-		},
-		{
-			"name": "eui"
-		},
-		{
-			"name": "assetsmanager"
-		},
-		{
-			"name": "tween"
-		},
-		{
-			"name": "game"
-		},
-		{
-			"name": "dragonBones"
-		},
-		{
-			"name": "socket"
-		},
-		{
-			"name": "experimental"
-		},
-		{
-			"name": "promise"
-		},
-		{
-			"name": "puremvc",
-			"path": "../3rdparty-libs/puremvc"
-		},
-		{
-			"name": "lodash",
-			"path": "../3rdparty-libs/lodash"
-		},
-		{
-			"name": "physics",
-			"path": "../3rdparty-libs/physics/libsrc"
-		},
-		{
-			"name": "socket.io",
-			"path": "../3rdparty-libs/socket.io/libsrc"
-		}
-	]
+  "engineVersion": "5.2.11",
+  "compilerVersion": "5.2.11",
+  "template": {},
+  "target": {
+    "current": "android"
+  },
+  "eui": {
+    "exmlRoot": [
+      "resource/eui_skins"
+    ],
+    "themes": [
+      "resource/default.thm.json"
+    ],
+    "exmlPublishPolicy": "commonjs"
+  },
+  "modules": [
+    {
+      "name": "egret"
+    },
+    {
+      "name": "eui"
+    },
+    {
+      "name": "assetsmanager"
+    },
+    {
+      "name": "tween"
+    },
+    {
+      "name": "game"
+    },
+    {
+      "name": "dragonBones"
+    },
+    {
+      "name": "socket"
+    },
+    {
+      "name": "experimental"
+    },
+    {
+      "name": "promise"
+    },
+    {
+      "name": "puremvc",
+      "path": "../3rdparty-libs/puremvc"
+    },
+    {
+      "name": "lodash",
+      "path": "../3rdparty-libs/lodash"
+    },
+    {
+      "name": "physics",
+      "path": "../3rdparty-libs/physics/libsrc"
+    },
+    {
+      "name": "socket.io",
+      "path": "../3rdparty-libs/socket.io/libsrc"
+    }
+  ],
+  "targets": {
+    "android": {
+      "appname": "tkb-client",
+      "packagename": "com.toolbar.childar"
+    }
+  }
 }

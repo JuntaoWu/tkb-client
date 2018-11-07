@@ -134,7 +134,7 @@ module game {
 
 			this.collectedCount = collectedCount;
 			this.shouldPowerUp = false;
-			if (!this.passInfo[this.currentLevel] || collectedCount > this.passInfo[this.currentLevel].stars) {
+			if (!this.passInfo[this.currentLevel] || collectedCount > (this.passInfo[this.currentLevel].stars || 0)) {
 				this.passInfo[this.currentLevel] = {
 					stars: collectedCount,
 				};

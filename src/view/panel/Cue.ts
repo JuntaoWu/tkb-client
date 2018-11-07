@@ -57,7 +57,7 @@ module game {
             innerCircle.collisionMask = 0;
 
             var e = new p2.Circle({
-                radius: 125
+                radius: 150
             });
             e.collisionGroup = 0;
             e.collisionMask = 0;

@@ -8,7 +8,8 @@ class WxgamePlatform {
 
     env = 'dev';
     name = 'wxgame';
-    appVersion = '0.2.25';
+    appVersion = '0.1.8';
+    adStatusMap = {};
 
     login() {
         return new Promise((resolve, reject) => {
@@ -32,7 +33,7 @@ class WxgamePlatform {
                     var province = userInfo.province
                     var city = userInfo.city
                     var country = userInfo.country
-                    resolve(userInfo);
+                    resolve({...res, ...userInfo});
                 },
                 fail: function (res) {
                     reject(res);
@@ -78,10 +79,30 @@ class WxgamePlatform {
         return this.openDataContext;
     }
 
+    captureAndUpload() {
+      let tempFilePath = canvas.toDataURL({
+        x: 140,
+        y: 0,
+        width: 1000,
+        height: 800,
+        destWidth: 500,
+        destHeight: 400
+      });
+      console.log(tempFilePath);
+    }
+
     shareAppMessage(message, query, callback) {
+      let tempFilePath = canvas.toTempFilePathSync({
+        x: 140,
+        y: 0,
+        width: 1000,
+        height: 800,
+        destWidth: 500,
+        destHeight: 400
+      });
         wx.shareAppMessage({
-            title: '古董局中局',
-            imageUrl: 'http://gdjzj.hzsdgames.com:8083/miniGame/resource/assets/shared/share.png',
+            title: message || "来助力一把？",
+            imageUrl: query ? tempFilePath : "https://tk2048.hzsdgames.com:8085/miniGame/resource/assets/share/share.jpg",
             query: query,
             success: (res) => {
                 console.log("shareAppMessage successfully.", res);
@@ -96,7 +117,7 @@ class WxgamePlatform {
             success: function (res) {
                 wx.onShareAppMessage(function () {
                     return {
-                        imageUrl: 'http://gdjzj.hzsdgames.com:8083/miniGame/resource/assets/shared/share.png',
+                        imageUrl: "https://tk2048.hzsdgames.com:8085/miniGame/resource/assets/share/share.jpg"
                     };
                 });
             },
@@ -186,14 +207,6 @@ class WxgamePlatform {
     playVideo(src) {
         return wx.createVideo({
             src: src
-        });
-    }
-
-    showPreImage(imgList) {
-        wx.previewImage({
-            urls: imgList.map(m => {
-                return `${m}?v=${this.getVersion()}`;
-            }),
         });
     }
 
@@ -296,11 +309,11 @@ class WxgamePlatform {
     }
 
     hideAllBannerAds() {
-        this.hideBannerAd("top");
-        this.hideBannerAd("bottom");
+        this.hideBannerAd("tk2048-choose-camp-banner");
+        this.hideBannerAd("tk2048-victory-banner");
     }
 
-    createRewardedVideoAd(name, adUnitId, callback) {
+    createRewardedVideoAd(name, adUnitId, callback, onError) {
         this[`video-${name}`] = wx.createRewardedVideoAd({
             adUnitId: adUnitId
         });
@@ -308,8 +321,9 @@ class WxgamePlatform {
         this[`video-${name}`].load().then(() => {
             console.log("createRewardedVideoAd load.");
         }).catch((error) => {
-            console.error("createRewardedVideoAd error", error);
+            console.error("createRewardedVideoAd catch error:", error);
             this[`video-${name}`].offLoad();
+            onError && onError(error);
         });
 
         this[`video-${name}`].onClose(res => {
@@ -323,12 +337,17 @@ class WxgamePlatform {
                 // 播放中途退出，不下发游戏奖励
             }
         });
+
+        this[`video-${name}`].onError(res => {
+          console.error("RewardedVideoAd onError:", res);
+          onError && onError(res);
+        });
     }
 
     showVideoAd(name) {
         if (this[`video-${name}`]) {
             this[`video-${name}`].show().catch(err => {
-                console.error(err && err.message);
+                console.error("showVideoAd error:", err && err.errMsg);
                 this[`video-${name}`].load()
                     .then(() => this[`video-${name}`].show());
             });
@@ -336,6 +355,32 @@ class WxgamePlatform {
         else {
             console.error("rewardedVideoAd never created.");
         }
+    }
+
+    disableVideoAd(name) {
+      if (this[`video-${name}`]) {
+        this.adStatusMap[`video-${name}`] = "disabled";
+      }
+    }
+
+    isVideoAdDisabled(name) {
+      return this.adStatusMap[`video-${name}`] == "disabled";
+    }
+
+    connectSocket(args) {
+      return wx.connectSocket({
+        url: args,
+      });
+    }
+
+    onSocketOpen(callback) {
+      wx.onSocketOpen(callback);
+    }
+
+    sendSocketMessage(message) {
+      wx.sendSocketMessage({
+        data: [message],
+      });
     }
 }
 

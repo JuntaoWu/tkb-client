@@ -16,6 +16,11 @@ module game {
             this.failedWindow.closeButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
             this.failedWindow.btnRetry.addEventListener(egret.TouchEvent.TOUCH_TAP, this.retryLevel, this);
             this.failedWindow.btnShareFailed.addEventListener(egret.TouchEvent.TOUCH_TAP, this.shareFailed, this);
+
+            // egret.ExternalInterface.addCallback("sendToJS", (message) => {
+            //     egret.log("message form native : " + message);//message form native : message from native
+            //     AccountAdapter.login();
+            // });
         }
 
         public async initData() {
@@ -49,11 +54,13 @@ module game {
         public shareFailed(event: egret.TouchEvent) {
             this.failedWindow.close();
 
-            this.sendNotification(GameCommand.CREATE_ONLINE_GAME, CommonData.logon && CommonData.logon.openId);
+            //egret.ExternalInterface.call("sendWxLoginToNative", "message from js");
 
-            if (1 == 1) {
-                return;
-            }
+            // if (1 == 1) {
+            //     return;
+            // }
+
+            this.sendNotification(GameCommand.CREATE_ONLINE_GAME, CommonData.logon && CommonData.logon.openId);
 
             egret.setTimeout(() => {
                 platform.shareAppMessage(null, `targetOpenId=${CommonData.logon && CommonData.logon.openId}&action=failed&level=${this.proxy.currentLevel}&transactionId=${Guid.uuidv4()}`, () => {

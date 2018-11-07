@@ -1,6 +1,7 @@
 {"file":"level-number-start.png","frames":{
+"关":{"x":1,"y":68,"w":48,"h":57,"offX":0,"offY":0,"sourceW":48,"sourceH":57},
 "第":{"x":1,"y":1,"w":56,"h":65,"offX":0,"offY":0,"sourceW":56,"sourceH":65},
-"-":{"x":94,"y":52,"w":35,"h":11,"offX":0,"offY":0,"sourceW":35,"sourceH":11},
+"-":{"x":94,"y":52,"w":35,"h":11,"offX":0,"offY":20,"sourceW":35,"sourceH":50},
 "0":{"x":59,"y":1,"w":33,"h":50,"offX":0,"offY":0,"sourceW":33,"sourceH":50},
 "1":{"x":129,"y":1,"w":20,"h":49,"offX":0,"offY":0,"sourceW":20,"sourceH":49},
 "2":{"x":197,"y":1,"w":32,"h":49,"offX":0,"offY":0,"sourceW":32,"sourceH":49},
@@ -10,5 +11,4 @@
 "6":{"x":126,"y":68,"w":34,"h":50,"offX":0,"offY":0,"sourceW":34,"sourceH":50},
 "7":{"x":196,"y":53,"w":33,"h":48,"offX":0,"offY":0,"sourceW":33,"sourceH":48},
 "8":{"x":90,"y":68,"w":34,"h":50,"offX":0,"offY":0,"sourceW":34,"sourceH":50},
-"9":{"x":162,"y":1,"w":33,"h":50,"offX":0,"offY":0,"sourceW":33,"sourceH":50},
-"关":{"x":1,"y":68,"w":48,"h":57,"offX":0,"offY":0,"sourceW":48,"sourceH":57}}}
+"9":{"x":162,"y":1,"w":33,"h":50,"offX":0,"offY":0,"sourceW":33,"sourceH":50}}}
