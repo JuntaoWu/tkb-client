@@ -8,7 +8,7 @@
                 <e:Image width="100%" height="100%" source="btn-restart" scaleX.down="0.9" scaleY.down="0.9" />
             </e:Skin>
         </e:Button>
-        <e:ToggleSwitch id="toggleSwitch" label="TestMode" x="457" y="22" selected="true"></e:ToggleSwitch>
+        <e:ToggleSwitch id="toggleSwitch" visible="{testMode}" label="TestMode" x="457" y="22" selected="true"></e:ToggleSwitch>
         <e:Button visible="{testMode}" id="btnCurrentTip" y="124" label="提示" x="465" width="60"></e:Button>
         <e:Button visible="{testMode}" id="btnConfirmTip" y="123" label="确认" x="538" width="60"></e:Button>
         <e:Button visible="{testMode}" id="btnCapture" width="60" y="123" x="617" label="截图"></e:Button>

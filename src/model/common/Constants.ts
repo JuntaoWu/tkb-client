@@ -30,11 +30,11 @@ module game {
             }
             if (platform.env == "prod") {
                 return {
-                    service: "http://gdjzj.hzsdgames.com:8092/",
+                    service: "https://gdjzj.hzsdgames.com:8094/",
                     localResource: "",
-                    remoteResource: "http://gdjzj.hzsdgames.com:8092/miniGame/",
-                    ws: "ws://localhost:4040/socket.io",
-                    wss: "wss://localhost:4040/socket.io"
+                    remoteResource: "https://gdjzj.hzsdgames.com:8094/miniGame/",
+                    ws: "ws://gdjzj.hzsdgames.com:8094/socket.io",
+                    wss: "wss://gdjzj.hzsdgames.com:8094/socket.io"
                 };
             }
         }
