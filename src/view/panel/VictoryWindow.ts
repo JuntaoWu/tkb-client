@@ -11,6 +11,7 @@ module game {
 
         public btnNext: eui.Button;
         public btnShareVictory: eui.Button;
+        public btnRestart: eui.Button;
 
         public star0: eui.Image;
         public star1: eui.Image;
@@ -32,6 +33,7 @@ module game {
         public currentLevelBinding: string = "第 1 关";
         public powerUpBinding: number = 0;
         public powerLabelBinding: string = "0/20";
+        public retryBinding: boolean = false;
 
         public constructor() {
             super();

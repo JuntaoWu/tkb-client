@@ -23,6 +23,13 @@
             <e:Image source="icon-power-start" y="0" x="65"></e:Image>
             <e:BitmapLabel text="{powerUpBinding}" font="power-number-victory_fnt" right="0" bottom="0" scaleX="1.5" scaleY="1.5"></e:BitmapLabel>
         </e:Group>
+        <e:Group visible="{retryBinding}" x="420" y="635">
+            <e:Button id="btnRestart" y="15" x="107" horizontalCenter="0" verticalCenter="0">
+                <e:Skin states="up,down,disabled">
+                    <e:Image width="100%" height="100%" source="btn-restart" scaleX.down="0.9" scaleY.down="0.9" />
+                </e:Skin>
+            </e:Button>
+        </e:Group>
         <e:Button id="btnNext" x="87" bottom="0">
             <e:Skin states="up,down,disabled">
                 <e:Image source="btn-next" scaleX.down="0.9" scaleY.down="0.9" />

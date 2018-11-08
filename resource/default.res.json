@@ -265,7 +265,7 @@
 			"url": "assets/modal/modal.json",
 			"type": "sheet",
 			"name": "modal_json",
-			"subkeys": "btn-cancel,btn-confirm,btn-video,btn-video-disabled,content-no-power,content-tips"
+			"subkeys": "btn-cancel,btn-confirm,btn-video,btn-video-disabled,content-no-power,content-refresh-power,content-tips"
 		},
 		{
 			"url": "assets/level/level.json",

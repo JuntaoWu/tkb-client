@@ -16,14 +16,16 @@ module game {
             this.victoryWindow.closeButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.navigateToLevelScreen, this);
             this.victoryWindow.btnNext.addEventListener(egret.TouchEvent.TOUCH_TAP, this.nextLevel, this);
             this.victoryWindow.btnShareVictory.addEventListener(egret.TouchEvent.TOUCH_TAP, this.share, this);
+            this.victoryWindow.btnRestart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.retryLevel, this);
         }
 
         public async initData() {
 
             this.victoryWindow.currentLevelBinding = `第 ${this.proxy.currentLevel + 1} 关`;
             this.victoryWindow.starCount = this.proxy.collectedCount || 0;
+            this.victoryWindow.retryBinding = this.victoryWindow.starCount < 3;
             this.victoryWindow.powerUpBinding = this.proxy.shouldPowerUp ? 3 : 0;
-            if (this.proxy.shouldPowerUp) {
+            if (this.proxy.shouldPowerUp || this.victoryWindow.retryBinding) {
                 this.victoryWindow.groupPower.x = 160;
             }
             else {
@@ -54,6 +56,12 @@ module game {
                 console.log("shareVictory completed");
                 this.proxy.increasePower(5);
             });
+        }
+
+        public retryLevel() {
+            SoundPool.playSoundEffect("tap-sound");
+            this.victoryWindow.close();
+            this.sendNotification(GameCommand.RETRY_LEVEL);
         }
 
         public navigateToStart() {

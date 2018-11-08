@@ -4,7 +4,8 @@
     <game:Shade id="overlay" />
     <e:Group id="container" horizontalCenter="0">
         <e:Image id="NoPowerBackground" source="power-tips-background" horizontalCenter="0" verticalCenter="0" />
-        <e:Image id="contentNoPower" source="content-no-power" y="185" horizontalCenter="0"></e:Image>
+        <e:Image id="contentNoPower" source="content-no-power" horizontalCenter="0" verticalCenter="0"></e:Image>
+        <e:Image id="contentPowerRefresh" y="407" horizontalCenter="0" source="content-refresh-power"></e:Image>
         <e:Button visible="{isVideoAvailable}" id="btnVideo" horizontalCenter="0" verticalCenter="0">
             <e:Skin states="up,down,disabled">
                 <e:Image source="btn-video" scaleX.down="0.9" scaleY.down="0.9" />
