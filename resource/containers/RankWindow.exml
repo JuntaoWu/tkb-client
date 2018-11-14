@@ -19,9 +19,9 @@
             </e:Scroller>
         </e:Group>
         <e:Group anchorOffsetY="0" height="148" y="837" anchorOffsetX="0" width="542" horizontalCenter="0">
-            <e:Group x="24" verticalCenter="0">
-                <e:Image visible="{data.rankRes}" source="{data.rankRes}"></e:Image>
-                <e:Label visible="{data.rankLabel}" text="{data.rankLabel}"></e:Label>
+            <e:Group x="24" width="72" verticalCenter="0">
+                <e:Image visible="{data.rankRes}" source="{data.rankRes}" horizontalCenter="0"></e:Image>
+                <e:Label visible="{data.rankLabel}" text="{data.rankLabel}" horizontalCenter="0"></e:Label>
             </e:Group>
             <e:Group x="119" width="100" height="100" verticalCenter="0">
                 <e:Image source="{data.avatarUrl}" width="80" height="80" horizontalCenter="0" verticalCenter="0"></e:Image>

@@ -300,7 +300,7 @@ module game {
                 this._cue.dragonBone.animation.play("hover", 0);
                 egret.Tween.get(this._cue.cueBody).to({ position: [x, y] }, 200);
 
-                this.playingTips = true;
+                // this.playingTips = true;
                 this.play(x, y, time);
             });
         }

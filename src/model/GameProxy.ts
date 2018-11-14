@@ -151,7 +151,7 @@ module game {
 
 		public updatePlayerInfo(playerInfo: PlayerInfo) {
 			this.playerInfo = playerInfo || this.playerInfo;
-			if (this.playerInfo.currentPower <= 20 && (!this.playerInfo.restoredAt || this.playerInfo.restoredAt < new Date(new Date().setHours(0, 0, 0, 0)))) {
+			if (this.playerInfo.currentPower <= 20 && (!this.playerInfo.restoredAt || new Date(this.playerInfo.restoredAt) < new Date(new Date().setHours(0, 0, 0, 0)))) {
 				this.playerInfo.currentPower = 20;
 				this.playerInfo.restoredAt = new Date();
 			}

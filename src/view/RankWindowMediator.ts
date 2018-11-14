@@ -30,8 +30,8 @@ module game {
 
                 let rankList = result.map((rank, index) => {
                     return {
-                        avatarUrl: rank.avatarUrl,
-                        nickName: rank.nickName,
+                        avatarUrl: rank.avatarUrl || "zhangfei",
+                        nickName: rank.nickName || "游客",
                         score: rank.score,
                         rankRes: index < 3 ? `rank-${index + 1}` : null,
                         rankLabel: index >= 3 ? index + 1 : null
@@ -44,8 +44,8 @@ module game {
                 if (!myRank) {
                     const userInfo = await this.accountProxy.loadUserInfo();
                     myRank = {
-                        avatarUrl: userInfo.avatarUrl,
-                        nickName: userInfo.nickName,
+                        avatarUrl: userInfo.avatarUrl || "zhangfei",
+                        nickName: userInfo.nickName || "游客",
                         score: this.proxy.collectedCount,
                     }
                 }
